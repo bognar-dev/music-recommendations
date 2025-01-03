@@ -2,7 +2,7 @@ import './globals.css'
 import { Inter } from 'next/font/google'
 import Player from '@/components/Player'
 import { ThemeProvider } from '@/components/ThemeProvider'
-
+import { AudioProvider } from '@/lib/audio-context'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
@@ -18,6 +18,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.className} bg-background`}>
+      <AudioProvider>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
@@ -29,6 +30,7 @@ export default function RootLayout({
             <Player />
           </div>
         </ThemeProvider>
+        </AudioProvider>
       </body>
     </html>
   )

@@ -1,9 +1,10 @@
-import React, { useCallback } from 'react'
+import React from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Play } from 'lucide-react'
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Label } from "@/components/ui/label"
+import { useMultiStepFormContext } from '@/components/ui/multi-step-form'
 
 const recommendationSets = [
   [
@@ -37,17 +38,13 @@ const recommendationSets = [
 ]
 
 interface RecommendationsProps {
-  onRate: (trackId: number, rating: number) => void
-  ratings: { [key: number]: number }
   step: number
+  stepKey: `step${number}`
 }
 
-const Recommendations: React.FC<RecommendationsProps> = React.memo(({ onRate, ratings, step }) => {
+const Recommendations: React.FC<RecommendationsProps> = ({ step, stepKey }) => {
+  const { form } = useMultiStepFormContext()
   const recommendations = recommendationSets[step - 1] || recommendationSets[0]
-
-  const handleRating = useCallback((trackId: number, rating: string) => {
-    onRate(trackId, parseInt(rating))
-  }, [onRate])
 
   return (
     <Card>
@@ -75,8 +72,10 @@ const Recommendations: React.FC<RecommendationsProps> = React.memo(({ onRate, ra
                   </Button>
                 </div>
                 <RadioGroup
-                  onValueChange={(value) => handleRating(track.id, value)}
-                  value={ratings[track.id]?.toString()}
+                  onValueChange={(value) => {
+                    form.setValue(`${stepKey}.songRatings.${track.id}`, parseInt(value))
+                  }}
+                  value={form.watch(`${stepKey}.songRatings.${track.id}`)?.toString()}
                   className="flex space-x-2"
                 >
                   {[1, 2, 3, 4, 5].map((rating) => (
@@ -93,9 +92,8 @@ const Recommendations: React.FC<RecommendationsProps> = React.memo(({ onRate, ra
       </CardContent>
     </Card>
   )
-})
+}
 
 Recommendations.displayName = 'Recommendations'
 
 export default Recommendations
-

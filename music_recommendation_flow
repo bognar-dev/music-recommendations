@@ -1,0 +1,14 @@
+// Album Cover Music Recommendation Process
+digraph {
+	A [label="Load Dataset (CSV)" shape=box]
+	B [label="Download and Preprocess Images" shape=box]
+	C [label="Extract Features from Album Covers" shape=box]
+	D [label="Calculate Similarities (Cosine)" shape=box]
+	E [label="Generate Recommendations" shape=box]
+	F [label="Display/Return Recommendations" shape=box]
+	A -> B [label="Load Data"]
+	B -> C [label="Process Images"]
+	C -> D [label="Feature Extraction"]
+	D -> E [label="Similarity Calculation"]
+	E -> F [label="Return Results"]
+}

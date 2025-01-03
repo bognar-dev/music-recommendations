@@ -1,0 +1,12 @@
+// Feature Comparison Process
+digraph {
+	A [label="Select Features to Compare" shape=box]
+	B [label="Extract Selected Features for Songs" shape=box]
+	C [label="Calculate Cosine Similarity for Each Feature" shape=box]
+	D [label="Aggregate Similarities" shape=box]
+	E [label="Generate Final Recommendations" shape=box]
+	A -> B [label="Select Features"]
+	B -> C [label="Extract Features"]
+	C -> D [label="Compute Similarities"]
+	D -> E [label="Generate Recommendations"]
+}

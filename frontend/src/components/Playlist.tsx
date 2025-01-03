@@ -1,16 +1,12 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Play } from 'lucide-react'
-
-const playlistTracks = [
-  { id: 1, title: "Shape of You", artist: "Ed Sheeran", albumCover: "/placeholder.svg?height=300&width=300" },
-  { id: 2, title: "Blinding Lights", artist: "The Weeknd", albumCover: "/placeholder.svg?height=300&width=300" },
-  { id: 3, title: "Dance Monkey", artist: "Tones and I", albumCover: "/placeholder.svg?height=300&width=300" },
-  { id: 4, title: "Someone You Loved", artist: "Lewis Capaldi", albumCover: "/placeholder.svg?height=300&width=300" },
-  { id: 5, title: "Watermelon Sugar", artist: "Harry Styles", albumCover: "/placeholder.svg?height=300&width=300" },
-]
+import { Play,Pause } from 'lucide-react'
+import {useAudio} from '@/lib/audio-context'
+import playlistTracks from '@/data/playlist'
 
 export default function Playlist() {
+  const { currentTrack, isPlaying, playTrack } = useAudio()
+
   return (
     <Card>
       <CardHeader>
@@ -31,8 +27,16 @@ export default function Playlist() {
                     <p className="font-medium">{track.title}</p>
                     <p className="text-sm text-muted-foreground">{track.artist}</p>
                   </div>
-                  <Button size="icon" variant="ghost">
-                    <Play className="h-4 w-4" />
+                  <Button 
+                    size="icon" 
+                    variant="ghost"
+                    onClick={() => playTrack(track)}
+                  >
+                    {currentTrack?.id === track.id && isPlaying ? (
+                      <Pause className="h-4 w-4" />
+                    ) : (
+                      <Play className="h-4 w-4" />
+                    )}
                     <span className="sr-only">Play {track.title}</span>
                   </Button>
                 </div>
@@ -44,4 +48,3 @@ export default function Playlist() {
     </Card>
   )
 }
-

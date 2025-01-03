@@ -1,0 +1,12 @@
+// Recommendation Generation Process
+digraph {
+	A [label="Select Target Song" shape=box]
+	B [label="Extract Features for Target Song" shape=box]
+	C [label="Calculate Similarities with Other Songs" shape=box]
+	D [label="Generate Top N Recommendations" shape=box]
+	E [label="Return and Display Recommendations" shape=box]
+	A -> B [label="Select Target"]
+	B -> C [label="Extract Features"]
+	C -> D [label="Calculate Cosine Similarities"]
+	D -> E [label="Return Top N Songs"]
+}
