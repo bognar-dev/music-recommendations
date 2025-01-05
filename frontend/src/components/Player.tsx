@@ -32,7 +32,7 @@ export default function Player() {
       <div className="flex items-center justify-between p-4">
         <div className="flex items-center space-x-4">
           <img
-            src={currentTrack.coverUrl || "/placeholder.svg?height=48&width=48"}
+            src={currentTrack.albumCover || "/placeholder.svg?height=48&width=48"}
             alt="Album cover"
             className="h-12 w-12 rounded"
           />

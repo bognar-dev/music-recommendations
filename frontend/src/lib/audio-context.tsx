@@ -2,6 +2,7 @@
 
 import { createContext, useContext, useState, useEffect } from 'react'
 import playlistTracks from '@/data/playlist'
+
 interface Track {
   id: string
   title: string
@@ -16,6 +17,7 @@ interface AudioContextType {
   volume: number;
   progress: number;
   duration: number;
+  isRepeatEnabled: boolean;
   playTrack: (track: Track) => void;
   togglePlay: () => void;
   setVolume: (value: number) => void;
@@ -32,13 +34,19 @@ export function AudioProvider({ children }: { children: React.ReactNode }) {
   const [currentTrackIndex, setCurrentTrackIndex] = useState<number>(-1);
   const [isRepeatEnabled, setIsRepeatEnabled] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [volume, setVolume] = useState(1);
+  const [volume, setVolume] = useState(0.4);
   const [progress, setProgress] = useState(0);
   const [duration, setDuration] = useState(0);
-  const [audio] = useState(new Audio());
-
+  const [audio, setAudio] = useState<HTMLAudioElement | null>(null);
 
   useEffect(() => {
+    // Initialize audio on the client side
+    setAudio(new Audio());
+  }, []);
+
+  useEffect(() => {
+    if (!audio) return;
+
     const handleTimeUpdate = () => {
       setProgress((audio.currentTime / audio.duration) * 100);
     };
@@ -57,19 +65,20 @@ export function AudioProvider({ children }: { children: React.ReactNode }) {
   }, [audio]);
 
   const seek = (value: number) => {
+    if (!audio) return;
     const time = (value / 100) * audio.duration;
     audio.currentTime = time;
   };
 
   const handleVolumeChange = (value: number) => {
+    if (!audio) return;
     const normalizedVolume = value / 100
     audio.volume = normalizedVolume
     setVolume(normalizedVolume)
   }
 
-  
-
   const togglePlay = () => {
+    if (!audio) return;
     if (isPlaying) {
       audio.pause()
     } else {
@@ -79,6 +88,8 @@ export function AudioProvider({ children }: { children: React.ReactNode }) {
   }
 
   useEffect(() => {
+    if (!audio) return;
+
     const handleEnded = () => {
       if (isRepeatEnabled) {
         audio.currentTime = 0;
@@ -90,9 +101,10 @@ export function AudioProvider({ children }: { children: React.ReactNode }) {
 
     audio.addEventListener('ended', handleEnded);
     return () => audio.removeEventListener('ended', handleEnded);
-  }, [isRepeatEnabled]);
+  }, [isRepeatEnabled, audio]);
 
   const playTrack = (track: Track) => {
+    if (!audio) return;
     if (track.previewUrl) {
       if (currentTrack?.id === track.id) {
         togglePlay()
@@ -161,3 +173,4 @@ export const useAudio = () => {
   if (!context) throw new Error('useAudio must be used within AudioProvider')
   return context
 }
+

@@ -4,7 +4,6 @@ import { useState } from "react"
 import { useForm } from "react-hook-form"
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from "zod"
-import Sidebar from '@/components/Sidebar'
 import Header from '@/components/Header'
 import {
   MultiStepForm,
@@ -77,8 +76,6 @@ export default function Home() {
 
   if (submitted) {
     return (
-      <div className="flex h-screen pb-24">
-        <Sidebar />
         <main className="flex-1 overflow-auto">
           <Header />
           <div className="p-6">
@@ -92,13 +89,10 @@ export default function Home() {
             </Card>
           </div>
         </main>
-      </div>
     )
   }
 
   return (
-    <div className="flex h-screen pb-24">
-      <Sidebar />
       <main className="flex-1 overflow-auto">
         <Header />
         <div className="p-6">
@@ -151,7 +145,6 @@ export default function Home() {
           </div>
         </div>
       </main>
-    </div>
   )
 }
 

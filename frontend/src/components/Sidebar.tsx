@@ -1,5 +1,6 @@
 import { Home, Library, Plus } from 'lucide-react'
 import { Button } from "@/components/ui/button"
+import Link from 'next/link'
 
 export default function Sidebar() {
   return (
@@ -8,14 +9,18 @@ export default function Sidebar() {
         <div className="px-3 py-2">
           <h2 className="mb-2 px-4 text-lg font-semibold">Music Study</h2>
           <div className="space-y-1">
+          <Link href="/">
             <Button variant="secondary" className="w-full justify-start">
               <Home className="mr-2 h-4 w-4" />
               Home
             </Button>
+            </Link>
+            <Link href="/songs">
             <Button variant="ghost" className="w-full justify-start">
               <Library className="mr-2 h-4 w-4" />
-              Your Library
+              Dataset
             </Button>
+            </Link>
           </div>
         </div>
         <div className="px-3 py-2">
