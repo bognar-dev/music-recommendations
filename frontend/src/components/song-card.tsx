@@ -2,7 +2,7 @@ import Image from "next/image"
 import { Play } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import type { Song } from "@/types/music"
+import type { Song } from "@/db/schema"
 
 interface SongCardProps {
   song: Song
@@ -16,14 +16,15 @@ export function SongCard({ song, onClick }: SongCardProps) {
     <Card className="overflow-hidden group cursor-pointer" onClick={onClick}>
       <CardContent className="p-0">
         <div className="relative aspect-square">
+        {song.image_url !== 'no' && (
           <Image
-            src={song.img}
+            src={song.image_url!}
             alt={`${song.name} by ${song.artist}`}
             className="object-cover transition-transform group-hover:scale-105"
             fill
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          />
-          {song.preview && (
+          />)}
+          {song.preview_url && (
             <Button
               size="icon"
               variant="secondary"

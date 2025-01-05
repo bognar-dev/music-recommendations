@@ -1,12 +1,10 @@
 import "server-only";
-
 import { cache } from 'react'
 import fs from 'fs'
 import path from 'path'
 import { parse } from 'csv-parse/sync'
 import type { Song, SearchParams } from '@/types/music'
 
-// Function to parse CSV data
 interface CSVRecord {
   name: string;
   artist: string;
@@ -31,13 +29,11 @@ interface CSVRecord {
 }
 
 function parseCSV(filePath: string): Song[] {
-  
   const fileContent = fs.readFileSync(filePath, 'utf-8')
   const records = parse(fileContent, {
     columns: true,
     skip_empty_lines: true
   })
-
 
   return records.map((record: CSVRecord) => ({
     name: record.name || 'Unknown',
@@ -63,12 +59,29 @@ function parseCSV(filePath: string): Song[] {
   }))
 }
 
-// Load and parse the CSV file
 const csvFilePath = path.join(process.cwd(), 'data', 'songs.csv')
 const songs: Song[] = parseCSV(csvFilePath)
 
-// Cache the filtered and sorted results
-export const getSongs = cache((params: SearchParams) => {
+type ParsedParams = {
+  query?: string;
+  page?: number;
+  minDanceability?: number;
+  minEnergy?: number;
+  sortBy?: string;
+}
+
+const parseSearchParams = (params: { [key: string]: string | string[] | undefined }): ParsedParams => {
+  return {
+    query: typeof params.query === 'string' ? params.query : undefined,
+    page: typeof params.page === 'string' ? Number(params.page) : 1,
+    minDanceability: typeof params.minDanceability === 'string' ? Number(params.minDanceability) : undefined,
+    minEnergy: typeof params.minEnergy === 'string' ? Number(params.minEnergy) : undefined,
+    sortBy: typeof params.sortBy === 'string' ? params.sortBy : undefined,
+  }
+}
+
+export const getSongs = cache((searchParams: { [key: string]: string | string[] | undefined }) => {
+  const params = parseSearchParams(searchParams)
   let filtered = songs
 
   // Apply search filter
@@ -84,13 +97,13 @@ export const getSongs = cache((params: SearchParams) => {
   // Apply numeric filters
   if (params.minDanceability) {
     filtered = filtered.filter(
-      song => song.danceability >= Number(params.minDanceability)
+      song => song.danceability >= params.minDanceability!
     )
   }
 
   if (params.minEnergy) {
     filtered = filtered.filter(
-      song => song.energy >= Number(params.minEnergy)
+      song => song.energy >= params.minEnergy!
     )
   }
 
@@ -113,8 +126,8 @@ export const getSongs = cache((params: SearchParams) => {
   }
 
   // Calculate pagination
-  const page = Number(params.page) || 1
   const pageSize = 20
+  const page = params.page || 1
   const start = (page - 1) * pageSize
   const end = start + pageSize
 
@@ -124,4 +137,3 @@ export const getSongs = cache((params: SearchParams) => {
     totalPages: Math.ceil(filtered.length / pageSize)
   }
 })
-

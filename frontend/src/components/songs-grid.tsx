@@ -2,7 +2,7 @@
 import { useState } from "react"
 import { SongCard } from "./song-card"
 import { SongDetailsPanel } from "./song-details-panel"
-import type { Song } from "@/types/music"
+import type { Song } from "@/db/schema"
 
 interface SongsGridProps {
   songs: Song[]

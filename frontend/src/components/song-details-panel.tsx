@@ -5,7 +5,7 @@ import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription } from "
 import { Progress } from "@/components/ui/progress"
 import { Separator } from "@/components/ui/separator"
 import Image from 'next/image'
-import type { Song } from "@/types/music"
+import type { Song } from "@/db/schema"
 
 interface SongDetailsPanelProps {
   song: Song | null
@@ -45,13 +45,15 @@ export function SongDetailsPanel({ song, isOpen, onClose }: SongDetailsPanelProp
           <SheetDescription>{song.artist}</SheetDescription>
         </SheetHeader>
         <div className="mt-6 space-y-6">
-          <Image
-            src={song.img}
+            {song.image_url !== 'no' && (
+              <Image
+            src={song.image_url!}
             alt={`${song.name} by ${song.artist}`}
             width={300}
             height={300}
             className="w-full h-auto rounded-md"
-          />
+              />
+            )}
           <Separator />
           <div>
             <h3 className="font-semibold mb-2">Track Features</h3>
@@ -71,7 +73,7 @@ export function SongDetailsPanel({ song, isOpen, onClose }: SongDetailsPanelProp
             <div className="space-y-2">
               <p><span className="font-medium">Spotify ID:</span> {song.spotify_id}</p>
               <p><span className="font-medium">Loudness:</span> {song.loudness.toFixed(2)} dB</p>
-              <p><span className="font-medium">Preview:</span> {song.preview ? "Available" : "Not available"}</p>
+              <p><span className="font-medium">Preview:</span> {song.preview_url ? "Available" : "Not available"}</p>
             </div>
           </div>
           <Separator />

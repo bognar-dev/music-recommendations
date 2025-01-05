@@ -3,23 +3,23 @@ import { Input } from '@/components/ui/input'
 import { SearchFilters } from '@/components/search-filters'
 import { SongsGrid } from '@/components/songs-grid'
 import { SongPagination } from '@/components/pagination'
-import { getSongs } from '@/lib/data'
+import { getSongs } from '@/db/queries'
 
 type Param = string | string[] | undefined
-interface SongsPageProps {
+interface PageProps {
   searchParams: { [key: string]: Param }
 }
 
-const parse = (param: Param) => {
-  return typeof param === 'string' ? param : undefined
-}
-const SongsPage = ({
-  searchParams,
-}: SongsPageProps) => {
-  const { songs, total, totalPages } = getSongs(searchParams)
+export default async function SongsPage({ searchParams }: PageProps) {
+  const { songs, total, totalPages } = await getSongs({
+    query: searchParams.query?.toString(),
+    page: Number(searchParams.page) || 1,
+    minDanceability: searchParams.minDanceability ? Number(searchParams.minDanceability) : undefined,
+    minEnergy: searchParams.minEnergy ? Number(searchParams.minEnergy) : undefined,
+    sortBy: searchParams.sortBy?.toString(),
+  })
   const currentPage = Number(searchParams.page) || 1
-  console.log(songs)
-  console.log(searchParams)
+
   return (
     <div className="flex h-full">
       <div className="w-64 p-4 border-r hidden md:block">
@@ -32,7 +32,7 @@ const SongsPage = ({
             type="search"
             placeholder="Search songs..."
             className="max-w-xl"
-            defaultValue={searchParams.query}
+            defaultValue={searchParams.query?.toString()}
           />
         </header>
 
@@ -58,7 +58,3 @@ const SongsPage = ({
     </div>
   )
 }
-
-
-
-export default SongsPage
