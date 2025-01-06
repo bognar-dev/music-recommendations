@@ -1,6 +1,9 @@
-import './globals.css'
+import '@/app/globals.css'
 import { Inter } from 'next/font/google'
+import Player from '@/components/Player'
+import Sidebar from '@/components/Sidebar'
 import { ThemeProvider } from '@/components/ThemeProvider'
+import { AudioProvider } from '@/lib/audio-context'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
@@ -23,9 +26,16 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-           
+          <div className="min-h-screen flex">
+            <Sidebar />
+            <div className="flex-1 flex flex-col">
+              <AudioProvider>
                 {children}
-         
+                <Player />
+
+              </AudioProvider>
+            </div>
+          </div>
         </ThemeProvider>
       </body>
     </html>

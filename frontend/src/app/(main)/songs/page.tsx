@@ -5,6 +5,8 @@ import { SongsPagination } from '@/components/pagination'
 import { estimateTotalSongs, fetchSongsWithPagination, ITEMS_PER_PAGE } from '@/db/queries'
 import { parseSearchParams } from '@/lib/url-state'
 import { Search, SearchFallback } from '@/components/search'
+import { cookies } from 'next/headers'
+import { redirect } from 'next/navigation'
 
 
 export default async function Page(
@@ -12,6 +14,13 @@ export default async function Page(
     searchParams: Promise<Record<string, string | string[] | undefined>>;
   }
 ) {
+
+
+  const cookieStore = await cookies()
+    const acceptedTerms = cookieStore.get('accepted-terms')
+    if(!acceptedTerms) {
+      redirect('/')
+    }
   const searchParams = await props.searchParams;
   const parsedSearchParams = parseSearchParams(searchParams);
 
