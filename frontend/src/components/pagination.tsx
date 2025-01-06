@@ -1,14 +1,15 @@
 'use client';
 
-import Form from 'next/form';
+import Form from 'next/form'
 import { useFormStatus } from 'react-dom';
+import { usePathname } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import {
   Pagination,
   PaginationContent,
   PaginationItem,
-} from '@/components/ui/pagination'
-import type { SearchParams } from '@/types/music';
+} from '@/components/ui/pagination';
+import { SearchParams } from '@/lib/url-state';
 
 function FormValues({
   searchParams,
@@ -33,7 +34,7 @@ function FormValues({
   );
 }
 
-export function SongPagination({
+export function SongsPagination({
   currentPage,
   totalPages,
   totalResults,
@@ -44,6 +45,8 @@ export function SongPagination({
   totalResults: number;
   searchParams: SearchParams;
 }) {
+  const pathname = usePathname();
+
   if (totalPages <= 1) {
     return null;
   }
@@ -52,7 +55,7 @@ export function SongPagination({
     <Pagination>
       <PaginationContent className="flex items-center justify-between">
         <PaginationItem>
-          <Form action="/">
+          <Form action={pathname}>
             <FormValues
               searchParams={searchParams}
               pageNumber={Math.max(1, currentPage - 1)}
@@ -74,7 +77,7 @@ export function SongPagination({
         </div>
 
         <PaginationItem>
-          <Form action="/">
+          <Form action={pathname}>
             <FormValues
               searchParams={searchParams}
               pageNumber={Math.min(totalPages, currentPage + 1)}
@@ -93,4 +96,3 @@ export function SongPagination({
     </Pagination>
   );
 }
-

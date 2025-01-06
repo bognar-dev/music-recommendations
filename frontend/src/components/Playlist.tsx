@@ -1,13 +1,12 @@
-"use client"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Play,Pause } from 'lucide-react'
-import {useAudio} from '@/lib/audio-context'
-import playlistTracks from '@/data/playlist'
+import { PlayButton } from "./play-button"
+import Image from "next/image";
+import { fetchSongsWithPagination } from "@/db/queries";
 
-export default function Playlist() {
-  const { currentTrack, isPlaying, playTrack } = useAudio()
 
+
+export default async function Playlist() {
+  const playlist = await fetchSongsWithPagination({limit:5,preview_url:true})
   return (
     <Card>
       <CardHeader>
@@ -15,31 +14,22 @@ export default function Playlist() {
       </CardHeader>
       <CardContent>
         <ul className="space-y-4">
-          {playlistTracks.map((track) => (
+          {playlist.map((track) => (
             <li key={track.id} className="flex items-center space-x-4 border-b pb-4 last:border-b-0">
-              <img
-                src={track.albumCover}
-                alt={`${track.title} album cover`}
+              <Image
+                src={track.image_url ?? '/placeholder.svg'}
+                alt={`${track.name} album cover`}
                 className="h-16 w-16 rounded"
+                width={64}
+                height={64}
               />
               <div className="flex-1">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="font-medium">{track.title}</p>
+                    <p className="font-medium">{track.name}</p>
                     <p className="text-sm text-muted-foreground">{track.artist}</p>
                   </div>
-                  <Button 
-                    size="icon" 
-                    variant="ghost"
-                    onClick={() => playTrack(track)}
-                  >
-                    {currentTrack?.id === track.id && isPlaying ? (
-                      <Pause className="h-4 w-4" />
-                    ) : (
-                      <Play className="h-4 w-4" />
-                    )}
-                    <span className="sr-only">Play {track.title}</span>
-                  </Button>
+                 <PlayButton song={track}/>
                 </div>
               </div>
             </li>

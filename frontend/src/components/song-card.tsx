@@ -1,19 +1,18 @@
 import Image from "next/image"
-import { Play } from 'lucide-react'
-import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import type { Song } from "@/db/schema"
+import { PlayButton } from "./play-button"
 
 interface SongCardProps {
   song: Song
-  onClick?: () => void
+  priority: boolean
 }
 
-export function SongCard({ song, onClick }: SongCardProps) {
+export function SongCard({ song, priority }: SongCardProps) {
   
 
   return (
-    <Card className="overflow-hidden group cursor-pointer" onClick={onClick}>
+    <Card className="overflow-hidden group cursor-pointer duration-300">
       <CardContent className="p-0">
         <div className="relative aspect-square">
         {song.image_url !== 'no' && (
@@ -23,17 +22,17 @@ export function SongCard({ song, onClick }: SongCardProps) {
             className="object-cover transition-transform group-hover:scale-105"
             fill
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            priority={priority}
           />)}
-          {song.preview_url && (
-            <Button
-              size="icon"
-              variant="secondary"
-              className="absolute bottom-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity"
-            >
-              <Play className="h-4 w-4" />
-              <span className="sr-only">Play preview</span>
-            </Button>
-          )}
+            {song.preview_url ? (
+            <PlayButton
+            className="absolute inset-0"
+            song={song}/>
+            ) : (
+            <div className="absolute inset-0 flex items-center justify-center bg-black/50 group-hover:scale-105">
+              <p className="text-white text-sm">No preview available</p>
+            </div>
+            )}
         </div>
         <div className="p-4">
           <h3 className="font-semibold truncate">{song.name}</h3>

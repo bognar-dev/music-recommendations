@@ -3,6 +3,7 @@ import { Play, Pause, SkipBack, SkipForward, Volume2, Repeat } from 'lucide-reac
 import { Button } from "@/components/ui/button"
 import { Slider } from "@/components/ui/slider"
 import { useAudio } from '@/lib/audio-context'
+import Image from 'next/image'
 
 export default function Player() {
   const { currentTrack,
@@ -31,13 +32,16 @@ export default function Player() {
     <div className="fixed bottom-0 left-0 right-0 bg-background border-t">
       <div className="flex items-center justify-between p-4">
         <div className="flex items-center space-x-4">
-          <img
-            src={currentTrack.albumCover || "/placeholder.svg?height=48&width=48"}
-            alt="Album cover"
-            className="h-12 w-12 rounded"
-          />
+         {currentTrack.image_url !== 'no' && (
+                  <Image
+                    src={currentTrack.image_url!}
+                    alt={`${currentTrack.name} by ${currentTrack.artist}`}
+                    className="object-cover transition-transform group-hover:scale-105"
+                    width={48}
+                    height={48}
+                  />)}
           <div>
-            <h3 className="text-sm font-medium">{currentTrack.title}</h3>
+            <h3 className="text-sm font-medium">{currentTrack.name}</h3>
             <p className="text-xs text-muted-foreground">{currentTrack.artist}</p>
           </div>
         </div>
