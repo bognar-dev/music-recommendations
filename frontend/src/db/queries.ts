@@ -1,3 +1,4 @@
+"server-only";
 import { sql, and, gte, eq, lte, desc, asc } from 'drizzle-orm';
 import { db } from './index';
 import { songs } from './schema';

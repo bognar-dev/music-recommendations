@@ -1,20 +1,15 @@
 
 
-import Playlist from "@/components/Playlist";
-import SurveryPage from "@/components/survey-page";
-import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
+import { AddDealRoutes } from '@/types/survey';
+import { cookies } from 'next/headers';
+import { redirect } from 'next/navigation';
 
-
-export default async function Home() {
+export default async function AddPage() {
   const cookieStore = await cookies()
   const acceptedTerms = cookieStore.get('accepted-terms')
-  if(!acceptedTerms) {
+  if (!acceptedTerms) {
     redirect('/')
   }
-  return (
-    <SurveryPage>
-      <Playlist />
-    </SurveryPage>
-  )
+
+  redirect(AddDealRoutes.MODEL_1);
 }
