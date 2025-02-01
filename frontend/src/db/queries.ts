@@ -69,7 +69,6 @@ const imageUrlFilter = (imageUrl?: boolean) => {
 
 
 export async function fetchSongsWithPagination(searchParams: SearchParams) {
-  console.log(searchParams)
   const page = Math.max(1, searchParams.page || 1);
   const limit = searchParams.limit || ITEMS_PER_PAGE;
 
@@ -96,7 +95,6 @@ export async function fetchSongsWithPagination(searchParams: SearchParams) {
     .orderBy(sortOrder(sortColumn))
     .limit(ITEMS_PER_PAGE)
     .offset(offset);
-    console.log(paginatedSongs.length)
   return paginatedSongs;
 }
 

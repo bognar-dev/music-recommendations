@@ -1,7 +1,7 @@
 "use client"
 
+import { useAudio } from "@/context/audio-context"
 import { Song } from "@/db/schema"
-import { useAudio } from "@/lib/audio-context"
 interface SongLoaderProps {
     songs: Song[]
 }

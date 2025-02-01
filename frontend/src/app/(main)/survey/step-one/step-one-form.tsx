@@ -11,6 +11,8 @@ import { stepOneFormAction } from "./actions";
 import { FormErrors } from "@/types/survey";
 import Form from "next/form";
 import { useActionState } from "react";
+import { useSurveyContext } from "@/context/survey-context";
+
 
 interface StepOneFormProps {
     recommendations: Song[]
@@ -21,8 +23,49 @@ export default function StepOneForm({ recommendations }: StepOneFormProps) {
     const [serverErrors, formAction] = useActionState(
         stepOneFormAction,
         initialState
-    );
+    )
 
+    const { updateSurveyDetails, surveyData } = useSurveyContext();
+
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = e.target;
+
+        // Handle song ratings
+        if (name.startsWith('songRatings.')) {
+            const [_, songId, field] = name.split('.');
+            const existingSongRating = surveyData.stepOne.songRatings.find(
+                sr => sr.songId === Number(songId)
+            );
+
+            const updatedRating = {
+                songId: Number(songId),
+                songName: recommendations.find(r => r.id === Number(songId))?.name || '',
+                modelId: surveyData.stepOne.modelId,
+                rating: Number(value)
+            };
+
+            const updatedSongRatings = existingSongRating
+                ? surveyData.stepOne.songRatings.map(sr =>
+                    sr.songId === Number(songId) ? updatedRating : sr
+                )
+                : [...surveyData.stepOne.songRatings, updatedRating];
+
+            updateSurveyDetails('stepOne', {
+                songRatings: updatedSongRatings
+            });
+        }
+
+        // Handle model ratings
+        if (name.startsWith('modelRating.')) {
+            const [_, field] = name.split('.');
+            updateSurveyDetails('stepOne', {
+                modelRating: {
+                    ...surveyData.stepOne.modelRating,
+                    [field]: Number(value)
+                }
+            });
+        }
+    };
     return (
         <Form action={formAction} className="flex flex-1 flex-col items-center">
             <div className="flex w-full flex-col gap-8 lg:max-w-[700px]">
@@ -64,6 +107,10 @@ export default function StepOneForm({ recommendations }: StepOneFormProps) {
                                                         name={`songRatings.${track.id}.rating`}
                                                         value={rating}
                                                         id={`rating-${track.id}-${rating}`}
+                                                        checked={surveyData.stepOne.songRatings.some(
+                                                            sr => sr.songId === track.id && sr.rating === rating
+                                                        )}
+                                                        onChange={handleInputChange}
                                                     />
                                                     <Label htmlFor={`rating-${track.id}-${rating}`}>{rating.toString()}</Label>
                                                 </div>
@@ -83,6 +130,7 @@ export default function StepOneForm({ recommendations }: StepOneFormProps) {
                     </CardHeader>
                     <CardContent>
                         <div className="space-y-6">
+                            {/* Relevance */}
                             <div>
                                 <Label htmlFor="relevance">Relevance</Label>
                                 <ul className="flex space-x-2 mt-2">
@@ -94,12 +142,16 @@ export default function StepOneForm({ recommendations }: StepOneFormProps) {
                                                 name="modelRating.relevance"
                                                 value={rating}
                                                 id={`relevance-${rating}`}
+                                                checked={surveyData.stepOne.modelRating.relevance === rating}
+                                                onChange={handleInputChange}
                                             />
                                             <Label htmlFor={`relevance-${rating}`}>{rating.toString()}</Label>
                                         </div>
                                     ))}
                                 </ul>
                             </div>
+
+                            {/* Novelty */}
                             <div>
                                 <Label htmlFor="novelty">Novelty</Label>
                                 <ul className="flex space-x-2 mt-2">
@@ -111,12 +163,16 @@ export default function StepOneForm({ recommendations }: StepOneFormProps) {
                                                 name="modelRating.novelty"
                                                 value={rating}
                                                 id={`novelty-${rating}`}
+                                                checked={surveyData.stepOne.modelRating.novelty === rating}
+                                                onChange={handleInputChange}
                                             />
                                             <Label htmlFor={`novelty-${rating}`}>{rating.toString()}</Label>
                                         </div>
                                     ))}
                                 </ul>
                             </div>
+
+                            {/* Satisfaction */}
                             <div>
                                 <Label htmlFor="satisfaction">Satisfaction</Label>
                                 <ul className="flex space-x-2 mt-2">
@@ -128,6 +184,8 @@ export default function StepOneForm({ recommendations }: StepOneFormProps) {
                                                 name="modelRating.satisfaction"
                                                 value={rating}
                                                 id={`satisfaction-${rating}`}
+                                                checked={surveyData.stepOne.modelRating.satisfaction === rating}
+                                                onChange={handleInputChange}
                                             />
                                             <Label htmlFor={`satisfaction-${rating}`}>{rating.toString()}</Label>
                                         </div>

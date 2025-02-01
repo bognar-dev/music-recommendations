@@ -27,9 +27,7 @@ export const stepOneFormAction = async (
         songRatings: songRatings.filter(x => x),
         modelRating
     };
-    console.log(data)
     const validated = stepOneSchema.safeParse(data);
-    console.log(validated.data!);
     if (!validated.success) {
         const errors = validated.error.issues.reduce((acc: FormErrors, issue) => {
             const path = issue.path[0] as string;

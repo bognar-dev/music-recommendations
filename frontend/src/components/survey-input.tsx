@@ -1,8 +1,11 @@
 'use client';
 
+import { useSurveyContext } from '@/context/survey-context'
+
 interface InputProps {
   label: string;
   id: string;
+  name?: string;
   description?: string;
   required?: boolean;
   pattern?: string;
@@ -11,10 +14,13 @@ interface InputProps {
   min?: number;
   max?: number;
   errorMsg?: string;
+  ratingType?: string;
 }
+
 export default function Input({
   label,
   id,
+  name,
   required,
   pattern,
   type,
@@ -23,7 +29,14 @@ export default function Input({
   max,
   description,
   errorMsg,
+  ratingType
 }: InputProps) {
+  const { updateSurveyDetails, surveyData } = useSurveyContext(); // Changed these context values
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    updateSurveyDetails({ [e.target.name]: e.target.value }); // Changed to use survey context
+  };
+
   return (
     <div>
       <label className="block text-lg" htmlFor={id}>
@@ -39,13 +52,20 @@ export default function Input({
           errorMsg ? 'border-red-500' : 'border-slate-300'
         } border-2`}
         type={type}
-        name={id}
+        name={name}
         id={id}
         required={required}
         pattern={pattern}
         minLength={minLength}
         min={min}
         max={max}
+        onChange={handleInputChange}
+        value={ratingType === 'song' 
+          ? surveyData.songRatings.find((rating) => rating.songId === id)?.rating
+          : ratingType === 'preference' 
+            ? surveyData.preferences[id]
+            : surveyData.demographics[id]
+        }
       />
       <div className="min-h-8 mt-1">
         {errorMsg && (

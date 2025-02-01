@@ -1,11 +1,13 @@
 import '@/app/globals.css'
-import { Inter } from 'next/font/google'
+import Header from '@/components/Header'
 import Player from '@/components/Player'
 import Sidebar from '@/components/Sidebar'
-import { ThemeProvider } from '@/components/ThemeProvider'
-import { AudioProvider } from '@/lib/audio-context'
 import StepNavigation from '@/components/survey-step-navigation'
-import Header from '@/components/Header'
+import { ThemeProvider } from '@/components/ThemeProvider'
+import { AudioProvider } from '@/context/audio-context'
+import { SurveyContextProvider } from '@/context/survey-context'
+import { Inter } from 'next/font/google'
+import { cookies } from 'next/headers'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
@@ -13,11 +15,12 @@ export const metadata = {
   description: 'A study comparing different music recommendation models',
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
+  const hasAcceptedTerms = (await cookies()).get('accepted-terms')?.value === 'true'
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${inter.className} bg-background`}>
@@ -28,21 +31,23 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <Header/>
-          <div className="min-h-screen flex">
-            <Sidebar />
-            <div className="flex-1 flex flex-col">
+          <SurveyContextProvider>
+            <Header />
+            <div className="min-h-screen flex">
+              <Sidebar hasAcceptedTerms={hasAcceptedTerms} />
+              <div className="flex-1 flex flex-col">
 
-              <AudioProvider>
-                <div className="flex flex-col justify-center justify-items-center">
-                  <StepNavigation />
-                  {children}
-                </div>
-                <Player />
+                <AudioProvider>
+                  <div className="flex flex-col justify-center justify-items-center">
+                    <StepNavigation />
+                    {children}
+                  </div>
+                  <Player />
 
-              </AudioProvider>
+                </AudioProvider>
+              </div>
             </div>
-          </div>
+          </SurveyContextProvider>
         </ThemeProvider>
       </body>
     </html>

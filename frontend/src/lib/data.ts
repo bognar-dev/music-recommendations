@@ -3,7 +3,7 @@ import { cache } from 'react'
 import fs from 'fs'
 import path from 'path'
 import { parse } from 'csv-parse/sync'
-import type { Song, SearchParams } from '@/types/music'
+import type { Song } from '@/types/music'
 
 interface CSVRecord {
   name: string;

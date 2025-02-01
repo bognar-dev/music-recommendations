@@ -1,5 +1,5 @@
 import React from 'react';
-import StepOneForm from './step-two-form';
+import StepTwoForm from './step-two-form';
 import Playlist from '@/components/Playlist';
 import { fetchSongsWithPagination } from '@/db/queries';
 
@@ -9,8 +9,7 @@ export default async function StepOne() {
     return (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <Playlist />
-            
-            <StepOneForm recommendations={playlist} />
+            <StepTwoForm recommendations={playlist} />
         </div>
     );
 }

@@ -1,10 +1,10 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import { Play, Pause } from 'lucide-react'
-import { useAudio } from '@/lib/audio-context'
+import { useAudio } from '@/context/audio-context'
 import { Song } from "@/db/schema"
 import { cn } from "@/lib/utils"
+import { Pause, Play } from 'lucide-react'
 
 interface PlayButtonProps {
   song: Song
@@ -12,12 +12,12 @@ interface PlayButtonProps {
 }
 
 export function PlayButton({ song, className }: PlayButtonProps) {
-  const { currentTrack, isPlaying, playTrack} = useAudio()
+  const { currentTrack, isPlaying, playTrack } = useAudio()
   const isCurrentTrack = currentTrack?.id === song.id
   return (
-    <Button 
-    className={cn("", className)}
-      size="icon" 
+    <Button
+      className={cn("", className)}
+      size="icon"
       variant="ghost"
       onClick={() => playTrack(song)}
     >

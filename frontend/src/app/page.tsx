@@ -7,16 +7,11 @@ import { redirect } from 'next/navigation';
 import React from 'react';
 
 const TermsPage = async () => {
-    const cookieStore = await cookies()
-    const acceptedTerms = cookieStore.get('accepted-terms')
+    
     const action = async () => {
         "use server";
         const cookieStore = await cookies()
         cookieStore.set('accepted-terms', 'true')
-        redirect('/survey')
-    }
-
-    if(acceptedTerms) {
         redirect('/survey')
     }
     
