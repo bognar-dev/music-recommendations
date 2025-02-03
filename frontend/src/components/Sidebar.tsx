@@ -1,62 +1,78 @@
 "use client"
-import { Home, Library, Plus, FileText } from 'lucide-react'
-import { Button } from "@/components/ui/button"
+import { Home, Library, FileText, ClipboardListIcon } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import {
+  Sidebar,
+  SidebarContent,
+  SidebarGroup,
+  SidebarGroupContent,
+  SidebarGroupLabel,
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem,
+} from "@/components/ui/sidebar"
 
-export default function Sidebar({ hasAcceptedTerms }: { hasAcceptedTerms: boolean }) {
+const items = [
+  {
+    title: "Home",
+    url: "/",
+    icon: Home,
+  },
+  {
+    title: "Dataset",
+    url: "/songs",
+    icon: Library,
+    requiresAcceptance: true,
+  },
+  {
+    title: "Survey",
+    url: "/survey",
+    icon: FileText,
+    requiresAcceptance: true,
+  },
+  {
+    title: "Results",
+    url: "/results",
+    icon: ClipboardListIcon,
+    disabled: true,
+    suffix: "released soon",
+  },
+]
+
+export default function AppSidebar({ hasAcceptedTerms }: { hasAcceptedTerms: boolean }) {
   const pathname = usePathname()
 
   return (
-    <div className="pb-12 w-60">
-      <div className="space-y-4 py-4">
-        <div className="px-3 py-2">
-          <h2 className="mb-2 px-4 text-lg font-semibold">Music Study</h2>
-          <div className="space-y-1">
-            <Link href="/">
-              <Button 
-                variant={pathname === '/' ? "secondary" : "ghost"} 
-                className="w-full justify-start"
-              >
-                <Home className="mr-2 h-4 w-4" />
-                Home
-              </Button>
-            </Link>
-            {hasAcceptedTerms && (
-              <>
-                <Link href="/songs">
-                  <Button 
-                    variant={pathname === '/songs' ? "secondary" : "ghost"} 
-                    className="w-full justify-start"
-                  >
-                    <Library className="mr-2 h-4 w-4" />
-                    Dataset
-                  </Button>
-                </Link>
-                <Link href="/survey">
-                  <Button 
-                    variant={pathname === '/survey' ? "secondary" : "ghost"} 
-                    className="w-full justify-start"
-                  >
-                    <FileText className="mr-2 h-4 w-4" />
-                    Survey
-                  </Button>
-                </Link>
-              </>
-            )}
-          </div>
-        </div>
-        <div className="px-3 py-2">
-          <div className="space-y-1">
-            <div className="flex items-center justify-between">
-              <h2 className="px-4 text-lg font-semibold">Playlists</h2>
-              <Button variant="ghost" size="icon">
-                <Plus className="h-4 w-4" />
-              </Button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <Sidebar>
+      <SidebarContent>
+        <SidebarGroup>
+          <SidebarGroupLabel>Music Study</SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              {items.map((item) => {
+                if (item.requiresAcceptance && !hasAcceptedTerms) return null;
+                
+                return (
+                  <SidebarMenuItem key={item.title}>
+                    <SidebarMenuButton asChild disabled={item.disabled}>
+                      <Link href={item.url}>
+                        <item.icon className="mr-2 h-4 w-4" />
+                        <span>{item.title}</span>
+                        {item.suffix && (
+                          <span className="ml-2 text-sm font-medium text-gray-500">
+                            {item.suffix}
+                          </span>
+                        )}
+                      </Link>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                );
+              })}
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+      </SidebarContent>
+    </Sidebar>
   )
 }

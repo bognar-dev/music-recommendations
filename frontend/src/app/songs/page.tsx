@@ -35,7 +35,7 @@ export default async function Page(
   const currentPage = Math.max(1, Number(parsedSearchParams.page) || 1);
 
   return (
-    <div className="flex h-full">
+    <div className="flex h-full border-t">
       <div className="w-64 p-4 border-r hidden md:block">
         <SearchFilters />
       </div>

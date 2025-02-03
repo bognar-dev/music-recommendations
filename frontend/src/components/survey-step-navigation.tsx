@@ -92,8 +92,6 @@ export default function StepNavigation() {
                 >
                     <ArrowBigRightIcon className="h-6 w-6" />
                 </Link>
-                {/* mobile background dashes */}
-                <div className="absolute top-4 flex h-1 w-full border-b border-dashed lg:hidden" />
             </div>
         </div>
     );

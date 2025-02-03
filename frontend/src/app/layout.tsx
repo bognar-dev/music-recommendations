@@ -1,8 +1,8 @@
 import '@/app/globals.css'
-import Header from '@/components/Header'
-import Player from '@/components/Player'
 import Sidebar from '@/components/Sidebar'
 import { ThemeProvider } from '@/components/ThemeProvider'
+import { ModeToggle } from '@/components/ThemeToggle'
+import { SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar'
 import { AudioProvider } from '@/context/audio-context'
 import { SurveyContextProvider } from '@/context/survey-context'
 import { Inter } from 'next/font/google'
@@ -31,21 +31,25 @@ export default async function RootLayout({
           disableTransitionOnChange
         >
           <SurveyContextProvider>
-            <Header />
-            <div className="min-h-screen flex">
+            <SidebarProvider>
+
+
               <Sidebar hasAcceptedTerms={hasAcceptedTerms} />
-              <div className="flex-1 flex flex-col">
+              <main className="flex flex-col flex-grow gap-1">
+                <div className="flex justify-between justify-items-stretch p-2"> 
+                  <SidebarTrigger />
+                  <ModeToggle />
+                </div>
 
                 <AudioProvider>
                   <div className="flex flex-col justify-center justify-items-center">
-                    
                     {children}
                   </div>
-                  <Player />
+                  
 
                 </AudioProvider>
-              </div>
-            </div>
+              </main>
+            </SidebarProvider>
           </SurveyContextProvider>
         </ThemeProvider>
       </body>

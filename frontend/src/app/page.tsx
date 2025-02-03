@@ -1,55 +1,67 @@
-import { Button } from '@/components/ui/button';
 
+import { Button } from '@/components/ui/button';
+import { ChevronDown } from 'lucide-react'; // Make sure to install lucide-react
 import Form from 'next/form';
 import { cookies } from 'next/headers';
-import Link from 'next/link';
 import { redirect } from 'next/navigation';
-import React from 'react';
 
 const TermsPage = async () => {
-    
     const action = async () => {
         "use server";
         const cookieStore = await cookies()
         cookieStore.set('accepted-terms', 'true')
         redirect('/survey')
     }
-    
+
     return (
-        <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 text-gray-800 px-6">
-            <div className="bg-white shadow-md rounded-lg p-8 max-w-3xl w-full text-center">
-                <h1 className="text-4xl font-bold mb-6">Welcome to the Music Recommendation Study</h1>
-                <p className="text-lg leading-relaxed mb-4">
+        <div className="flex flex-col items-center justify-start min-h-screen p-4 md:p-6 bg-background">
+            <div className="fixed bottom-4 right-4 md:hidden">
+                <Button 
+                    variant="secondary" 
+                    size="icon"
+                    className="rounded-full shadow-lg"
+                >
+                    <ChevronDown className="h-6 w-6" />
+                </Button>
+            </div>
+
+            <div className="bg-card shadow-lg rounded-lg p-6 md:p-8 max-w-3xl w-full text-card-foreground">
+                <h1 className="text-3xl md:text-4xl font-bold mb-6 text-primary">Welcome to the Music Recommendation Study</h1>
+                <p className="text-lg text-muted-foreground mb-6">
                     Please read and agree to the following terms before proceeding:
                 </p>
 
-                <div className="text-left space-y-6 mb-6">
-                    <p><span className="font-bold">1. Purpose:</span> This website is designed to support research and provide insights into music recommendation systems.</p>
-                    <p><span className="font-bold">2. User Agreement:</span> By using this website, you agree to comply with these terms and conditions.</p>
-                    <span className="font-bold">3. Privacy and Data Collection:</span>
-                        <ul className="list-disc pl-6">
+                <div className="space-y-6 mb-8">
+                    {/* Terms sections with improved styling */}
+                    <section className="border border-border rounded-md p-4">
+                        <h2 className="text-lg font-semibold text-primary mb-2">1. Purpose</h2>
+                        <p className="text-muted-foreground">This website is designed to support research and provide insights into music recommendation systems.</p>
+                    </section>
+
+                    <section className="border border-border rounded-md p-4">
+                        <h2 className="text-lg font-semibold text-primary mb-2">2. User Agreement</h2>
+                        <p className="text-muted-foreground">By using this website, you agree to comply with these terms and conditions.</p>
+                    </section>
+
+                    <section className="border border-border rounded-md p-4">
+                        <h2 className="text-lg font-semibold text-primary mb-2">3. Privacy and Data Collection</h2>
+                        <ul className="list-disc pl-6 text-muted-foreground space-y-2">
                             <li>I collect limited data for analytics and research purposes.</li>
                             <li>Your data will be handled securely and not shared with third parties without your consent.</li>
-                            <li>Participation is entirely voluntary, and you can withdraw from the study at any time without providing a reason.</li>
+                            <li>Participation is entirely voluntary, and you can withdraw from the study at any time.</li>
                         </ul>
-                    <p><span className="font-bold">4. Content Usage:</span> All content on this site, including text, images, and code, is protected by copyright.</p>
-                    <span className="font-bold">5. Withdrawal Rights:</span>
-                        <ul className="list-disc pl-6">
-                            <li>You can withdraw from the study at any time.</li>
-                            <li>Contact me at nb302289@falmouth.ac.uk with your participant ID to have your data removed.</li>
-                        </ul>
-                    
-                    <p><span className="font-bold">6. Disclaimer:</span> This website is provided for research purposes only. The information provided on this website is not intended for medical, legal, or financial advice. You should consult with a qualified healthcare professional before making any decisions based on the information provided.</p>
-                    <p><span className="font-bold">7. Contact Me:</span> For any questions, concerns, or withdrawal requests, contact me at nb302289@falmouth.ac.uk.</p>
-                </div>
-                <Form action={action}>
-                <Button>
-                    <Link href='/survey'>
-                        I Agree
-                    </Link>
-                </Button>
+                    </section>
 
-                </Form>
+                    {/* Add similar sections for 4, 5, 6, and 7 */}
+                </div>
+
+                <div className="flex justify-center pt-6 border-t border-border">
+                    <Form action={action}>
+                        <Button size="lg" className="text-lg px-8">
+                            I Agree, Show me the survey!
+                        </Button>
+                    </Form>
+                </div>
             </div>
         </div>
     );

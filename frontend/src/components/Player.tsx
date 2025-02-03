@@ -29,7 +29,7 @@ export default function Player() {
   if (!currentTrack) return null
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 bg-background border-t">
+    <div className="sticky bottom-0 bg-background border-t">
       <div className="flex items-center justify-between p-4">
         <div className="flex items-center space-x-4">
           {currentTrack.image_url !== 'no' && (
