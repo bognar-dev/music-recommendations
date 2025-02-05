@@ -8,26 +8,34 @@ export const stepOneFormAction = async (
     _prevState: FormErrors | undefined,
     formData: FormData
 ): Promise<FormErrors | undefined> => {
-    const entries = Object.entries(formData.entries());
+    const entries = formData.entries();
     const songRatings: any[] = [];
     const modelRating: any = {};
+    console.log("formData", formData);
     
     entries.forEach(([key, value]) => {
         if (key.startsWith('songRatings.')) {
             const [, index, field] = key.split('.');
             if (!songRatings[parseInt(index)]) songRatings[parseInt(index)] = {};
-            songRatings[parseInt(index)][field] = field === 'rating' ? parseInt(value as string) : value;
+            songRatings[parseInt(index)][field] = (field === 'rating' || field === 'songId') ? parseInt(value as string) : value;
         } else if (key.startsWith('modelRating.')) {
+            console.log("key", key);
             const [, field] = key.split('.');
             modelRating[field] = parseInt(value as string);
         }
     });
+    console.log("modelRating", modelRating);
+    console.log("songRatings", songRatings);
 
     const data = {
         songRatings: songRatings.filter(x => x),
-        modelRating
+        modelRating,
+        modelId: "1",
+        step: 1
     };
+    
     const validated = stepOneSchema.safeParse(data);
+    console.log("validated", validated.success);
     if (!validated.success) {
         const errors = validated.error.issues.reduce((acc: FormErrors, issue) => {
             const path = issue.path[0] as string;

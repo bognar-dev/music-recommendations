@@ -36,9 +36,9 @@ const initialValues: SurveyType = {
     },
     stepFour: {
         step: 4,
-        usability: 1,
-        clarity: 1,
-        preference: 1,
+        age: 13,
+        country: 'UK',
+        preference: 'model1',
         feedback: ''
     }
 }

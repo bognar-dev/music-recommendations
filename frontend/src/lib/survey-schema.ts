@@ -4,7 +4,6 @@ import z from 'zod';
 const songRatingSchema = z.object({
   songId: z.number(),
   songName: z.string(),
-  modelId: z.string(),
   rating: z.number().min(1).max(5).int()
 });
 
@@ -38,11 +37,13 @@ export const stepThreeSchema = z.object({
 
 export const stepFourSchema = z.object({
   step: z.literal(4),
-  usability: z.number().min(1).max(5).int(),
-  clarity: z.number().min(1).max(5).int(),
-  preference: z.number().min(1).max(3).int(),
-  feedback: z.string()
-});
+  age: z.number().int().min(13, "You must be at least 13 years old").max(120, "Please enter a valid age"),
+  country: z.string().min(1, "Country is required"),
+  preference: z.enum(["model1", "model2", "model3"], {
+    required_error: "Please select a preferred model",
+  }),
+  feedback: z.string().max(500, "Feedback must be less than 500 characters"),
+})
 
 // Complete survey schema
 export const surveySchema = z.object({

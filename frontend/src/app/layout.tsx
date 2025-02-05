@@ -5,9 +5,9 @@ import { ModeToggle } from '@/components/ThemeToggle'
 import { SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar'
 import { AudioProvider } from '@/context/audio-context'
 import { SurveyContextProvider } from '@/context/survey-context'
-import { Inter } from 'next/font/google'
+import { Arimo } from 'next/font/google'
 import { cookies } from 'next/headers'
-const inter = Inter({ subsets: ['latin'] })
+const arimo = Arimo({ subsets: ['latin'] })
 
 export const metadata = {
   title: 'Music Recommendation Study',
@@ -22,7 +22,7 @@ export default async function RootLayout({
   const hasAcceptedTerms = (await cookies()).get('accepted-terms')?.value === 'true'
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.className} bg-background`}>
+      <body className={`${arimo.className} bg-background`}>
 
         <ThemeProvider
           attribute="class"
