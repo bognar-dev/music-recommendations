@@ -8,7 +8,7 @@ export const stepOneFormAction = async (
     _prevState: FormErrors | undefined,
     formData: FormData
 ): Promise<FormErrors | undefined> => {
-    const entries = formData.entries();
+    const entries = Array.from(formData.entries());
     const songRatings: any[] = [];
     const modelRating: any = {};
     console.log("formData", formData);
@@ -22,7 +22,7 @@ export const stepOneFormAction = async (
             console.log("key", key);
             const [, field] = key.split('.');
             modelRating[field] = parseInt(value as string);
-        }
+        } 
     });
     console.log("modelRating", modelRating);
     console.log("songRatings", songRatings);

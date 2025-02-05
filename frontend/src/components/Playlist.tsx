@@ -1,12 +1,15 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { PlayButton } from "./play-button"
 import Image from "next/image";
-import { fetchSongsWithPagination } from "@/db/queries";
+import { Song } from "@/db/schema";
 
 
+interface PlaylistProps {
+  playlist: Song[]
+}
 
-export default async function Playlist() {
-  const playlist = await fetchSongsWithPagination({limit:5,preview_url:true})
+
+export default async function Playlist({ playlist }: PlaylistProps) {
   return (
     <Card>
       <CardHeader>

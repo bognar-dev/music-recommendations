@@ -1,8 +1,9 @@
 "server-only";
 import { sql, and, gte, eq, lte, desc, asc } from 'drizzle-orm';
 import { db } from './index';
-import { songs } from './schema';
+import { songs, surveys } from './schema';
 import { SearchParams } from '@/lib/url-state';
+import { SurveyType } from '@/lib/survey-schema';
 
 export const ITEMS_PER_PAGE = 20;
 
@@ -125,5 +126,20 @@ export async function fetchSongById(id: number) {
     .limit(1);
 
   return result[0];
+}
+
+
+export async function insertSurvey(survey: SurveyType) {
+  const surveyToInsert = {
+    step_one: survey.stepOne,
+    step_two: survey.stepTwo,
+    step_three: survey.stepThree,
+    step_four: survey.stepFour,
+  };
+  const result = await db
+    .insert(surveys)
+    .values(surveyToInsert)
+    .returning();
+  return result;
 }
 

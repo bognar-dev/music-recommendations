@@ -14,6 +14,7 @@ import { useSurveyContext } from "@/context/survey-context"
 import { CountrySelect } from "@/components/country-select"
 import { VinylRating } from "@/components/vinyl-rating"
 import { Textarea } from "@/components/ui/textarea"
+import AgeInputSlider from "@/components/age-input-slider"
 
 
 const initialState: FormErrors = {}
@@ -48,12 +49,25 @@ export default function StepFourForm() {
     }
 
     if (name === "preference") {
-      updateSurveyDetails("stepFour", {
-        preference: value as "model1" | "model2" | "model3",
-      })
+      switch (value) {
+        case "1":
+          updateSurveyDetails("stepFour", {
+            preference: "model1",
+          })
+          break
+        case "2":
+          updateSurveyDetails("stepFour", {
+            preference: "model2",
+          })
+          break
+        case "3":
+          updateSurveyDetails("stepFour", {
+            preference: "model3",
+          })
+          break
+      }
     }
   }
-
   return (
     <Form action={formAction} className="flex flex-1 flex-col items-center">
       <div className="flex w-full flex-col gap-8 lg:max-w-[700px]">
@@ -64,20 +78,7 @@ export default function StepFourForm() {
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
-              <div>
-                <Label htmlFor="age">Age</Label>
-                <input
-                  type="number"
-                  id="age"
-                  name="age"
-                  required
-                  min="13"
-                  max="120"
-                  value={surveyData.stepFour.age || ""}
-                  onChange={handleInputChange}
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                />
-              </div>
+              <AgeInputSlider initialAge={surveyData.stepFour.age} onChange={(value) => updateSurveyDetails("stepFour", { age: Number(value) })} />
               <div>
                 <Label htmlFor="country">Country</Label>
                 <CountrySelect
@@ -95,32 +96,12 @@ export default function StepFourForm() {
           </CardHeader>
           <CardContent>
             <div className="space-y-6">
-              <div>
                 <Label htmlFor="preference">Preferred Recommendation Model</Label>
                 <div className="space-y-2 mt-2">
-                  {["model1", "model2", "model3"].map((model) => (
-                    <div key={model} className="flex items-center space-x-2">
-                      <input
-                        type="radio"
-                        id={`preference-${model}`}
-                        name="preference"
-                        value={model}
-                        checked={surveyData.stepFour.preference === model}
-                        onChange={handleInputChange}
-                        className="form-radio h-4 w-4 text-indigo-600"
-                      />
-                      <Label htmlFor={`preference-${model}`}>
-                        {model === "model1"
-                          ? "Model 1 (Genre-based)"
-                          : model === "model2"
-                            ? "Model 2 (Collaborative Filtering)"
-                            : "Model 3 (Hybrid Approach)"}
-                      </Label>
-                    </div>
-                  ))}
-                </div>
+                  <VinylRating name="preference" value={surveyData.stepFour.preference} onChange={handleInputChange} range={3} ratingMode="single" />
               </div>
             </div>
+
           </CardContent>
         </Card>
 

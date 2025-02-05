@@ -12,6 +12,7 @@ import { FormErrors } from "@/types/survey";
 import Form from "next/form";
 import { useActionState } from "react";
 import { useSurveyContext } from "@/context/survey-context";
+import { VinylRating } from "@/components/vinyl-rating";
 
 
 interface StepThreeFormProps {
@@ -99,22 +100,7 @@ export default function StepThreeForm({ recommendations }: StepThreeFormProps) {
                                             </Button>
                                         </div>
                                         <ul className="flex space-x-2">
-                                            {[1, 2, 3, 4, 5].map((rating) => (
-                                                <div key={rating} className="flex items-center space-x-1">
-                                                    <input
-                                                        type="radio"
-                                                        required
-                                                        name={`songRatings.${track.id}.rating`}
-                                                        value={rating}
-                                                        id={`rating-${track.id}-${rating}`}
-                                                        checked={surveyData.stepThree.songRatings.some(
-                                                            sr => sr.songId === track.id && sr.rating === rating
-                                                        )}
-                                                        onChange={handleInputChange}
-                                                    />
-                                                    <Label htmlFor={`rating-${track.id}-${rating}`}>{rating.toString()}</Label>
-                                                </div>
-                                            ))}
+                                            <VinylRating name={`songRatings.${track.id}.rating`} value={surveyData.stepThree.songRatings.find(sr => sr.songId === track.id)?.rating || 0} onChange={handleInputChange} />
                                         </ul>
                                     </div>
                                 </li>
@@ -132,64 +118,25 @@ export default function StepThreeForm({ recommendations }: StepThreeFormProps) {
                         <div className="space-y-6">
                             {/* Relevance */}
                             <div>
-                                <Label htmlFor="relevance">Relevance</Label>
+                                <Label htmlFor="relevance">How relevant is this model to your music preferences?</Label>
                                 <ul className="flex space-x-2 mt-2">
-                                    {[1, 2, 3, 4, 5].map((rating) => (
-                                        <div key={rating} className="flex items-center space-x-1">
-                                            <input
-                                                type="radio"
-                                                required
-                                                name="modelRating.relevance"
-                                                value={rating}
-                                                id={`relevance-${rating}`}
-                                                checked={surveyData.stepThree.modelRating.relevance === rating}
-                                                onChange={handleInputChange}
-                                            />
-                                            <Label htmlFor={`relevance-${rating}`}>{rating.toString()}</Label>
-                                        </div>
-                                    ))}
+                                    <VinylRating name="modelRating.relevance" value={surveyData.stepThree.modelRating.relevance} onChange={handleInputChange} />
                                 </ul>
                             </div>
 
                             {/* Novelty */}
                             <div>
-                                <Label htmlFor="novelty">Novelty</Label>
+                                <Label htmlFor="novelty">How novel/refreshing is this model?</Label>
                                 <ul className="flex space-x-2 mt-2">
-                                    {[1, 2, 3, 4, 5].map((rating) => (
-                                        <div key={rating} className="flex items-center space-x-1">
-                                            <input
-                                                type="radio"
-                                                required
-                                                name="modelRating.novelty"
-                                                value={rating}
-                                                id={`novelty-${rating}`}
-                                                checked={surveyData.stepThree.modelRating.novelty === rating}
-                                                onChange={handleInputChange}
-                                            />
-                                            <Label htmlFor={`novelty-${rating}`}>{rating.toString()}</Label>
-                                        </div>
-                                    ))}
+                                    <VinylRating name="modelRating.novelty" value={surveyData.stepThree.modelRating.novelty} onChange={handleInputChange} />
                                 </ul>
                             </div>
 
                             {/* Satisfaction */}
                             <div>
-                                <Label htmlFor="satisfaction">Satisfaction</Label>
+                                <Label htmlFor="satisfaction">How satisfied are you with the models recommendations?</Label>
                                 <ul className="flex space-x-2 mt-2">
-                                    {[1, 2, 3, 4, 5].map((rating) => (
-                                        <div key={rating} className="flex items-center space-x-1">
-                                            <input
-                                                type="radio"
-                                                required
-                                                name="modelRating.satisfaction"
-                                                value={rating}
-                                                id={`satisfaction-${rating}`}
-                                                checked={surveyData.stepThree.modelRating.satisfaction === rating}
-                                                onChange={handleInputChange}
-                                            />
-                                            <Label htmlFor={`satisfaction-${rating}`}>{rating.toString()}</Label>
-                                        </div>
-                                    ))}
+                                    <VinylRating name="modelRating.satisfaction" value={surveyData.stepThree.modelRating.satisfaction} onChange={handleInputChange} />
                                 </ul>
                             </div>
                         </div>

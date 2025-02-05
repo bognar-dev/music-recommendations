@@ -1,3 +1,4 @@
+"use client"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 
 interface CountrySelectProps {
@@ -6,8 +7,9 @@ interface CountrySelectProps {
 }
 
 export function CountrySelect({ value, onChange }: CountrySelectProps) {
+  console.log("CountrySelect value", value);
   return (
-    <Select onValueChange={onChange} defaultValue={value}>
+    <Select onValueChange={onChange} value={value} defaultValue={value}>
       <SelectTrigger className="w-full">
         <SelectValue placeholder="Select your country" />
       </SelectTrigger>

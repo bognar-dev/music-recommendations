@@ -8,7 +8,7 @@ export const stepThreeFormAction = async (
     _prevState: FormErrors | undefined,
     formData: FormData
 ): Promise<FormErrors | undefined> => {
-    const entries = formData.entries();
+    const entries = Array.from(formData.entries());
     const songRatings: any[] = [];
     const modelRating: any = {};
     console.log("formData", formData);

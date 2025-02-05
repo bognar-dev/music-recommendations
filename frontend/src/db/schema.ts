@@ -5,7 +5,8 @@ import {
     doublePrecision,
     varchar,
     timestamp,
-    index 
+    index, 
+    json
   } from 'drizzle-orm/pg-core'
   
   export const songs = pgTable('songs', {
@@ -44,6 +45,17 @@ import {
       spotifyIdx: index('spotify_idx').on(table.spotify_id),
     }
   })
+
+  export const surveys = pgTable('surveys', {
+    id: serial('id').primaryKey(),
+    step_one: json('step_one').notNull(),
+    step_two: json('step_two').notNull(),
+    step_three: json('step_three').notNull(),
+    step_four: json('step_four').notNull(),
+    created_at: timestamp('created_at').defaultNow(),
+    updated_at: timestamp('updated_at').defaultNow(),
+  })
+  
   
   export type Song = typeof songs.$inferSelect
   export type NewSong = typeof songs.$inferInsert

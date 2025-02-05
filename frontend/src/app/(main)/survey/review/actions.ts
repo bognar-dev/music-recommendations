@@ -1,6 +1,8 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use server";
 
+import { insertSurvey } from "@/db/queries";
 import {
   stepFourSchema,
   surveySchema,
@@ -58,7 +60,8 @@ export const submitSurveyAction = async (
   }
 
   // If validation is successful, you would typically save the data here
-  console.log("Validated survey data:", validated.data);
+  console.log("Validated survey data:", JSON.stringify(validated.data, null, 2));
+  console.log("StepOneSongRatings", validated.data.stepOne.songRatings);
 
   // For demonstration purposes, we're just logging the data and returning success
   return {
@@ -74,42 +77,32 @@ export const stepFourFormAction = async (
   _prevState: FormErrors | undefined,
   formData: FormData
 ): Promise<FormErrors | undefined> => {
-  const entries = formData.entries();
-  const songRatings: any[] = [];
-  const modelRating: any = {};
-  let age: number | undefined;
-  let country: string | undefined;
-  let preference: string | undefined;
-  let feedback: string | undefined;
+  
 
-  entries.forEach(([key, value]) => {
-    if (key.startsWith("songRatings.")) {
-      const [, index, field] = key.split(".");
-      if (!songRatings[Number.parseInt(index)])
-        songRatings[Number.parseInt(index)] = {};
-      songRatings[Number.parseInt(index)][field] =
-        field === "rating" || field === "songId"
-          ? Number.parseInt(value as string)
-          : value;
-    } else if (key === "usability" || key === "clarity") {
-      modelRating[key] = Number.parseInt(value as string);
-    } else if (key === "age") {
-      age = Number.parseInt(value as string);
-    } else if (key === "country") {
-      country = value as string;
-    } else if (key === "preference") {
-      preference = value as string;
-    } else if (key === "feedback") {
-      feedback = value as string;
-    }
-  });
+
+  const validated = stepFourSchema.safeParse(surveyData.stepFour);
+
+  if (!validated.success) {
+    const errors = validated.error.issues.reduce((acc: FormErrors, issue) => {
+      const path = issue.path[0] as string;
+      acc[path] = issue.message;
+      return acc;
+    }, {});
+    console.log(errors);
+    return errors;
+  }
+
+
+
+
+
+
+  
 
   
   console.log(surveyData)
-
-  // Here you would typically update the survey context with the validated data
-  // updateSurveyContext(validated.data);
-
-  // Instead of redirecting, return success
+  const result = await insertSurvey(surveyData);
+  console.log("result", result);
+  
   redirect(AddDealRoutes.THANK_YOU);
 };
