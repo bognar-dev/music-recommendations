@@ -6,12 +6,13 @@ import { Song } from "@/db/schema";
 
 interface PlaylistProps {
   playlist: Song[]
+  className?: string
 }
 
 
-export default async function Playlist({ playlist }: PlaylistProps) {
+export default async function Playlist({ playlist,className }: PlaylistProps) {
   return (
-    <Card>
+    <Card className={className}>
       <CardHeader>
         <CardTitle>Curated Playlist</CardTitle>
       </CardHeader>

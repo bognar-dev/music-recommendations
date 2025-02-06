@@ -19,6 +19,7 @@ export function PlayButton({ song, className }: PlayButtonProps) {
       className={cn("", className)}
       size="icon"
       variant="ghost"
+      type="button"
       onClick={() => playTrack(song)}
     >
       {isCurrentTrack && isPlaying ? (

@@ -1,7 +1,6 @@
 "use client"
 import { Home, Library, FileText, ClipboardListIcon } from 'lucide-react'
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
 import {
   Sidebar,
   SidebarContent,
@@ -41,7 +40,6 @@ const items = [
 ]
 
 export default function AppSidebar({ hasAcceptedTerms }: { hasAcceptedTerms: boolean }) {
-  const pathname = usePathname()
 
   return (
     <Sidebar>
@@ -56,7 +54,7 @@ export default function AppSidebar({ hasAcceptedTerms }: { hasAcceptedTerms: boo
                 return (
                   <SidebarMenuItem key={item.title}>
                     <SidebarMenuButton asChild disabled={item.disabled}>
-                      <Link href={item.url}>
+                      <Link href={item.url} aria-disabled={item.disabled}>
                         <item.icon className="mr-2 h-4 w-4" />
                         <span>{item.title}</span>
                         {item.suffix && (

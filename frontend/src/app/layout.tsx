@@ -36,7 +36,8 @@ export default async function RootLayout({
 
               <Sidebar hasAcceptedTerms={hasAcceptedTerms} />
               <main className="flex flex-col flex-grow gap-1">
-                <div className="flex justify-between justify-items-stretch p-2"> 
+                
+                <div className="sticky bg-transparent backdrop-blur-sm top-0 flex justify-between justify-items-stretch p-2 "> 
                   <SidebarTrigger />
                   <ModeToggle />
                 </div>

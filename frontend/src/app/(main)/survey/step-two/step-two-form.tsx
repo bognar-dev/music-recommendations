@@ -13,6 +13,7 @@ import Form from "next/form";
 import { useActionState } from "react";
 import { useSurveyContext } from "@/context/survey-context";
 import { VinylRating } from "@/components/vinyl-rating";
+import { PlayButton } from "@/components/play-button";
 
 
 interface StepTwoFormProps {
@@ -96,10 +97,7 @@ export default function StepTwoForm({ recommendations }: StepTwoFormProps) {
                                                 <p className="font-medium">{track.name}</p>
                                                 <p className="text-sm text-muted-foreground">{track.artist}</p>
                                             </div>
-                                            <Button size="icon" variant="ghost">
-                                                <Play className="h-4 w-4" />
-                                                <span className="sr-only">Play {track.name}</span>
-                                            </Button>
+                                            <PlayButton song={track}/>
                                         </div>
                                         <ul className="flex space-x-2">
                                             <VinylRating name={`songRatings.${track.id}.rating`} value={surveyData.stepTwo.songRatings.find(sr => sr.songId === track.id)?.rating || 0} onChange={handleInputChange} />
