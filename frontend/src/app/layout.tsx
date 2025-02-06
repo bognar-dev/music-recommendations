@@ -31,7 +31,7 @@ export default async function RootLayout({
           disableTransitionOnChange
         >
           <SurveyContextProvider>
-            <SidebarProvider>
+            <SidebarProvider defaultOpen={false}>
 
 
               <Sidebar hasAcceptedTerms={hasAcceptedTerms} />

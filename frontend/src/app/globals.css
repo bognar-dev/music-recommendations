@@ -73,7 +73,46 @@ body {
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground;
+  }
+
+  @font-face {
+    font-family: "Overused Grotesk";
+    src:
+      url("../../public/fonts/OverusedGrotesk-VF.woff2") format("woff2 supports variations"),
+      url("../../public/fonts/OverusedGrotesk-VF.woff2") format("woff2-variations");
+    font-weight: 300 900;
+  }
+
+  @font-face {
+    font-family: "Cotham Sans";
+    src: url("../../public/fonts/CothamSans.otf") format("otf");
+    font-weight: 400;
+  }
+
+  @font-face {
+    font-family: "Calendas Plus";
+    src: url("../../public/fonts/calendas_plus-webfont.woff") format("woff");
+    font-weight: 400;
+  }
+
+  @font-face {
+    font-family: "VT323";
+    src: url("../../public/fonts/VT323-Regular.ttf") format("truetype");
+    font-weight: 400;
+  }
+
+  @font-face {
+    font-family: "Azeret Mono";
+    src: url("../../public/fonts/AzeretMono-Variable.woff2") format("woff2-variations");
+    font-weight: 100 900;
+  }
+
+  @font-face {
+    font-family: "Noto Sans Symbols";
+    src: url("../../public/fonts/NotoSansSymbols-VariableFont_wght.ttf") format("truetype-variations");
+    font-weight: 100 900;
   }
 }
