@@ -11,7 +11,7 @@ interface CirclingElementsDemoProps {
 }
 export const CirclingElementsDemo: React.FC<CirclingElementsDemoProps> = ({ images, children }) => {
     const screenSize = useScreenSize()
-    const displayedImages = screenSize.lessThan("md") ? images.slice(0, 5) : images
+    const displayedImages = screenSize.lessThan("md") ? images.slice(0, 8) : images
 
     
 

@@ -7,7 +7,7 @@ import Link  from 'next/link';
 const Page: React.FC = async () => {
     const songs = await fetchSongsWithPagination({ limit: 5, preview_url: true })
     const shuffledSongs = songs.sort(() => Math.random() - 0.5);
-    const images = shuffledSongs.slice(0, 10).map(song => song.image_url);
+    const images = shuffledSongs.slice(0, 18).map(song => song.image_url);
     return (
         <div className='min-h-screen'>
             <CircularImages images={images}>
