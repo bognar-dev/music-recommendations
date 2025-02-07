@@ -100,7 +100,7 @@ const TermsPage =  () => {
 
                     <div className="flex justify-center mt-8" id='bottom'>
                         <Form action={acceptTerms}>
-                            <Button size="lg" className="text-lg px-8 bg-primary hover:bg-primary/90">
+                            <Button size="lg" className="text-lg text-background px-8 bg-primary hover:bg-primary/90">
                                 I Agree, Start the Survey!
                             </Button>
                         </Form>

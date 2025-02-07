@@ -42,10 +42,10 @@ const items = [
 export default function AppSidebar({ hasAcceptedTerms }: { hasAcceptedTerms: boolean }) {
 
   return (
-    <Sidebar>
+    <Sidebar className='bg-background'>
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>Music Study</SidebarGroupLabel>
+          <SidebarGroupLabel>Music Recommendation Study</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {items.map((item) => {

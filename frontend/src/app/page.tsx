@@ -11,8 +11,8 @@ const Page: React.FC = async () => {
     return (
         <div className='min-h-screen'>
             <CircularImages images={images}>
-                <div className="flex flex-col items-center justify-start md:justify-center gap-5">
-                <p className="text-center text-lg pb-40 md:pb-20 md:text-5xl font-azeretMono">
+                <div className="flex flex-col items-center justify-start md:justify-center gap-5 md:w-1/4">
+                <p className="text-center text-lg pb-80 md:pb-20 md:text-5xl font-azeretMono">
                     Find out if album covers can be used to make music recommendations better for you!
                 </p>
                 <Button className='font-azeretMono text-foreground'>

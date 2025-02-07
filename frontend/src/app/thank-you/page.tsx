@@ -1,13 +1,13 @@
-import { Disc3, HandMetal } from 'lucide-react'
+import { Disc3} from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import Link from 'next/link'
 
 export default function ThankYouPage() {
     return (
-        <div className="min-h-screen bg-gradient-to-br from-primary to-accent flex flex-col items-center justify-center px-4 py-12 text-foreground">
+        <div className="min-h-screen flex flex-col items-center justify-center px-4 py-12 text-foreground">
             <div className="max-w-3xl mx-auto text-center">
-                <h1 className="text-4xl md:text-7xl font-extrabold mb-6 animate-bounce">
-                    You&apos;re a Rock Star! <HandMetal className="inline-block w-10 h-10 mb-2 -mt-1 animate-bounce" />
+                <h1 className="text-4xl md:text-7xl font-extrabold mb-6 font-azeretMono">
+                    You&apos;re a Rock Star!
                 </h1>
                 <p className="text-xl md:text-2xl mb-12">
                     Thank you for participating in our survey. Your feedback is music to my ears!

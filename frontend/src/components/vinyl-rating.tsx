@@ -43,7 +43,7 @@ export function VinylRating({
               className="cursor-pointer flex flex-col items-center space-x-1"
             >
               <Disc3
-                className={`h-8 w-8 ${
+                className={`h-8 w-8 stroke-1 ${
                   isColored ? "text-primary fill-primary/60" : "text-gray-300"
                 }`}
               />
