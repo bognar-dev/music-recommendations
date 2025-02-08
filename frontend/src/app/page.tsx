@@ -15,7 +15,7 @@ const Page: React.FC = async () => {
                 <p className="text-center text-lg pb-80 md:pb-20 md:text-5xl font-azeretMono">
                     Find out if album covers can be used to make music recommendations better for you!
                 </p>
-                <Button className='font-azeretMono text-foreground'>
+                <Button className='font-azeretMono font-light text-foreground'>
                     <Link href='terms'>
                         Start the survey !
                     </Link>
