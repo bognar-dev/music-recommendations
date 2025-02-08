@@ -6,11 +6,9 @@ import { SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar'
 import { AudioProvider } from '@/context/audio-context'
 import { SurveyContextProvider } from '@/context/survey-context'
 import { Metadata } from 'next'
-import { Arimo } from 'next/font/google'
 import { siteConfig } from '@/config/site'
 import { cookies } from 'next/headers'
-const arimo = Arimo({ subsets: ['latin'] })
-
+import { CSPostHogProvider } from './providers'
 export const metadata: Metadata = {
   title: {
     default: siteConfig.name,
@@ -91,7 +89,7 @@ export default async function RootLayout({
   const hasAcceptedTerms = (await cookies()).get('accepted-terms')?.value === 'true'
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${arimo.className} bg-background`}>
+      <body className={`font-notoSansSymbols bg-background`}>
 
         <ThemeProvider
           attribute="class"
@@ -99,28 +97,30 @@ export default async function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <SurveyContextProvider>
-            <SidebarProvider defaultOpen={false}>
+          <CSPostHogProvider>
+            <SurveyContextProvider>
+              <SidebarProvider defaultOpen={false}>
 
 
-              <Sidebar hasAcceptedTerms={hasAcceptedTerms} />
-              <main className="flex flex-col flex-grow gap-1">
-                
-                <div className="sticky bg-transparent backdrop-blur-sm top-0 flex justify-between justify-items-stretch p-2 "> 
-                  <SidebarTrigger />
-                  <ModeToggle />
-                </div>
+                <Sidebar hasAcceptedTerms={hasAcceptedTerms} />
+                <main className="flex flex-col flex-grow gap-1">
 
-                <AudioProvider>
-                  <div className="flex flex-col justify-center justify-items-center">
-                    {children}
+                  <div className="sticky bg-transparent backdrop-blur-sm top-0 flex justify-between justify-items-stretch p-2 ">
+                    <SidebarTrigger />
+                    <ModeToggle />
                   </div>
-                  
 
-                </AudioProvider>
-              </main>
-            </SidebarProvider>
-          </SurveyContextProvider>
+                  <AudioProvider>
+                    <div className="flex flex-col justify-center justify-items-center">
+                      {children}
+                    </div>
+
+
+                  </AudioProvider>
+                </main>
+              </SidebarProvider>
+            </SurveyContextProvider>
+          </CSPostHogProvider>
         </ThemeProvider>
       </body>
     </html>

@@ -17,21 +17,21 @@ const modelRatingSchema = z.object({
 export const stepOneSchema = z.object({
   step: z.literal(1),
   modelId: z.string(),
-  songRatings: z.array(songRatingSchema).min(1).default([]),
+  songRatings: z.array(songRatingSchema).default([]),
   modelRating: modelRatingSchema
 });
 
 export const stepTwoSchema = z.object({
   step: z.literal(2),
   modelId: z.string(),
-  songRatings: z.array(songRatingSchema).min(1).default([]),
+  songRatings: z.array(songRatingSchema).default([]),
   modelRating: modelRatingSchema
 });
 
 export const stepThreeSchema = z.object({
   step: z.literal(3),
   modelId: z.string(),
-  songRatings: z.array(songRatingSchema).min(1).default([]),
+  songRatings: z.array(songRatingSchema).default([]),
   modelRating: modelRatingSchema
 });
 

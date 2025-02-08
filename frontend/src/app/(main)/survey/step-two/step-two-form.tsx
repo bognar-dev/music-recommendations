@@ -1,12 +1,11 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 'use client';
 
 import Image from "next/image";
 import SubmitButton from "@/components/survey-submit";
-import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Song } from "@/db/schema";
 import { Label } from "@/components/ui/label";
-import { Play } from "lucide-react";
 import { stepTwoFormAction } from "./actions";
 import { FormErrors } from "@/types/survey";
 import Form from "next/form";

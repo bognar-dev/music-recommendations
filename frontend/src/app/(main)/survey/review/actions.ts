@@ -92,13 +92,6 @@ export const stepFourFormAction = async (
     return errors;
   }
 
-
-
-
-
-
-  
-
   
   console.log(surveyData)
   const result = await insertSurvey(surveyData);

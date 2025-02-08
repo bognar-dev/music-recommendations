@@ -13,6 +13,7 @@ export const stepOneFormAction = async (
     const modelRating: any = {};
     console.log("formData", formData);
     
+    
     entries.forEach(([key, value]) => {
         if (key.startsWith('songRatings.')) {
             const [, index, field] = key.split('.');
