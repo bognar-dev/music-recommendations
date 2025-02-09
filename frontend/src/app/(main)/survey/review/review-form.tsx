@@ -14,6 +14,7 @@ import { CountrySelect } from "@/components/country-select"
 import { VinylRating } from "@/components/vinyl-rating"
 import { Textarea } from "@/components/ui/textarea"
 import AgeInputSlider from "@/components/age-input-slider"
+import posthog from "posthog-js"
 
 
 const initialState: FormErrors = {}
@@ -23,7 +24,9 @@ export default function StepFourForm() {
   const { updateSurveyDetails, surveyData } = useSurveyContext()
   const [serverErrors, formAction] = useActionState(stepFourFormAction.bind(null, surveyData), initialState)
 
-
+  const submit = () => {
+   posthog.capture('submitted_survey', { property: surveyData })
+  }
 
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -121,7 +124,7 @@ export default function StepFourForm() {
           </CardContent>
         </Card>
 
-        <SubmitButton text="Submit" />
+        <SubmitButton onClick={submit} text="Submit" />
         {serverErrors && (
           <div className="text-red-500 text-sm">
             {Object.entries(serverErrors).map(([key, value]) => (

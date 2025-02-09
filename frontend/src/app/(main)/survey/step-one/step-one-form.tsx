@@ -13,6 +13,7 @@ import { useActionState } from "react";
 import { useSurveyContext } from "@/context/survey-context";
 import { VinylRating } from "@/components/vinyl-rating";
 import { PlayButton } from "@/components/play-button";
+import posthog from "posthog-js";
 
 
 interface StepOneFormProps {
@@ -29,6 +30,7 @@ export default function StepOneForm({ recommendations }: StepOneFormProps) {
     const { updateSurveyDetails, surveyData } = useSurveyContext();
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        posthog.capture('my event', { property: 'value' })
         const { name, value } = e.target;
 
         // Handle song ratings

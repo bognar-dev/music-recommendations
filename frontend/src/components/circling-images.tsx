@@ -23,7 +23,7 @@ export const CirclingElementsDemo: React.FC<CirclingElementsDemoProps> = ({ imag
                         key={index}
                         className="w-20 h-20 md:w-40 md:h-40 absolute -translate-x-1/2 -translate-y-1/2"
                     >
-                        <Image src={image} fill alt="image" className="object-cover" />
+                        <Image src={image} fill sizes="(max-width: 768px) 80px, 160px" alt="image" className="object-cover" />
                     </div>
                 ))}
             </CirclingElements>

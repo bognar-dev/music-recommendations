@@ -8,7 +8,8 @@ import { SurveyContextProvider } from '@/context/survey-context'
 import { Metadata } from 'next'
 import { siteConfig } from '@/config/site'
 import { cookies } from 'next/headers'
-import { CSPostHogProvider } from './providers'
+import { PostHogProvider } from './providers'
+import { CookieBanner } from '@/components/cookie-banner'
 export const metadata: Metadata = {
   title: {
     default: siteConfig.name,
@@ -97,12 +98,13 @@ export default async function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <CSPostHogProvider>
+          <PostHogProvider>
             <SurveyContextProvider>
               <SidebarProvider defaultOpen={false}>
 
 
                 <Sidebar hasAcceptedTerms={hasAcceptedTerms} />
+                
                 <main className="flex flex-col flex-grow gap-1">
 
                   <div className="sticky bg-transparent backdrop-blur-sm top-0 flex justify-between justify-items-stretch p-2 ">
@@ -118,9 +120,10 @@ export default async function RootLayout({
 
                   </AudioProvider>
                 </main>
+                <CookieBanner />
               </SidebarProvider>
             </SurveyContextProvider>
-          </CSPostHogProvider>
+          </PostHogProvider>
         </ThemeProvider>
       </body>
     </html>

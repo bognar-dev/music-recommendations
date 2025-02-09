@@ -3,11 +3,13 @@ import { useFormStatus } from 'react-dom';
 
 interface SubmitButtonProps {
   text: string;
+  onClick?: () => void;
 }
-export default function SubmitButton({ text }: SubmitButtonProps) {
+export default function SubmitButton({ text,onClick }: SubmitButtonProps) {
   const { pending } = useFormStatus();
   return (
     <button
+      onClick={onClick}
       className="mt-2 rounded-lg bg-accent py-4 text-lg text-black disabled:bg-accent/30 lg:py-7 lg:text-2xl"
       type="submit"
     >
