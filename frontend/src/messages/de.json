@@ -1,0 +1,15 @@
+
+{
+    "HomePage": {   
+        "hero": "Sind Musik Empfelungen besser wenn sie auf Plattencovern basieren?",
+        "button": "Teste es selbst!"
+    },
+    "LocaleSwitcher": {
+    "de": "Deutsch",
+    "en": "English",
+    "es": "Español",
+    "fr": "Français",
+    "pt": "Português",
+    "label": "Sprache"
+    }
+}

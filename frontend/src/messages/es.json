@@ -1,0 +1,14 @@
+{
+    "HomePage": {
+        "hero": "¡Descubre si las portadas de álbumes se pueden usar para mejorar tus recomendaciones musicales!",
+        "button": "¡Inicia la encuesta!"
+    },
+    "LocaleSwitcher": {
+    "de": "Deutsch",
+    "en": "English",
+    "es": "Español",
+    "fr": "Français",
+    "pt": "Português",
+    "label": "Idioma"
+    }
+}

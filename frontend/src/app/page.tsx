@@ -3,8 +3,10 @@ import CircularImages from '@/components/circling-images';
 import { fetchSongsWithPagination } from '@/db/queries';
 import { Button } from '@/components/ui/button';
 import Link  from 'next/link';
+import { getTranslations } from 'next-intl/server';
 
 const Page: React.FC = async () => {
+    const t = await getTranslations('HomePage');
     const songs = await fetchSongsWithPagination({ limit: 5, preview_url: true })
     const shuffledSongs = songs.sort(() => Math.random() - 0.5);
     const images = shuffledSongs.slice(0, 18).map(song => song.image_url).filter((url): url is string => url !== null);
@@ -13,11 +15,11 @@ const Page: React.FC = async () => {
             <CircularImages images={images}>
                 <div className="flex flex-col items-center justify-start md:justify-center gap-5 md:w-1/4">
                 <p className="text-center text-lg pb-80 md:pb-20 md:text-5xl font-azeretMono">
-                    Find out if album covers can be used to make music recommendations better for you!
+                    {t('hero')}
                 </p>
                 <Button className='font-azeretMono font-light text-foreground'>
                     <Link href='terms'>
-                        Start the survey !
+                        {t('button')}
                     </Link>
                 </Button>
                 </div>

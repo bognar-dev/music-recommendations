@@ -10,6 +10,9 @@ import { siteConfig } from '@/config/site'
 import { cookies } from 'next/headers'
 import { PostHogProvider } from './providers'
 import { CookieBanner } from '@/components/cookie-banner'
+import { getLocale, getMessages } from 'next-intl/server'
+import { NextIntlClientProvider } from 'next-intl';
+import LocaleSwitcher from '@/components/locale-switcher'
 export const metadata: Metadata = {
   title: {
     default: siteConfig.name,
@@ -88,8 +91,13 @@ export default async function RootLayout({
   children: React.ReactNode
 }) {
   const hasAcceptedTerms = (await cookies()).get('accepted-terms')?.value === 'true'
+  const locale = await getLocale();
+
+  // Providing all messages to the client
+  // side is the easiest way to get started
+  const messages = await getMessages();
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang={locale} suppressHydrationWarning>
       <body className={`font-notoSansSymbols bg-background`}>
 
         <ThemeProvider
@@ -99,30 +107,35 @@ export default async function RootLayout({
           disableTransitionOnChange
         >
           <PostHogProvider>
-            <SurveyContextProvider>
-              <SidebarProvider defaultOpen={false}>
+            <NextIntlClientProvider messages={messages}>
+              <SurveyContextProvider>
+                <SidebarProvider defaultOpen={false}>
 
 
-                <Sidebar hasAcceptedTerms={hasAcceptedTerms} />
-                
-                <main className="flex flex-col flex-grow gap-1">
+                  <Sidebar hasAcceptedTerms={hasAcceptedTerms} />
 
-                  <div className="sticky bg-transparent backdrop-blur-sm top-0 flex justify-between justify-items-stretch p-2 ">
-                    <SidebarTrigger />
-                    <ModeToggle />
-                  </div>
+                  <main className="flex flex-col flex-grow gap-1">
 
-                  <AudioProvider>
-                    <div className="flex flex-col justify-center justify-items-center">
-                      {children}
+                    <div className="sticky bg-transparent backdrop-blur-sm top-0 flex justify-between justify-items-stretch p-2 ">
+                      <SidebarTrigger />
+                      <div className='flex gap-4'>
+                        <LocaleSwitcher />
+                        <ModeToggle />
+                      </div>
                     </div>
 
+                    <AudioProvider>
+                      <div className="flex flex-col justify-center justify-items-center">
+                        {children}
+                      </div>
 
-                  </AudioProvider>
-                </main>
-                <CookieBanner />
-              </SidebarProvider>
-            </SurveyContextProvider>
+
+                    </AudioProvider>
+                  </main>
+                  <CookieBanner />
+                </SidebarProvider>
+              </SurveyContextProvider>
+            </NextIntlClientProvider>
           </PostHogProvider>
         </ThemeProvider>
       </body>

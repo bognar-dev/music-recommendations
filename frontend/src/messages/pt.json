@@ -1,0 +1,14 @@
+{
+    "HomePage": {   
+        "hero": "Descubra se as capas de álbuns podem ser usadas para melhorar as recomendações musicais para você!",
+        "button": "Comece a pesquisa!"
+    },
+    "LocaleSwitcher": {
+    "de": "Deutsch",
+    "en": "English",
+    "es": "Español",
+    "fr": "Français",
+    "pt": "Português",
+    "label": "Idioma"
+    }
+}

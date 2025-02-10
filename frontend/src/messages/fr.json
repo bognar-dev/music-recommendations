@@ -1,0 +1,14 @@
+{
+    "HomePage": {
+        "hero": "Découvrez si les pochettes d'album peuvent être utilisées pour améliorer vos recommandations musicales !",
+        "button": "Commencez le sondage !"
+    },
+    "LocaleSwitcher": {
+    "de": "Deutsch",
+    "en": "English",
+    "es": "Español",
+    "fr": "Français",
+    "pt": "Português",
+    "label": "Langue"
+    }
+}

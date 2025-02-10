@@ -1,0 +1,14 @@
+{
+    "HomePage": {   
+        "hero": "Find out if album covers can be used to make music recommendations better for you!",
+        "button": "Start the survey !"
+    },
+    "LocaleSwitcher": {
+    "de": "Deutsch",
+    "en": "English",
+    "es": "Español",
+    "fr": "Français",
+    "pt": "Português",
+    "label": "Language"
+    }
+}

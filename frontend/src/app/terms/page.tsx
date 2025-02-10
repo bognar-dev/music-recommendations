@@ -1,4 +1,6 @@
 "use client";
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -7,6 +9,14 @@ import acceptTerms from '@/app/actions/acceptTerms';
 import { ChevronDown } from 'lucide-react';
 
 const TermsPage =  () => {
+    const router = useRouter();
+
+    useEffect(() => {
+        // Check if the "accepted-terms" cookie is set to "true"
+        if (document.cookie.includes('accepted-terms=true')) {
+            router.push('/survey');
+        }
+    }, [router]);
 
     const terms = [
         {
@@ -35,7 +45,6 @@ const TermsPage =  () => {
         }
     ];
 
-
     const scrollToBottom = () =>{
         const bottom = document.getElementById('bottom')
         if (bottom){
@@ -57,7 +66,9 @@ const TermsPage =  () => {
             </div>
             <Card className="w-full max-w-4xl shadow-lg shadow-accent bg-background/10">
                 <CardHeader className="text-center">
-                    <CardTitle className="text-3xl md:text-4xl font-bold text-primary">Find out if album covers can be used to make music recommendations better for you!</CardTitle>
+                    <CardTitle className="text-3xl md:text-4xl font-bold text-primary">
+                        Find out if album covers can be used to make music recommendations better for you!
+                    </CardTitle>
                 </CardHeader>
                 <CardContent>
                     <p className="text-lg text-center text-muted-foreground mb-6">
@@ -74,7 +85,9 @@ const TermsPage =  () => {
                                 {terms.map((term, index) => (
                                     <Card key={index} className="bg-card/50 backdrop-blur-sm">
                                         <CardHeader>
-                                            <CardTitle className="text-lg font-semibold text-primary">{term.title}</CardTitle>
+                                            <CardTitle className="text-lg font-semibold text-primary">
+                                                {term.title}
+                                            </CardTitle>
                                         </CardHeader>
                                         <CardContent>
                                             <p className="text-sm text-muted-foreground">{term.content}</p>
