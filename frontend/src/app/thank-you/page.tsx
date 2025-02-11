@@ -1,16 +1,19 @@
 import { Disc3} from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import Link from 'next/link'
+import { useTranslations } from 'next-intl';
 
 export default function ThankYouPage() {
+    const t = useTranslations('ThankYouPage');
+
     return (
         <div className="min-h-screen flex flex-col items-center justify-center px-4 py-12 text-foreground">
             <div className="max-w-3xl mx-auto text-center">
                 <h1 className="text-4xl md:text-7xl font-extrabold mb-6 font-azeretMono">
-                    You&apos;re a Rock Star!
+                    {t('title')}
                 </h1>
                 <p className="text-xl md:text-2xl mb-12">
-                    Thank you for participating in our survey. Your feedback is music to my ears!
+                    {t('thankYouMessage')}
                 </p>
                 <div className="flex justify-center items-center mb-12 space-x-4">
                     {[...Array(5)].map((_, index) => (
@@ -24,7 +27,7 @@ export default function ThankYouPage() {
                     ))}
                 </div>
                 <p className="text-lg md:text-xl mb-8">
-                    You&apos;ll be able to see the results in the results tab after April 1st.
+                    {t('resultsMessage')}
                 </p>
                 
                 <div className="space-y-4">
@@ -32,18 +35,18 @@ export default function ThankYouPage() {
                     
                     <Button asChild className="text-foreground">
                         <Link href="/results">
-                            Check Results
+                            {t('checkResults')}
                         </Link>
                     </Button>
                     <Button asChild variant="secondary" className="text-foreground">
                         <Link href="/">
-                            Back to Home
+                            {t('backToHome')}
                         </Link>
                     </Button>
                 </div>
                     <Button asChild variant="default" className="text-foreground">
-                        <Link href="/">
-                            Explore the Dataset that I used
+                        <Link href="/songs">
+                            {t('exploreDataset')}
                         </Link>
                     </Button>
                 </div>

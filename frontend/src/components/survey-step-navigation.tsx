@@ -6,33 +6,42 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import path from 'path';
 import { useEffect, useState } from 'react';
+import { useTranslations } from 'next-intl';
 
-const steps = [
-    {
-        title: 'Model 1',
-        route: 'step-one',
-        link: AddDealRoutes.MODEL_1,
-    },
-    {
-        title: 'Model 2',
-        route: 'step-two',
-        link: AddDealRoutes.MODEL_2,
-    },
-    {
-        title: 'Model 3',
-        route: 'step-three',
-        link: AddDealRoutes.MODEL_3,
-    },
-    { title: 'Review', route: 'review', link: AddDealRoutes.REVIEW_SURVEY },
-];
+const stepRoutes = [
+    'step-one',
+    'step-two',
+    'step-three',
+    'review'
+]
 
 export default function StepNavigation() {
+    const t = useTranslations('Survey.steps');
     const pathname = usePathname();
     const currentPath = path.basename(pathname);
     const [currentStep, setCurrentStep] = useState(1);
     useEffect(() => {
-        setCurrentStep(steps.findIndex((step) => step.route === currentPath));
+        setCurrentStep(stepRoutes.findIndex((step) => step === currentPath));
     }, [currentPath]);
+
+    const steps = [
+        {
+            title: t('model1'),
+            route: 'step-one',
+            link: AddDealRoutes.MODEL_1,
+        },
+        {
+            title: t('model2'),
+            route: 'step-two',
+            link: AddDealRoutes.MODEL_2,
+        },
+        {
+            title: t('model3'),
+            route: 'step-three',
+            link: AddDealRoutes.MODEL_3,
+        },
+        { title: t('review'), route: 'review', link: AddDealRoutes.REVIEW_SURVEY },
+    ];
 
     return (
         <div className="mb-12 mt-4 min-w-60">
@@ -42,7 +51,7 @@ export default function StepNavigation() {
             {/* list of form steps */}
             <div className=" flex justify-center justify-items-center lg:gap-8">
                 <Link
-                    href={steps[currentStep - 1]?.link || steps[3].link}    
+                    href={steps[currentStep - 1]?.link || steps[3].link}
                     className={clsx(
                         'flex h-10 w-10 items-center justify-center rounded-full border  text-sm  transition-colors duration-200  lg:h-12 lg:w-12 lg:text-lg',
                         'border-none bg-accent text-background group-hover:border-none group-hover:text-foreground'
@@ -84,7 +93,7 @@ export default function StepNavigation() {
                     </Link>
                 ))}
                 <Link
-                    href={steps[currentStep + 1]?.link || steps[0].link}    
+                    href={steps[currentStep + 1]?.link || steps[0].link}
                     className={clsx(
                         'flex h-10 w-10 items-center justify-center rounded-full border  text-sm  transition-colors duration-200  lg:h-12 lg:w-12 lg:text-lg',
                         'border-none bg-accent text-background group-hover:border-none group-hover:text-foreground'

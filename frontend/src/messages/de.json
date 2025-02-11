@@ -1,15 +1,103 @@
-
 {
-    "HomePage": {   
-        "hero": "Sind Musik Empfelungen besser wenn sie auf Plattencovern basieren?",
-        "button": "Teste es selbst!"
+    "HomePage": {
+        "hero": "Finde heraus, ob Albumcover verwendet werden können, um Musikempfehlungen für dich zu verbessern!",
+        "button": "Starte die Umfrage!"
+    },
+    "TermsPage": {
+        "title": "Finde heraus, ob Albumcover verwendet werden können, um Musikempfehlungen für dich zu verbessern!",
+        "description": "Bitte überprüfe und akzeptiere unsere Bedingungen, um an dieser spannenden Forschung teilzunehmen!",
+        "keyTerms": "Wichtige Bedingungen",
+        "fullTerms": "Vollständige Bedingungen",
+        "agreeButton": "Ich stimme zu, starte die Umfrage!",
+        "terms": {
+            "purpose": {
+                "title": "Zweck",
+                "content": "Diese Website unterstützt die Forschung zu Musikempfehlungssystemen, um die Benutzererfahrung und die algorithmische Genauigkeit zu verbessern."
+            },
+            "userAgreement": {
+                "title": "Nutzervereinbarung",
+                "content": "Durch die Nutzung dieser Website erklärst du dich bereit, an unserer Forschungsstudie teilzunehmen und diese Bedingungen zu akzeptieren."
+            },
+            "privacyData": {
+                "title": "Datenschutz & Daten",
+                "content": "Wir sammeln begrenzte Daten zu Forschungszwecken. Deine Informationen werden sicher und vertraulich aufbewahrt und nicht an Dritte weitergegeben."
+            },
+            "voluntary": {
+                "title": "Freiwillige Teilnahme",
+                "content": "Deine Teilnahme ist völlig freiwillig. Du kannst jederzeit ohne negative Konsequenzen aus der Studie ausscheiden."
+            },
+            "risksBenefits": {
+                "title": "Risiken & Vorteile",
+                "content": "Es gibt ein geringes Risiko, das mit dieser Studie verbunden ist. Vorteile sind der Beitrag zur Weiterentwicklung der Technologie für Musikempfehlungen."
+            },
+            "contact": {
+                "title": "Kontaktinformation",
+                "content": "Bei Fragen oder Bedenken kontaktiere mich bitte unter nb302289@falmouth.ac.uk."
+            }
+        }
+    },
+    "Survey": {
+        "steps": {
+            "model1": "Modell 1",
+            "model2": "Modell 2",
+            "model3": "Modell 3",
+            "review": "Überprüfung"
+        }
     },
     "LocaleSwitcher": {
-    "de": "Deutsch",
-    "en": "English",
-    "es": "Español",
-    "fr": "Français",
-    "pt": "Português",
-    "label": "Sprache"
+        "de": "Deutsch",
+        "en": "English",
+        "es": "Español",
+        "fr": "Français",
+        "pt": "Português",
+        "it": "Italiano",
+        "label": "Sprache"
+    },
+    "StepForm": {
+        "recommendedTracks": "Empfohlene Titel",
+        "modelEvaluation": "Modellbewertung",
+        "relevance": "Wie relevant ist dieses Modell für deine Musikpräferenzen?",
+        "novelty": "Wie neu/erfrischend ist dieses Modell?",
+        "satisfaction": "Wie zufrieden bist du mit den Empfehlungen des Modells?",
+        "submit": "Nächstes Modell"
+    },
+    "Review": {
+        "userInfo": "Benutzerinformation",
+        "country": "Land",
+        "modelEval": "Modellbewertung",
+        "preference": "Bevorzugtes Empfehlungsmodell",
+        "feedback": "Zusätzliches Feedback",
+        "placeholderFeedback": "Bitte gib weiteres Feedback...",
+        "submit": "Absenden"
+    },
+    "AgeInputSlider": {
+        "selectYourAge": "Wähle dein Alter",
+        "minimumAge": "Mindestalter",
+        "teen": "Teenager",
+        "youngAdult": "Junger Erwachsener",
+        "adult": "Erwachsener",
+        "middleAged": "Mittleres Alter",
+        "senior": "Senior",
+        "youAreA": "Du bist ein {ageGroup}",
+        "minimumAgeReached": "Mindestalter erreicht"
+    },
+    "ThankYouPage": {
+        "title": "Du bist ein Rockstar!",
+        "thankYouMessage": "Danke, dass du an unserer Umfrage teilgenommen hast. Dein Feedback ist Musik in meinen Ohren!",
+        "resultsMessage": "Du kannst die Ergebnisse im Ergebnistab nach dem 1. April einsehen.",
+        "checkResults": "Ergebnisse überprüfen",
+        "backToHome": "Zurück zur Startseite",
+        "exploreDataset": "Erkunde den Datensatz, den ich verwendet habe"
+    },
+    "Playlist": {
+        "curatedPlaylist": "Kuratierte Playlist"
+    },
+    "AppSidebar": {
+        "musicRecommendationStudy": "Studie zu Musikempfehlungen",
+        "home": "Startseite",
+        "dataset": "Datensatz",
+        "survey": "Umfrage",
+        "results": "Ergebnisse",
+        "releasedSoon": "bald veröffentlicht"
     }
 }

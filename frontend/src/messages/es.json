@@ -1,7 +1,48 @@
 {
     "HomePage": {
-        "hero": "¡Descubre si las portadas de álbumes se pueden usar para mejorar tus recomendaciones musicales!",
-        "button": "¡Inicia la encuesta!"
+      "hero": "¡Descubre si las portadas de álbumes pueden usarse para mejorar las recomendaciones musicales para ti!",
+      "button": "¡Comienza la encuesta!"
+    },
+    "TermsPage": {
+      "title": "¡Descubre si las portadas de álbumes pueden usarse para mejorar las recomendaciones musicales para ti!",
+      "description": "¡Por favor revisa y acepta nuestros términos para participar en esta emocionante investigación!",
+      "keyTerms": "Términos Clave",
+      "fullTerms": "Términos Completos",
+      "agreeButton": "¡Acepto, comienza la encuesta!",
+      "terms": {
+        "purpose": {
+          "title": "Propósito",
+          "content": "Este sitio web apoya la investigación en sistemas de recomendación musical, con el objetivo de mejorar la experiencia del usuario y la precisión algorítmica."
+        },
+        "userAgreement": {
+          "title": "Acuerdo del Usuario",
+          "content": "Al utilizar este sitio web, aceptas participar en nuestro estudio de investigación y cumplir con estos términos y condiciones."
+        },
+        "privacyData": {
+          "title": "Privacidad y Datos",
+          "content": "Recopilamos datos limitados con fines de investigación. Tu información se mantiene segura y confidencial, y no se compartirá con terceros."
+        },
+        "voluntary": {
+          "title": "Participación Voluntaria",
+          "content": "Tu participación es completamente voluntaria. Puedes retirarte del estudio en cualquier momento sin consecuencias negativas."
+        },
+        "risksBenefits": {
+          "title": "Riesgos y Beneficios",
+          "content": "Hay un bajo riesgo asociado con este estudio. Los beneficios incluyen contribuir al avance de la tecnología de recomendaciones musicales."
+        },
+        "contact": {
+          "title": "Información de Contacto",
+          "content": "Para preguntas o inquietudes, contáctame en nb302289@falmouth.ac.uk."
+        }
+      }
+    },
+    "Survey": {
+      "steps": {
+        "model1": "Modelo 1",
+        "model2": "Modelo 2",
+        "model3": "Modelo 3",
+        "review": "Revisión"
+      }
     },
     "LocaleSwitcher": {
     "de": "Deutsch",
@@ -9,6 +50,55 @@
     "es": "Español",
     "fr": "Français",
     "pt": "Português",
+    "it": "Italiano",
     "label": "Idioma"
+  },
+    "StepForm": {
+      "recommendedTracks": "Pistas Recomendadas",
+      "modelEvaluation": "Evaluación del Modelo",
+      "relevance": "¿Qué tan relevante es este modelo para tus preferencias musicales?",
+      "novelty": "¿Qué tan novedoso/refrescante es este modelo?",
+      "satisfaction": "¿Qué tan satisfecho estás con las recomendaciones de los modelos?",
+      "submit": "Enviar"
+    },
+    "Review": {
+      "userInfo": "Información del Usuario",
+      "country": "País",
+      "modelEval": "Evaluación del Modelo",
+      "preference": "Modelo de Recomendación Preferido",
+      "feedback": "Comentarios Adicionales",
+      "placeholderFeedback": "Por favor proporciona cualquier comentario adicional...",
+      "submit": "Enviar"
+    },
+    "AgeInputSlider": {
+      "selectYourAge": "Selecciona tu Edad",
+      "minimumAge": "Edad Mínima",
+      "teen": "Adolescente",
+      "youngAdult": "Joven Adulto",
+      "adult": "Adulto",
+      "middleAged": "Mediana Edad",
+      "senior": "Senior",
+      "youAreA": "Eres un {ageGroup}",
+      "minimumAgeReached": "Edad mínima alcanzada"
+    },
+    "ThankYouPage": {
+      "title": "¡Eres una Estrella del Rock!",
+      "thankYouMessage": "¡Gracias por participar en nuestra encuesta! Tu opinión es música para mis oídos.",
+      "resultsMessage": "Podrás ver los resultados en la pestaña de resultados después del 1 de abril.",
+      "checkResults": "Ver Resultados",
+      "backToHome": "Volver a Inicio",
+      "exploreDataset": "Explora el Conjunto de Datos que utilicé"
+    },
+    "Playlist": {
+      "curatedPlaylist": "Lista de Reproducción Curada"
+    },
+    "AppSidebar": {
+      "musicRecommendationStudy": "Estudio de Recomendación Musical",
+      "home": "Inicio",
+      "dataset": "Conjunto de Datos",
+      "survey": "Encuesta",
+      "results": "Resultados",
+      "releasedSoon": "próximamente"
     }
-}
+  }
+  

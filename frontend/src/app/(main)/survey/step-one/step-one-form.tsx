@@ -14,6 +14,7 @@ import { useSurveyContext } from "@/context/survey-context";
 import { VinylRating } from "@/components/vinyl-rating";
 import { PlayButton } from "@/components/play-button";
 import posthog from "posthog-js";
+import { useTranslations } from 'next-intl';
 
 
 interface StepOneFormProps {
@@ -26,7 +27,7 @@ export default function StepOneForm({ recommendations }: StepOneFormProps) {
         stepOneFormAction,
         initialState
     )
-
+    const t = useTranslations('StepForm');
     const { updateSurveyDetails, surveyData } = useSurveyContext();
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -75,7 +76,7 @@ export default function StepOneForm({ recommendations }: StepOneFormProps) {
                 {/* Song Ratings */}
                 <Card>
                     <CardHeader>
-                        <CardTitle>Recommended Tracks</CardTitle>
+                        <CardTitle>{t('recommendedTracks')}</CardTitle>
                     </CardHeader>
                     <CardContent>
                         <ul className="space-y-4">
@@ -111,13 +112,13 @@ export default function StepOneForm({ recommendations }: StepOneFormProps) {
                 {/* Model Ratings */}
                 <Card>
                     <CardHeader>
-                        <CardTitle>Model Evaluation</CardTitle>
+                        <CardTitle>{t('modelEvaluation')}</CardTitle>
                     </CardHeader>
                     <CardContent>
                         <div className="space-y-6">
                             {/* Relevance */}
                             <div>
-                                <Label htmlFor="relevance">How relevant is this model to your music preferences?</Label>
+                                <Label htmlFor="relevance">{t('relevance')}</Label>
                                 <ul className="flex space-x-2 mt-2">
                                     <VinylRating name="modelRating.relevance" value={surveyData.stepOne.modelRating.relevance} onChange={handleInputChange} />
                                 </ul>
@@ -125,7 +126,7 @@ export default function StepOneForm({ recommendations }: StepOneFormProps) {
 
                             {/* Novelty */}
                             <div>
-                                <Label htmlFor="novelty">How novel/refreshing is this model?</Label>
+                                <Label htmlFor="novelty">{t('novelty')}</Label>
                                 <ul className="flex space-x-2 mt-2">
                                     <VinylRating name="modelRating.novelty" value={surveyData.stepOne.modelRating.novelty} onChange={handleInputChange} />
                                 </ul>
@@ -133,7 +134,7 @@ export default function StepOneForm({ recommendations }: StepOneFormProps) {
 
                             {/* Satisfaction */}
                             <div>
-                                <Label htmlFor="satisfaction">How satisfied are you with the models recommendations?</Label>
+                                <Label htmlFor="satisfaction">{t('satisfaction')}</Label>
                                 <ul className="flex space-x-2 mt-2">
                                     <VinylRating name="modelRating.satisfaction" value={surveyData.stepOne.modelRating.satisfaction} onChange={handleInputChange} />
                                 </ul>
@@ -142,7 +143,7 @@ export default function StepOneForm({ recommendations }: StepOneFormProps) {
                     </CardContent>
                 </Card>
 
-                <SubmitButton text="Submit" />
+                <SubmitButton text={t('submit')} />
                 {serverErrors && (
                     <div className="text-red-500 text-sm">
                         {Object.entries(serverErrors).map(([key, value]) => (

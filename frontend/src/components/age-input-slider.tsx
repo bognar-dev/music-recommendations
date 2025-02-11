@@ -3,6 +3,7 @@
 import { useState, useMemo, useEffect } from "react"
 import { motion, AnimatePresence } from "motion/react"
 import { Slider } from "@/components/ui/slider"
+import { useTranslations } from 'next-intl';
 
 interface AgeInputSliderProps {
     minimumAge?: number
@@ -13,6 +14,7 @@ interface AgeInputSliderProps {
 const AgeInputSlider = ({ minimumAge = 18, initialAge, onChange }: AgeInputSliderProps) => {
     const [hasInteracted, setHasInteracted] = useState(false)
     const [age, setAge] = useState(initialAge ?? minimumAge)
+    const t = useTranslations('AgeInputSlider');
 
     // On mount, override age from localStorage if available
     useEffect(() => {
@@ -24,21 +26,21 @@ const AgeInputSlider = ({ minimumAge = 18, initialAge, onChange }: AgeInputSlide
 
     const getAgeGroup = useMemo(
         () => (age: number) => {
-            if (age === minimumAge) return "Minimum Age"
-            if (age < 18) return "Teen"
-            if (age < 30) return "Young Adult"
-            if (age < 50) return "Adult"
-            if (age < 70) return "Middle Aged"
-            return "Senior"
+            if (age === minimumAge) return t("minimumAge")
+            if (age < 18) return t("teen")
+            if (age < 30) return t("youngAdult")
+            if (age < 50) return t("adult")
+            if (age < 70) return t("middleAged")
+            return t("senior")
         },
-        [minimumAge],
+        [minimumAge, t],
     )
 
-    const ageGroups = useMemo(() => ["Minimum Age", "Teen", "Young Adult", "Adult", "Middle Aged", "Senior"], [])
+    const ageGroups = useMemo(() => [t("minimumAge"), t("teen"), t("youngAdult"), t("adult"), t("middleAged"), t("senior")], [t])
 
     return (
         <div className="w-full max-w-md mx-auto p-6 space-y-8">
-            <h2 className="text-2xl font-bold text-center mb-6">Select Your Age</h2>
+            <h2 className="text-2xl font-bold text-center mb-6">{t("selectYourAge")}</h2>
 
             <div className="relative">
                 <Slider
@@ -97,7 +99,7 @@ const AgeInputSlider = ({ minimumAge = 18, initialAge, onChange }: AgeInputSlide
                     transition={{ duration: 0.2 }}
                     className="text-center text-lg font-semibold mt-4"
                 >
-                    You are a {getAgeGroup(age)}
+                    {t("youAreA", { ageGroup: getAgeGroup(age) })}
                 </motion.div>
             </AnimatePresence>
 
@@ -109,7 +111,7 @@ const AgeInputSlider = ({ minimumAge = 18, initialAge, onChange }: AgeInputSlide
                     transition={{ duration: 0.2 }}
                     className="text-center text-sm text-gray-500 mt-2"
                 >
-                    Minimum age reached
+                    {t("minimumAgeReached")}
                 </motion.div>
             )}
         </div>

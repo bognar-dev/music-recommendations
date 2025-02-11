@@ -1,0 +1,104 @@
+{
+    "HomePage": {
+      "hero": "Scopri se le copertine degli album possono essere utilizzate per migliorare le raccomandazioni musicali per te!",
+      "button": "Inizia il sondaggio!"
+    },
+    "TermsPage": {
+      "title": "Scopri se le copertine degli album possono essere utilizzate per migliorare le raccomandazioni musicali per te!",
+      "description": "Si prega di rivedere e accettare i nostri termini per partecipare a questa entusiasmante ricerca!",
+      "keyTerms": "Termini Chiave",
+      "fullTerms": "Termini Completi",
+      "agreeButton": "Accetto, inizia il sondaggio!",
+      "terms": {
+        "purpose": {
+          "title": "Scopo",
+          "content": "Questo sito supporta la ricerca sui sistemi di raccomandazione musicale, con l'obiettivo di migliorare l'esperienza dell'utente e l'accuratezza algoritmica."
+        },
+        "userAgreement": {
+          "title": "Accordo dell'Utente",
+          "content": "Utilizzando questo sito, accetti di partecipare al nostro studio di ricerca e di rispettare questi termini e condizioni."
+        },
+        "privacyData": {
+          "title": "Privacy e Dati",
+          "content": "Raccogliamo dati limitati per scopi di ricerca. Le tue informazioni sono mantenute sicure e riservate e non saranno condivise con terzi."
+        },
+        "voluntary": {
+          "title": "Partecipazione Volontaria",
+          "content": "La tua partecipazione è completamente volontaria. Puoi ritirarti dallo studio in qualsiasi momento senza conseguenze negative."
+        },
+        "risksBenefits": {
+          "title": "Rischi e Benefici",
+          "content": "C'è un basso rischio associato a questo studio. I benefici includono il contributo all'avanzamento della tecnologia di raccomandazione musicale."
+        },
+        "contact": {
+          "title": "Informazioni di Contatto",
+          "content": "Per domande o preoccupazioni, contattami a nb302289@falmouth.ac.uk."
+        }
+      }
+    },
+    "Survey": {
+      "steps": {
+        "model1": "Modello 1",
+        "model2": "Modello 2",
+        "model3": "Modello 3",
+        "review": "Revisione"
+      }
+    },
+    "LocaleSwitcher": {
+    "de": "Deutsch",
+    "en": "English",
+    "es": "Español",
+    "fr": "Français",
+    "pt": "Português",
+    "it": "Italiano",
+    "label": "Lingua"
+  },
+    "StepForm": {
+      "recommendedTracks": "Tracce Raccomandate",
+      "modelEvaluation": "Valutazione del Modello",
+      "relevance": "Quanto è rilevante questo modello per le tue preferenze musicali?",
+      "novelty": "Quanto è nuovo/rinfrescante questo modello?",
+      "satisfaction": "Quanto sei soddisfatto delle raccomandazioni dei modelli?",
+      "submit": "Invia"
+    },
+    "Review": {
+      "userInfo": "Informazioni Utente",
+      "country": "Paese",
+      "modelEval": "Valutazione del Modello",
+      "preference": "Modello di Raccomandazione Preferito",
+      "feedback": "Feedback Aggiuntivo",
+      "placeholderFeedback": "Si prega di fornire eventuali feedback aggiuntivi...",
+      "submit": "Invia"
+    },
+    "AgeInputSlider": {
+      "selectYourAge": "Seleziona la tua Età",
+      "minimumAge": "Età Minima",
+      "teen": "Adolescente",
+      "youngAdult": "Giovane Adulto",
+      "adult": "Adulto",
+      "middleAged": "Mezza Età",
+      "senior": "Anziano",
+      "youAreA": "Sei un {ageGroup}",
+      "minimumAgeReached": "Età minima raggiunta"
+    },
+    "ThankYouPage": {
+      "title": "Sei una Rock Star!",
+      "thankYouMessage": "Grazie per aver partecipato al nostro sondaggio. Il tuo feedback è musica per le mie orecchie!",
+      "resultsMessage": "Potrai vedere i risultati nella scheda dei risultati dopo il 1° aprile.",
+      "checkResults": "Controlla i Risultati",
+      "backToHome": "Torna alla Home",
+      "exploreDataset": "Esplora il Dataset che ho utilizzato"
+    },
+    "Playlist": {
+      "curatedPlaylist": "Playlist Curata"
+    },
+    "AppSidebar": {
+      "musicRecommendationStudy": "Studio di Raccomandazione Musicale",
+      "home": "Home",
+      "dataset": "Dataset",
+      "survey": "Sondaggio",
+      "results": "Risultati",
+      "releasedSoon": "in arrivo"
+    }
+  }
+  

@@ -10,11 +10,13 @@ import type { FormErrors } from "@/types/survey"
 import Form from "next/form"
 import { useActionState } from "react"
 import { useSurveyContext } from "@/context/survey-context"
-import { CountrySelect } from "@/components/country-select"
+import { Country, CountryDropdown } from "@/components/country-select"
 import { VinylRating } from "@/components/vinyl-rating"
 import { Textarea } from "@/components/ui/textarea"
 import AgeInputSlider from "@/components/age-input-slider"
 import posthog from "posthog-js"
+import { useTranslations } from "next-intl"
+import { countries } from "country-data-list"
 
 
 const initialState: FormErrors = {}
@@ -23,7 +25,7 @@ export default function StepFourForm() {
   
   const { updateSurveyDetails, surveyData } = useSurveyContext()
   const [serverErrors, formAction] = useActionState(stepFourFormAction.bind(null, surveyData), initialState)
-
+  const t = useTranslations('Review')
   const submit = () => {
    posthog.capture('submitted_survey', { property: surveyData })
   }
@@ -76,16 +78,16 @@ export default function StepFourForm() {
         {/* User Information */}
         <Card>
           <CardHeader>
-            <CardTitle>User Information</CardTitle>
+            <CardTitle>{t('userInfo')}</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
               <AgeInputSlider initialAge={surveyData.stepFour.age} onChange={(value) => updateSurveyDetails("stepFour", { age: Number(value) })} />
               <div>
-                <Label htmlFor="country">Country</Label>
-                <CountrySelect
-                  value={surveyData.stepFour.country}
-                  onChange={(value) => updateSurveyDetails("stepFour", { country: value })}
+                <Label htmlFor="country">{t('country')}</Label>
+                <CountryDropdown
+                  defaultValue={countries.all.find(country => country.name === surveyData.stepFour.country)?.alpha3}
+                  onChange={(country: Country) => updateSurveyDetails("stepFour", { country: country.name })}
                 />
               </div>
             </div>
@@ -94,11 +96,11 @@ export default function StepFourForm() {
         {/* Model Evaluation */}
         <Card>
           <CardHeader>
-            <CardTitle>Model Evaluation</CardTitle>
+            <CardTitle>{t('modelEval')}</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-6">
-                <Label htmlFor="preference">Preferred Recommendation Model</Label>
+                <Label htmlFor="preference">{t('preference')}</Label>
                 <div className="space-y-2 mt-2">
                   <VinylRating name="preference" value={surveyData.stepFour.preference} onChange={handleInputChange} range={3} ratingMode="single" />
               </div>
@@ -110,7 +112,7 @@ export default function StepFourForm() {
         {/* Feedback */}
         <Card>
           <CardHeader>
-            <CardTitle>Additional Feedback</CardTitle>
+            <CardTitle>{t('feedback')}</CardTitle>
           </CardHeader>
           <CardContent>
             <Textarea
@@ -118,13 +120,13 @@ export default function StepFourForm() {
               rows={4}
               value={surveyData.stepFour.feedback}
               onChange={handleInputChange}
-              placeholder="Please provide any additional feedback..."
+              placeholder={t('placeholderFeedback')}
               className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
             />
           </CardContent>
         </Card>
 
-        <SubmitButton onClick={submit} text="Submit" />
+        <SubmitButton onClick={submit} text={t('submit')} />
         {serverErrors && (
           <div className="text-red-500 text-sm">
             {Object.entries(serverErrors).map(([key, value]) => (

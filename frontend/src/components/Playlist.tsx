@@ -2,6 +2,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { PlayButton } from "./play-button"
 import Image from "next/image";
 import { Song } from "@/db/schema";
+import { getTranslations } from "next-intl/server";
 
 
 interface PlaylistProps {
@@ -11,10 +12,11 @@ interface PlaylistProps {
 
 
 export default async function Playlist({ playlist,className }: PlaylistProps) {
+  const t = await getTranslations('Playlist');
   return (
     <Card className={className}>
       <CardHeader>
-        <CardTitle>Curated Playlist</CardTitle>
+        <CardTitle>{t('curatedPlaylist')}</CardTitle>
       </CardHeader>
       <CardContent>
         <ul className="space-y-4">

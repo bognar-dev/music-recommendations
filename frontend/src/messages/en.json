@@ -1,14 +1,103 @@
 {
-    "HomePage": {   
-        "hero": "Find out if album covers can be used to make music recommendations better for you!",
-        "button": "Start the survey !"
-    },
-    "LocaleSwitcher": {
+  "HomePage": {
+    "hero": "Find out if album covers can be used to make music recommendations better for you!",
+    "button": "Start the survey !"
+  },
+  "TermsPage": {
+    "title": "Find out if album covers can be used to make music recommendations better for you!",
+    "description": "Please review and accept our terms to participate in this exciting research!",
+    "keyTerms": "Key Terms",
+    "fullTerms": "Full Terms",
+    "agreeButton": "I Agree, Start the Survey!",
+    "terms": {
+      "purpose": {
+        "title": "Purpose",
+        "content": "This website supports research into music recommendation systems, aiming to improve user experiences and algorithmic accuracy."
+      },
+      "userAgreement": {
+        "title": "User Agreement",
+        "content": "By using this website, you agree to participate in our research study and comply with these terms and conditions."
+      },
+      "privacyData": {
+        "title": "Privacy & Data",
+        "content": "We collect limited data for research purposes. Your information is kept secure and confidential, and will not be shared with third parties."
+      },
+      "voluntary": {
+        "title": "Voluntary Participation",
+        "content": "Your participation is entirely voluntary. You can withdraw from the study at any time without any negative consequences."
+      },
+      "risksBenefits": {
+        "title": "Risks & Benefits",
+        "content": "There is low risk associated with this study. Benefits include contributing to the advancement of music recommendation technology."
+      },
+      "contact": {
+        "title": "Contact Information",
+        "content": "For questions or concerns, please contact me at nb302289@falmouth.ac.uk ."
+      }
+    }
+  },
+  "Survey": {
+    "steps": {
+      "model1": "Model 1",
+      "model2": "Model 2",
+      "model3": "Model 3",
+      "review": "Review"
+    }
+  },
+  "LocaleSwitcher": {
     "de": "Deutsch",
     "en": "English",
     "es": "Español",
     "fr": "Français",
     "pt": "Português",
+    "it": "Italiano",
     "label": "Language"
-    }
+  },
+  "StepForm": {
+    "recommendedTracks": "Recommended Tracks",
+    "modelEvaluation": "Model Evaluation",
+    "relevance": "How relevant is this model to your music preferences?",
+    "novelty": "How novel/refreshing is this model?",
+    "satisfaction": "How satisfied are you with the models recommendations?",
+    "submit": "Submit"
+  },
+  "Review": {
+    "userInfo": "User Information",
+    "country": "Country",
+    "modelEval": "Model Evaluation",
+    "preference": "Preferred Recommendation Model",
+    "feedback": "Additional Feedback",
+    "placeholderFeedback": "Please provide any additional feedback...",
+    "submit": "Submit"
+  },
+  "AgeInputSlider": {
+    "selectYourAge": "Select Your Age",
+    "minimumAge": "Minimum Age",
+    "teen": "Teen",
+    "youngAdult": "Young Adult",
+    "adult": "Adult",
+    "middleAged": "Middle Aged",
+    "senior": "Senior",
+    "youAreA": "You are a {ageGroup}",
+    "minimumAgeReached": "Minimum age reached"
+  },
+  "ThankYouPage": {
+    "title": "You're a Rock Star!",
+    "thankYouMessage": "Thank you for participating in our survey. Your feedback is music to my ears!",
+    "resultsMessage": "You'll be able to see the results in the results tab after April 1st.",
+    "checkResults": "Check Results",
+    "backToHome": "Back to Home",
+    "exploreDataset": "Explore the Dataset that I used"
+  },
+  "Playlist": {
+    "curatedPlaylist": "Curated Playlist"
+  },
+  "AppSidebar": {
+    "musicRecommendationStudy": "Music Recommendation Study",
+    "home": "Home",
+    "dataset": "Dataset",
+    "survey": "Survey",
+    "results": "Results",
+    "releasedSoon": "released soon"
+  }
 }

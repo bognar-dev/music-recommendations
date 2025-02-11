@@ -11,41 +11,43 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
+import { useTranslations } from 'next-intl';
 
 const items = [
   {
-    title: "Home",
+    title: "home",
     url: "/",
     icon: Home,
   },
   {
-    title: "Dataset",
+    title: "dataset",
     url: "/songs",
     icon: Library,
     requiresAcceptance: true,
   },
   {
-    title: "Survey",
+    title: "survey",
     url: "/survey",
     icon: FileText,
     requiresAcceptance: true,
   },
   {
-    title: "Results",
+    title: "results",
     url: "/results",
     icon: ClipboardListIcon,
     disabled: true,
-    suffix: "released soon",
+    suffix: "releasedSoon",
   },
 ]
 
 export default function AppSidebar({ hasAcceptedTerms }: { hasAcceptedTerms: boolean }) {
+  const t = useTranslations('AppSidebar');
 
   return (
     <Sidebar className='bg-background'>
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>Music Recommendation Study</SidebarGroupLabel>
+          <SidebarGroupLabel>{t('musicRecommendationStudy')}</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {items.map((item) => {
@@ -56,10 +58,10 @@ export default function AppSidebar({ hasAcceptedTerms }: { hasAcceptedTerms: boo
                     <SidebarMenuButton asChild disabled={item.disabled}>
                       <Link href={item.url} aria-disabled={item.disabled}>
                         <item.icon className="mr-2 h-4 w-4" />
-                        <span>{item.title}</span>
+                        <span>{t(item.title)}</span>
                         {item.suffix && (
                           <span className="ml-2 text-sm font-medium text-gray-500">
-                            {item.suffix}
+                            {t(item.suffix)}
                           </span>
                         )}
                       </Link>

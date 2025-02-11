@@ -14,6 +14,7 @@ import { useActionState } from "react";
 import { useSurveyContext } from "@/context/survey-context";
 import { VinylRating } from "@/components/vinyl-rating";
 import { PlayButton } from "@/components/play-button";
+import { useTranslations } from "next-intl";
 
 
 interface StepThreeFormProps {
@@ -26,7 +27,7 @@ export default function StepThreeForm({ recommendations }: StepThreeFormProps) {
         stepThreeFormAction,
         initialState
     )
-
+    const t = useTranslations('StepForm');
     const { updateSurveyDetails, surveyData } = useSurveyContext();
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -74,7 +75,7 @@ export default function StepThreeForm({ recommendations }: StepThreeFormProps) {
                 {/* Song Ratings */}
                 <Card>
                     <CardHeader>
-                        <CardTitle>Recommended Tracks</CardTitle>
+                        <CardTitle>{t('recommendedTracks')}</CardTitle>
                     </CardHeader>
                     <CardContent>
                         <ul className="space-y-4">
@@ -110,13 +111,13 @@ export default function StepThreeForm({ recommendations }: StepThreeFormProps) {
                 {/* Model Ratings */}
                 <Card>
                     <CardHeader>
-                        <CardTitle>Model Evaluation</CardTitle>
+                        <CardTitle>{t('modelEvaluation')}</CardTitle>
                     </CardHeader>
                     <CardContent>
                         <div className="space-y-6">
                             {/* Relevance */}
                             <div>
-                                <Label htmlFor="relevance">How relevant is this model to your music preferences?</Label>
+                                <Label htmlFor="relevance">{t('relevance')}</Label>
                                 <ul className="flex space-x-2 mt-2">
                                     <VinylRating name="modelRating.relevance" value={surveyData.stepThree.modelRating.relevance} onChange={handleInputChange} />
                                 </ul>
@@ -124,7 +125,7 @@ export default function StepThreeForm({ recommendations }: StepThreeFormProps) {
 
                             {/* Novelty */}
                             <div>
-                                <Label htmlFor="novelty">How novel/refreshing is this model?</Label>
+                                <Label htmlFor="novelty">{t('novelty')}</Label>
                                 <ul className="flex space-x-2 mt-2">
                                     <VinylRating name="modelRating.novelty" value={surveyData.stepThree.modelRating.novelty} onChange={handleInputChange} />
                                 </ul>
@@ -132,7 +133,7 @@ export default function StepThreeForm({ recommendations }: StepThreeFormProps) {
 
                             {/* Satisfaction */}
                             <div>
-                                <Label htmlFor="satisfaction">How satisfied are you with the models recommendations?</Label>
+                                <Label htmlFor="satisfaction">{t('satisfaction')}</Label>
                                 <ul className="flex space-x-2 mt-2">
                                     <VinylRating name="modelRating.satisfaction" value={surveyData.stepThree.modelRating.satisfaction} onChange={handleInputChange} />
                                 </ul>

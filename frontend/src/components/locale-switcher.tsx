@@ -28,6 +28,10 @@ export default function LocaleSwitcher() {
         {
           value: 'pt',
           label: t('pt')
+        },
+        {
+          value: 'it',
+          label: t('it')
         }
       ]}
       label={t('label')}

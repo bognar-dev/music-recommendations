@@ -13,6 +13,7 @@ import { useActionState } from "react";
 import { useSurveyContext } from "@/context/survey-context";
 import { VinylRating } from "@/components/vinyl-rating";
 import { PlayButton } from "@/components/play-button";
+import { useTranslations } from "next-intl";
 
 
 interface StepTwoFormProps {
@@ -23,6 +24,7 @@ const initialState: FormErrors = {};
 
 
 export default function StepTwoForm({ recommendations }: StepTwoFormProps) {
+    const t = useTranslations('StepForm');
     const [serverErrors, formAction] = useActionState(
         stepTwoFormAction,
         initialState
@@ -75,7 +77,7 @@ export default function StepTwoForm({ recommendations }: StepTwoFormProps) {
                 {/* Song Ratings */}
                 <Card>
                     <CardHeader>
-                        <CardTitle>Recommended Tracks</CardTitle>
+                        <CardTitle>{t('recommendedTracks')}</CardTitle>
                     </CardHeader>
                     <CardContent>
                         <ul className="space-y-4">
@@ -111,13 +113,13 @@ export default function StepTwoForm({ recommendations }: StepTwoFormProps) {
                 {/* Model Ratings */}
                 <Card>
                     <CardHeader>
-                        <CardTitle>Model Evaluation</CardTitle>
+                        <CardTitle>{t('recommendedTracks')}</CardTitle>
                     </CardHeader>
                     <CardContent>
                         <div className="space-y-6">
                             {/* Relevance */}
                             <div>
-                                <Label htmlFor="relevance">How relevant is this model to your music preferences?</Label>
+                                <Label htmlFor="relevance">{t('relevance')}</Label>
                                 <ul className="flex space-x-2 mt-2">
                                     <VinylRating name="modelRating.relevance" value={surveyData.stepTwo.modelRating.relevance} onChange={handleInputChange} />
                                 </ul>
@@ -125,7 +127,7 @@ export default function StepTwoForm({ recommendations }: StepTwoFormProps) {
 
                             {/* Novelty */}
                             <div>
-                                <Label htmlFor="novelty">How novel/refreshing is this model?</Label>
+                                <Label htmlFor="novelty">{t('novelty')}</Label>
                                 <ul className="flex space-x-2 mt-2">
                                     <VinylRating name="modelRating.novelty" value={surveyData.stepTwo.modelRating.novelty} onChange={handleInputChange} />
                                 </ul>
@@ -133,7 +135,7 @@ export default function StepTwoForm({ recommendations }: StepTwoFormProps) {
 
                             {/* Satisfaction */}
                             <div>
-                                <Label htmlFor="satisfaction">How satisfied are you with the models recommendations?</Label>
+                                <Label htmlFor="satisfaction">{t('satisfaction')}</Label>
                                 <ul className="flex space-x-2 mt-2">
                                     <VinylRating name="modelRating.satisfaction" value={surveyData.stepTwo.modelRating.satisfaction} onChange={handleInputChange} />
                                 </ul>
@@ -142,7 +144,7 @@ export default function StepTwoForm({ recommendations }: StepTwoFormProps) {
                     </CardContent>
                 </Card>
 
-                <SubmitButton text="Submit" />
+                <SubmitButton text={t('submit')} />
                 {serverErrors && (
                     <div className="text-red-500 text-sm">
                         {Object.entries(serverErrors).map(([key, value]) => (
