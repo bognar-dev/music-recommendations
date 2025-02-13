@@ -275,7 +275,7 @@ def object_detection(image: np.ndarray) -> List[str]:
         return []
 
     # Load a pretrained YOLOv8 model
-    model = YOLO("yolov8n.pt")  # You can change this to a different model if needed
+    model = YOLO("yolov11n.pt")  # You can change this to a different model if needed
 
     # Run inference on the image
     results = model(image)
@@ -380,10 +380,10 @@ if __name__ == "__main__":
     for index, row in tqdm(spotify_df.iterrows(), total=len(spotify_df), desc="Downloading Images"):
         image_url = row["img"]
         if not isinstance(image_url, str):
-            print(f"Skipping download for index {index} due to invalid image URL: {image_url}")
+            print(f"Skipping download for id {row['id']} due to invalid image URL: {image_url}")
             continue
 
-        image_filename = f"album_cover_{index}.jpg"
+        image_filename = f"album_cover_{row['id']}.jpg"
         image_path = os.path.join(image_dir, image_filename)
         spotify_df.at[index, "image_path"] = image_path
 

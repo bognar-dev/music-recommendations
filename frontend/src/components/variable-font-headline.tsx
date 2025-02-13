@@ -17,7 +17,7 @@ export default function VariableFontHeadline({ label }: VariableFontHeadlineProp
 
     return (
         <div
-            className="w-full h-full items-center justify-center font-overusedGrotesk p-24 relative cursor-none overflow-hidden"
+            className="w-full h-full items-center justify-center font-overusedGrotesk p-4 relative cursor-none overflow-hidden"
             ref={containerRef}
         >
             {/* this is the important stuff */}
