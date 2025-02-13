@@ -16,7 +16,7 @@ export const CirclingElementsDemo: React.FC<CirclingElementsDemoProps> = ({ imag
     
 
     return (
-        <div className="w-full h-full flex items-center justify-center relative">
+        <div className="w-full max-h-screen flex items-center justify-center relative">
             <CirclingElements radius={screenSize.lessThan("md") ? 80 : 390} duration={40}>
                 {displayedImages.map((image, index) => (
                     <div
