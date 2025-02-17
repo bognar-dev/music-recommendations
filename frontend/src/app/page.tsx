@@ -14,7 +14,7 @@ const Page: React.FC = async () => {
         <div className='min-h-screen flex items-center justify-start'>
             <CircularImages images={images}>
                 <div className="flex flex-col items-center justify-start md:justify-center gap-5 md:w-1/4">
-                    <div className="text-center text-lg pb-80 md:p-0 md:text-5xl font-azeretMono">
+                    <div className="w-full h-full text-center text-lg pb-80 md:p-0 md:text-5xl font-azeretMono">
                         <VariableFontHeadline label={t('hero')}/>
                     </div>
                     <GooeyButton 

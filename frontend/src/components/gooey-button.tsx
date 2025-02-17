@@ -14,7 +14,7 @@ interface GooeyButtonProps {
 export default function GooeyButton({ children, className, href, onClick }: GooeyButtonProps) {
   return (
     <>
-      <Button className="select-none p-6 [filter:url('#goo')]">
+      <Button variant={"unstyled"} className="select-none p-6 [filter:url('#goo')]">
         <a
           href={href}
           onClick={onClick}
