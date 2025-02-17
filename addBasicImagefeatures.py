@@ -6,6 +6,9 @@ from skimage import feature
 from skimage.color import rgb2hsv
 from typing import List, Tuple
 import os
+import signal
+import sys
+import argparse
 from tqdm import tqdm  # Import tqdm
 # pip install ultralytics  # For YOLOv8
 
@@ -292,12 +295,13 @@ def object_detection(image: np.ndarray) -> List[str]:
     return detected_objects
 
 
-def extract_image_features(image_path: str) -> dict:
+def extract_image_features(image_path: str, enabled_features: List[str]) -> dict:
     """
     Extracts image features from the given image path.
 
     Args:
         image_path: The path to the image file.
+        enabled_features: A list of strings representing the features to extract.
 
     Returns:
         A dictionary containing the extracted image features.
@@ -308,51 +312,69 @@ def extract_image_features(image_path: str) -> dict:
             print(f"Error: Could not read the image at {image_path}")
             return None
 
+        features = {}
+
         # Color-Based Features
-        dominant_colors = dominant_color_kmeans(image)
-        temp = color_temperature(image)
-        brightness = color_brightness(image)
-        lightness = overall_lightness(image)
-        rgb_hist, hsv_hist = color_histograms(image)
-        single_pixel_color = resize_to_single_pixel(image)
-        weighted_average_color = luminosity_weighted_average(image)
-        most_vibrant = find_most_vibrant_color(image)
+        if "dominant_color_kmeans" in enabled_features:
+            features["dominant_colors"] = dominant_color_kmeans(image)
+        if "color_temperature" in enabled_features:
+            features["color_temperature"] = color_temperature(image)
+        if "color_brightness" in enabled_features:
+            features["color_brightness"] = color_brightness(image)
+        if "overall_lightness" in enabled_features:
+            features["overall_lightness"] = overall_lightness(image)
+        if "color_histograms" in enabled_features:
+            rgb_hist, hsv_hist = color_histograms(image)
+            features["rgb_histogram_shapes"] = [h.shape for h in rgb_hist]
+            features["hsv_histogram_shapes"] = [h.shape for h in hsv_hist]
+        if "resize_to_single_pixel" in enabled_features:
+            features["single_pixel_color"] = resize_to_single_pixel(image)
+        if "luminosity_weighted_average" in enabled_features:
+            features["weighted_average_color"] = luminosity_weighted_average(image)
+        if "find_most_vibrant_color" in enabled_features:
+            features["most_vibrant_color"] = find_most_vibrant_color(image)
 
         # Structure and Content-Based Features
-        edges = edge_detection(image)
-        lbp_hist = texture_analysis(image)
+        if "edge_detection" in enabled_features:
+            edges = edge_detection(image)
+            features["edge_map_shape"] = edges.shape
+        if "texture_analysis" in enabled_features:
+            lbp_hist = texture_analysis(image)
+            features["lbp_histogram_shape"] = lbp_hist.shape
 
         # Object Detection
-        detected_objects = object_detection(image)
+        if "object_detection" in enabled_features:
+            features["detected_objects"] = object_detection(image)
 
-        features = {
-            "dominant_colors": dominant_colors,
-            "color_temperature": temp,
-            "color_brightness": brightness,
-            "overall_lightness": lightness,
-            "rgb_histogram_shapes": [h.shape for h in rgb_hist],
-            "hsv_histogram_shapes": [h.shape for h in hsv_hist],
-            "single_pixel_color": single_pixel_color,
-            "weighted_average_color": weighted_average_color,
-            "most_vibrant_color": most_vibrant,
-            "edge_map_shape": edges.shape,
-            "lbp_histogram_shape": lbp_hist.shape,
-            "detected_objects": detected_objects,
-        }
         return features
     except Exception as e:
         print(f"Error processing image {image_path}: {e}")
         return None
 
 
-if __name__ == "__main__":
-    # Load the Spotify data from CSV
-    spotify_data_path = "spotify_data.csv"
-    spotify_df = pd.read_csv(spotify_data_path)
-    print(f"Loaded Spotify data from {spotify_data_path}")
+def save_dataframe(df: pd.DataFrame, output_csv_path: str, index: bool = False):
+    """Saves the DataFrame to a CSV file."""
+    try:
+        df.to_csv(output_csv_path, index=index)
+        print(f"DataFrame saved to {output_csv_path}")
+    except Exception as e:
+        print(f"Error saving DataFrame to {output_csv_path}: {e}")
 
-    # Create a directory to store the album cover images
-    image_dir = "album_covers"
+
+def main(spotify_data_path: str, output_csv_path: str, image_dir: str, enabled_features: List[str]):
+    """Main function to process the Spotify data and extract image features."""
+    # Load the Spotify data from CSV
+    try:
+        spotify_df = pd.read_csv(spotify_data_path)
+        print(f"Loaded Spotify data from {spotify_data_path}")
+    except FileNotFoundError:
+        print(f"Error: Spotify data file not found at {spotify_data_path}")
+        return
+    except Exception as e:
+        print(f"Error loading Spotify data from {spotify_data_path}: {e}")
+        return
+
+    # Create the image directory if it doesn't exist
     if not os.path.exists(image_dir):
         os.makedirs(image_dir)
         print(f"Created directory {image_dir}")
@@ -398,72 +420,137 @@ if __name__ == "__main__":
     spotify_df.to_csv(image_paths_csv_path, index=False)
     print(f"Image paths saved to {image_paths_csv_path}")
 
-    # Extract image features and add them to the DataFrame
-    feature_columns = [
-        "dominant_colors",
-        "color_temperature",
-        "color_brightness",
-        "overall_lightness",
-        "rgb_histogram_shapes",
-        "hsv_histogram_shapes",
-        "single_pixel_color",
-        "weighted_average_color",
-        "most_vibrant_color",
-        "edge_map_shape",
-        "lbp_histogram_shape",
-        "detected_objects",
-    ]
+    # Define feature columns based on enabled features
+    feature_columns = []
+    if "dominant_color_kmeans" in enabled_features:
+        feature_columns.append("dominant_colors")
+    if "color_temperature" in enabled_features:
+        feature_columns.append("color_temperature")
+    if "color_brightness" in enabled_features:
+        feature_columns.append("color_brightness")
+    if "overall_lightness" in enabled_features:
+        feature_columns.append("overall_lightness")
+    if "color_histograms" in enabled_features:
+        feature_columns.append("rgb_histogram_shapes")
+        feature_columns.append("hsv_histogram_shapes")
+    if "resize_to_single_pixel" in enabled_features:
+        feature_columns.append("single_pixel_color")
+    if "luminosity_weighted_average" in enabled_features:
+        feature_columns.append("weighted_average_color")
+    if "find_most_vibrant_color" in enabled_features:
+        feature_columns.append("most_vibrant_color")
+    if "edge_detection" in enabled_features:
+        feature_columns.append("edge_map_shape")
+    if "texture_analysis" in enabled_features:
+        feature_columns.append("lbp_histogram_shape")
+    if "object_detection" in enabled_features:
+        feature_columns.append("detected_objects")
+
+    # Add new columns for the color values of the color features
+    if "resize_to_single_pixel" in enabled_features:
+        spotify_df["single_pixel_color_r"] = None
+        spotify_df["single_pixel_color_g"] = None
+        spotify_df["single_pixel_color_b"] = None
+    if "luminosity_weighted_average" in enabled_features:
+        spotify_df["weighted_average_color_r"] = None
+        spotify_df["weighted_average_color_g"] = None
+        spotify_df["weighted_average_color_b"] = None
+    if "find_most_vibrant_color" in enabled_features:
+        spotify_df["most_vibrant_color_r"] = None
+        spotify_df["most_vibrant_color_g"] = None
+        spotify_df["most_vibrant_color_b"] = None
+
+    # Load the index of the last processed image
+    start_index = 0
+    if os.path.exists("last_processed.txt"):
+        with open("last_processed.txt", "r") as f:
+            try:
+                start_index = int(f.read())
+                print(f"Resuming from index {start_index}")
+            except ValueError:
+                print("Invalid index in last_processed.txt, starting from 0")
+
+    # Initialize feature columns
     print("Initializing feature columns...")
     for column in feature_columns:
         spotify_df[column] = None  # Initialize the new columns
 
-    # Add new columns for the color values of the color features
-    spotify_df["single_pixel_color_r"] = None
-    spotify_df["single_pixel_color_g"] = None
-    spotify_df["single_pixel_color_b"] = None
-    spotify_df["weighted_average_color_r"] = None
-    spotify_df["weighted_average_color_g"] = None
-    spotify_df["weighted_average_color_b"] = None
-    spotify_df["most_vibrant_color_r"] = None
-    spotify_df["most_vibrant_color_g"] = None
-    spotify_df["most_vibrant_color_b"] = None
-
+    # Extract image features and add them to the DataFrame
     print("Extracting image features...")
-    for index, row in tqdm(spotify_df.iterrows(), total=len(spotify_df), desc="Extracting Features"):
+    SAVE_INTERVAL = 10
+    for index, row in tqdm(spotify_df.iloc[start_index:].iterrows(), total=len(spotify_df) - start_index, desc="Extracting Features"):
         image_path = row["image_path"]
         if image_path and os.path.exists(image_path):
             print(f"Processing image at {image_path}")
-            features = extract_image_features(image_path)
+            features = extract_image_features(image_path, enabled_features)
             if features:
                 print(f"Features extracted: {features.keys()}")
                 for column in feature_columns:
                     spotify_df.at[index, column] = features.get(column)
 
                 # Extract and assign the color values
-                single_pixel_color = features.get("single_pixel_color")
-                if single_pixel_color:
-                    spotify_df.at[index, "single_pixel_color_r"] = single_pixel_color[0]
-                    spotify_df.at[index, "single_pixel_color_g"] = single_pixel_color[1]
-                    spotify_df.at[index, "single_pixel_color_b"] = single_pixel_color[2]
+                if "resize_to_single_pixel" in enabled_features:
+                    single_pixel_color = features.get("single_pixel_color")
+                    if single_pixel_color:
+                        spotify_df.at[index, "single_pixel_color_r"] = single_pixel_color[0]
+                        spotify_df.at[index, "single_pixel_color_g"] = single_pixel_color[1]
+                        spotify_df.at[index, "single_pixel_color_b"] = single_pixel_color[2]
 
-                weighted_average_color = features.get("weighted_average_color")
-                if weighted_average_color:
-                    spotify_df.at[index, "weighted_average_color_r"] = weighted_average_color[0]
-                    spotify_df.at[index, "weighted_average_color_g"] = weighted_average_color[1]
-                    spotify_df.at[index, "weighted_average_color_b"] = weighted_average_color[2]
+                if "luminosity_weighted_average" in enabled_features:
+                    weighted_average_color = features.get("weighted_average_color")
+                    if weighted_average_color:
+                        spotify_df.at[index, "weighted_average_color_r"] = weighted_average_color[0]
+                        spotify_df.at[index, "weighted_average_color_g"] = weighted_average_color[1]
+                        spotify_df.at[index, "weighted_average_color_b"] = weighted_average_color[2]
 
-                most_vibrant_color = features.get("most_vibrant_color")
-                if most_vibrant_color:
-                    spotify_df.at[index, "most_vibrant_color_r"] = most_vibrant_color[0]
-                    spotify_df.at[index, "most_vibrant_color_g"] = most_vibrant_color[1]
-                    spotify_df.at[index, "most_vibrant_color_b"] = most_vibrant_color[2]
+                if "find_most_vibrant_color" in enabled_features:
+                    most_vibrant_color = features.get("most_vibrant_color")
+                    if most_vibrant_color:
+                        spotify_df.at[index, "most_vibrant_color_r"] = most_vibrant_color[0]
+                        spotify_df.at[index, "most_vibrant_color_g"] = most_vibrant_color[1]
+                        spotify_df.at[index, "most_vibrant_color_b"] = most_vibrant_color[2]
             else:
                 print(f"No features extracted for image at {image_path}")
         else:
             print(f"Skipping feature extraction for index {index} due to missing image.")
 
-    # Save the updated DataFrame to a new CSV file
-    output_csv_path = "spotify_data_with_image_features.csv"
-    spotify_df.to_csv(output_csv_path, index=False)
+        # Save progress every SAVE_INTERVAL iterations
+        if (index - start_index + 1) % SAVE_INTERVAL == 0:
+            save_dataframe(spotify_df, output_csv_path)
+            # Save the index of the last processed image
+            with open("last_processed.txt", "w") as f:
+                f.write(str(index))
+            print(f"Progress saved up to index {index}")
 
+    # Save the final DataFrame to a new CSV file
+    save_dataframe(spotify_df, output_csv_path)
     print(f"Image features added and saved to {output_csv_path}")
+
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="Extract image features from Spotify album covers.")
+    parser.add_argument("--spotify_data_path", type=str, default="spotify_data.csv", help="Path to the Spotify data CSV file.")
+    parser.add_argument("--output_csv_path", type=str, default="spotify_data_with_image_features.csv", help="Path to the output CSV file.")
+    parser.add_argument("--image_dir", type=str, default="album_covers", help="Path to the directory containing the album cover images.")
+    parser.add_argument(
+        "--features",
+        nargs="+",
+        default=[
+            "dominant_color_kmeans",
+            "color_temperature",
+            "color_brightness",
+            "overall_lightness",
+            "color_histograms",
+            "resize_to_single_pixel",
+            "luminosity_weighted_average",
+            "find_most_vibrant_color",
+            "edge_detection",
+            "texture_analysis",
+            "object_detection",
+        ],
+        help="List of image features to extract. Choose from: dominant_color_kmeans, color_temperature, color_brightness, overall_lightness, color_histograms, resize_to_single_pixel, luminosity_weighted_average, find_most_vibrant_color, edge_detection, texture_analysis, object_detection",
+    )
+
+    args = parser.parse_args()
+
+    main(args.spotify_data_path, args.output_csv_path, args.image_dir, args.features)

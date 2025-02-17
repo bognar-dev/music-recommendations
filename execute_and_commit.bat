@@ -13,7 +13,7 @@ REM Install missing packages
 pip install opencv-python numpy pandas scikit-learn scikit-image tqdm
 
 REM Run the Python script
-python addBasicImageFeatures.py
+python addBasicImagefeatures.py --spotify_data_path spotify_data.csv --output_csv_path spotify_data_with_image_features.csv --image_dir album_covers --features dominant_color_kmeans color_temperature color_brightness overall_lightness color_histograms resize_to_single_pixel luminosity_weighted_average find_most_vibrant_color edge_detection texture_analysis
 
 REM Get the exit code of the python script
 set EXIT_CODE=%ERRORLEVEL%
