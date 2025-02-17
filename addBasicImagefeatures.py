@@ -277,7 +277,7 @@ def object_detection(image: np.ndarray) -> List[str]:
         )
         return []
 
-    # Load a pretrained YOLOv8 model
+    # Load a pretrained YOLOv11n model
     model = YOLO("yolov11n.pt")  # You can change this to a different model if needed
 
     # Run inference on the image
