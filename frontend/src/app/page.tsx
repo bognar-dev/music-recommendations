@@ -3,7 +3,7 @@ import CircularImages from '@/components/circling-images';
 import { fetchSongsWithPagination } from '@/db/queries';
 import GooeyButton from '@/components/gooey-button';
 import { getTranslations } from 'next-intl/server';
-import VariableFontHeadline from '@/components/variable-font-headline';
+import VerticalCutReveal from '@/components/vertical-cut-reveal';
 
 const Page: React.FC = async () => {
     const t = await getTranslations('HomePage');
@@ -14,17 +14,32 @@ const Page: React.FC = async () => {
         <div className='min-h-screen flex items-center justify-start'>
             <CircularImages images={images}>
                 <div className="flex flex-col items-center justify-start md:justify-center gap-5 md:w-1/4">
-                    <div className="w-full h-full text-center text-lg pb-80 md:p-0 md:text-5xl font-azeretMono">
-                        <VariableFontHeadline label={t('hero')}/>
+                    <div className="w-full h-full text-center text-lg pb-80 md:p-0 md:text-5xl mb-5 font-azeretMono">
+                        <VerticalCutReveal
+                            containerClassName='justify-center items-center'
+                            splitBy="words"
+                            staggerDuration={0.025}
+                            staggerFrom="random"
+                            transition={{
+                                type: "spring",
+                                stiffness: 200,
+                                damping: 21,
+                            }}
+                        >
+                            {t('hero')}
+                            
+                        </VerticalCutReveal>
+                        <GooeyButton
+                            href="terms"
+                            className="font-azeretMono font-light text-foreground text-base"
+                        >
+                            {t('button')}
+                        </GooeyButton>
                     </div>
-                    <GooeyButton 
-                        href="terms"
-                        className="font-azeretMono font-light text-foreground text-base"
-                    >
-                        {t('button')}
-                    </GooeyButton>
+
                 </div>
             </CircularImages>
+
         </div>
     );
 };
