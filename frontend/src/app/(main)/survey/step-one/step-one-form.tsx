@@ -85,7 +85,7 @@ export default function StepOneForm({ recommendations }: StepOneFormProps) {
                                     <input type="hidden" name={`songRatings.${track.id}.songId`} value={track.id} />
                                     <input type="hidden" name={`songRatings.${track.id}.songName`} value={track.name} />
                                     <Image
-                                        src={track.image_url!}
+                                        src={track.image_url && track.image_url !== "no" ? track.image_url : '/placeholder.svg'}
                                         width={64}
                                         height={64}
                                         alt={`${track.name} album cover`}

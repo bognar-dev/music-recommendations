@@ -6,12 +6,31 @@ import { Progress } from "@/components/ui/progress"
 import { Separator } from "@/components/ui/separator"
 import Image from 'next/image'
 import type { Song } from "@/db/schema"
+import { parseListOfRgb, parseRgb } from '@/lib/numpy'
 
 interface SongDetailsPanelProps {
   song: Song | null
   isOpen: boolean
   onClose: () => void
 }
+
+
+  const keyMap: { [key: string]: string } = {
+    "-1": "No Key Detected",
+    "0": "C",
+    "1": "C♯/D♭",
+    "2": "D",
+    "3": "D♯/E♭",
+    "4": "E",
+    "5": "F",
+    6: "F♯/G♭",
+    7: "G",
+    8: "G♯/A♭",
+    9: "A",
+    10: "A♯/B♭",
+    11: "B",
+  };
+
 
 export function SongDetailsPanel({ song, isOpen, onClose }: SongDetailsPanelProps) {
   const [open, setOpen] = useState(isOpen)
@@ -27,11 +46,15 @@ export function SongDetailsPanel({ song, isOpen, onClose }: SongDetailsPanelProp
 
   if (!song) return null
 
+
+  const dominant_colors = parseListOfRgb(song.dominant_colors!)
+
+
   const renderProgressWithValue = (label: string, value: number) => (
     <div>
       <div className="flex justify-between items-center mb-2">
         <h3 className="text-sm font-medium">{label}</h3>
-        <span className="text-sm text-muted-foreground">{value.toFixed(3)}</span>
+        <span className="text-sm text-muted-foreground">{value.toFixed(1)}</span>
       </div>
       <Progress value={value * 100} />
     </div>
@@ -68,12 +91,21 @@ export function SongDetailsPanel({ song, isOpen, onClose }: SongDetailsPanelProp
             </div>
           </div>
           <Separator />
+          <h3 className="font-semibold mb-2">Dominant Colors</h3>
+          <div className="flex space-x-2">
+            {dominant_colors && dominant_colors.map((color, index) => (
+              <div key={index} style={{ backgroundColor: `rgb(${color[0]}, ${color[1]}, ${color[2]})` }} className="h-10 w-10 rounded-full" />
+            ))}
+          </div>
+          <h3 className="font-semibold mb-2">Single Pixel Colour</h3>
+          <div style={{ backgroundColor: `rgb(${parseRgb(song.single_pixel_color!)?.join(',')})` }} className="h-10 w-10 rounded-full" />
+          <Separator />
           <div>
             <h3 className="font-semibold mb-2">Additional Information</h3>
             <div className="space-y-2">
-              <p><span className="font-medium">Spotify ID:</span> {song.spotify_id}</p>
-              <p><span className="font-medium">Loudness:</span> {song.loudness.toFixed(2)} dB</p>
-              <p><span className="font-medium">Preview:</span> {song.preview_url ? "Available" : "Not available"}</p>
+              <p><span className="font-medium">Key:</span> {song.key !== null ? keyMap[song.key] || 'Unknown' : 'Unknown'}</p>
+              <p><span className="font-medium">Loudness:</span> {song.loudness.toFixed(1)} dB</p>
+              
             </div>
           </div>
           <Separator />

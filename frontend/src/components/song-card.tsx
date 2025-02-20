@@ -9,7 +9,7 @@ interface SongCardProps {
 }
 
 export function SongCard({ song, priority }: SongCardProps) {
-  
+  console.log(song.image_url)
 
   return (
     <Card className="overflow-hidden group cursor-pointer duration-300">

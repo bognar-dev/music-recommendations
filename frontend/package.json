@@ -51,6 +51,7 @@
     "react-circle-flags": "^0.0.23",
     "react-dom": "19.0.0-rc.1",
     "react-hook-form": "^7.54.2",
+    "recharts": "^2.15.1",
     "tailwind-merge": "^2.5.5",
     "tailwindcss-animate": "^1.0.7",
     "zod": "^3.24.1"

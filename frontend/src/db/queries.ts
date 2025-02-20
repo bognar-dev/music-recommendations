@@ -1,5 +1,5 @@
 "server-only";
-import { sql, and, gte, eq, lte, desc, asc } from 'drizzle-orm';
+import { sql, and, gte, eq, lte, desc, asc, inArray} from 'drizzle-orm';
 import { db } from './index';
 import { songs, surveys } from './schema';
 import { SearchParams } from '@/lib/url-state';
@@ -66,6 +66,15 @@ const imageUrlFilter = (imageUrl?: boolean) => {
   }
   return undefined;
 };
+
+
+export async function fetchSongs(songIds: string[]) {
+  const songsArray = await db
+    .select()
+    .from(songs)
+    .where(inArray(songs.spotify_id, songIds));
+  return songsArray;
+}
 
 
 

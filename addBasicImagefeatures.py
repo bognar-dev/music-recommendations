@@ -460,20 +460,27 @@ def main(spotify_data_path: str, output_csv_path: str, image_dir: str, enabled_f
         spotify_df["most_vibrant_color_g"] = None
         spotify_df["most_vibrant_color_b"] = None
 
-    # Load the index of the last processed image
+    # Determine the starting index based on existing data
     start_index = 0
-    if os.path.exists("last_processed.txt"):
-        with open("last_processed.txt", "r") as f:
-            try:
-                start_index = int(f.read())
-                print(f"Resuming from index {start_index}")
-            except ValueError:
-                print("Invalid index in last_processed.txt, starting from 0")
+    if os.path.exists(output_csv_path):
+        try:
+            existing_df = pd.read_csv(output_csv_path)
+            # Identify processed rows based on the presence of feature columns
+            processed_indices = existing_df.dropna(subset=feature_columns).index.tolist()
+            if processed_indices:
+                start_index = processed_indices[-1] + 1  # Start after the last processed row
+                spotify_df = pd.concat([existing_df.iloc[:start_index], spotify_df.iloc[start_index:]], ignore_index=True)
+                print(f"Resuming from index {start_index} based on existing data in {output_csv_path}")
+            else:
+                print(f"No processed data found in {output_csv_path}, starting from index 0")
+        except Exception as e:
+            print(f"Error loading or analyzing existing data in {output_csv_path}: {e}. Starting from index 0.")
 
     # Initialize feature columns
     print("Initializing feature columns...")
     for column in feature_columns:
-        spotify_df[column] = None  # Initialize the new columns
+        if column not in spotify_df.columns:
+            spotify_df[column] = None  # Initialize the new columns
 
     # Extract image features and add them to the DataFrame
     print("Extracting image features...")
@@ -517,14 +524,12 @@ def main(spotify_data_path: str, output_csv_path: str, image_dir: str, enabled_f
         # Save progress every SAVE_INTERVAL iterations
         if (index - start_index + 1) % SAVE_INTERVAL == 0:
             save_dataframe(spotify_df, output_csv_path)
-            # Save the index of the last processed image
-            with open("last_processed.txt", "w") as f:
-                f.write(str(index))
             print(f"Progress saved up to index {index}")
 
     # Save the final DataFrame to a new CSV file
     save_dataframe(spotify_df, output_csv_path)
     print(f"Image features added and saved to {output_csv_path}")
+
 
 
 if __name__ == "__main__":

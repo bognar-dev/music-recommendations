@@ -23,7 +23,7 @@ export default async function Playlist({ playlist,className }: PlaylistProps) {
           {playlist.map((track) => (
             <li key={track.id} className="flex items-center space-x-4 border-b pb-4 last:border-b-0">
               <Image
-                src={track.image_url ?? '/placeholder.svg'}
+                 src={track.image_url && track.image_url !== "no" ? track.image_url : '/placeholder.svg'}
                 alt={`${track.name} album cover`}
                 className="h-16 w-16 rounded"
                 width={64}

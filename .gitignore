@@ -4,3 +4,4 @@ yolov8n.pt
 last_processed.txt
 spotify_data_with_image_features.csv
 spotify_data_with_image_paths.csv
+test_data.csv
