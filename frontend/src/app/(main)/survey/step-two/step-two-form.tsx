@@ -113,7 +113,7 @@ export default function StepTwoForm({ recommendations }: StepTwoFormProps) {
                 {/* Model Ratings */}
                 <Card>
                     <CardHeader>
-                        <CardTitle>{t('recommendedTracks')}</CardTitle>
+                        <CardTitle>{t('modelEvaluation')}</CardTitle>
                     </CardHeader>
                     <CardContent>
                         <div className="space-y-6">
