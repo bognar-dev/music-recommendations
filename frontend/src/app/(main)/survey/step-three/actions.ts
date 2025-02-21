@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use server';
+import { postHogServer } from '@/lib/postHog-server';
 import { stepThreeSchema } from '@/lib/survey-schema';
 import { AddDealRoutes, FormErrors } from '@/types/survey';
 import { redirect } from 'next/navigation';
@@ -45,6 +46,11 @@ export const stepThreeFormAction = async (
         console.log(errors);
         return errors;
     }
+    postHogServer.capture({
+        distinctId: "server",
+        event: "stepThreeFormSubmit",
+        properties: { modelRating, songRatings }
+      });
 
     redirect(AddDealRoutes.REVIEW_SURVEY);
 };

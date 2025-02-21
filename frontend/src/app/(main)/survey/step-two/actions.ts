@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use server';
+import { postHogServer } from '@/lib/postHog-server';
 import { stepTwoSchema } from '@/lib/survey-schema';
 import { AddDealRoutes, FormErrors } from '@/types/survey';
 import { redirect } from 'next/navigation';
@@ -45,6 +46,12 @@ export const stepTwoFormAction = async (
         console.log(errors);
         return errors;
     }
+
+    postHogServer.capture({
+        distinctId: "server",
+        event: "stepTwoFormSubmit",
+        properties: { modelRating, songRatings }
+      });
 
     redirect(AddDealRoutes.MODEL_3);
 };

@@ -1,5 +1,5 @@
 import { SongsPagination } from '@/components/pagination'
-import { Search, SearchFallback } from '@/components/search'
+import { Search } from '@/components/search'
 import { SearchFilters } from '@/components/search-filters'
 import { SongsGrid } from '@/components/songs-grid'
 import { estimateTotalSongs, fetchSongsWithPagination, ITEMS_PER_PAGE } from '@/db/queries'

@@ -7,6 +7,7 @@ import Form from 'next/form';
 import acceptTerms from '@/app/actions/acceptTerms';
 import { ChevronDown } from 'lucide-react';
 import { useTranslations } from 'next-intl';
+import { Button } from '@/components/ui/button';
 
 const TermsPage = () => {
     const router = useRouter();
@@ -36,12 +37,12 @@ const TermsPage = () => {
     return (
         <div className="flex flex-col items-center justify-start min-h-screen p-4 md:p-6 bg-background text-foreground">
             <div className="fixed bottom-4 right-4 md:hidden z-50">
-                <GooeyButton 
+                <Button 
                     className="rounded-full shadow-lg"
                     onClick={scrollToBottom}
                 >
                     <ChevronDown className="h-6 w-6" />
-                </GooeyButton>
+                </Button>
             </div>
             <div className="w-full max-w-4xl text-center">
                 <h1 className="text-3xl md:text-4xl font-bold text-primary mb-6">

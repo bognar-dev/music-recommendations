@@ -3,6 +3,7 @@
 "use server";
 
 import { insertSurvey } from "@/db/queries";
+import { postHogServer } from "@/lib/postHog-server";
 import {
   stepFourSchema,
   surveySchema,
@@ -62,6 +63,11 @@ export const submitSurveyAction = async (
   // If validation is successful, you would typically save the data here
   console.log("Validated survey data:", JSON.stringify(validated.data, null, 2));
   console.log("StepOneSongRatings", validated.data.stepOne.songRatings);
+  postHogServer.capture({
+    distinctId: "server",
+    event: "submitSurvey",
+    properties: { survey },
+  });
 
   // For demonstration purposes, we're just logging the data and returning success
   return {
