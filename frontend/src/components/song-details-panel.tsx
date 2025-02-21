@@ -15,21 +15,21 @@ interface SongDetailsPanelProps {
 }
 
 
-  const keyMap: { [key: string]: string } = {
-    "-1": "No Key Detected",
-    "0": "C",
-    "1": "C♯/D♭",
-    "2": "D",
-    "3": "D♯/E♭",
-    "4": "E",
-    "5": "F",
-    6: "F♯/G♭",
-    7: "G",
-    8: "G♯/A♭",
-    9: "A",
-    10: "A♯/B♭",
-    11: "B",
-  };
+const keyMap: { [key: string]: string } = {
+  "-1": "No Key Detected",
+  "0": "C",
+  "1": "C♯/D♭",
+  "2": "D",
+  "3": "D♯/E♭",
+  "4": "E",
+  "5": "F",
+  6: "F♯/G♭",
+  7: "G",
+  8: "G♯/A♭",
+  9: "A",
+  10: "A♯/B♭",
+  11: "B",
+};
 
 
 export function SongDetailsPanel({ song, isOpen, onClose }: SongDetailsPanelProps) {
@@ -68,15 +68,65 @@ export function SongDetailsPanel({ song, isOpen, onClose }: SongDetailsPanelProp
           <SheetDescription>{song.artist}</SheetDescription>
         </SheetHeader>
         <div className="mt-6 space-y-6">
-            {song.image_url !== 'no' && (
-              <Image
-            src={song.image_url!}
-            alt={`${song.name} by ${song.artist}`}
-            width={300}
-            height={300}
-            className="w-full h-auto rounded-md"
-              />
+          {song.image_url !== 'no' && (
+            <Image
+              src={song.image_url!}
+              alt={`${song.name} by ${song.artist}`}
+              width={300}
+              height={300}
+              className="w-full h-auto rounded-md"
+            />
+          )}
+          <Separator />
+
+          <h3 className="font-semibold mb-2">Dominant Colors</h3>
+          <div className="flex space-x-2">
+            {dominant_colors && dominant_colors.map((color, index) => (
+              <div key={index} style={{ backgroundColor: `rgb(${color[0]}, ${color[1]}, ${color[2]})` }} className="h-10 w-10 rounded-full" />
+            ))}
+          </div>
+          <Separator />
+          <div className="grid-flow-row grid grid-cols-2 gap-4">
+            {song.single_pixel_color && (
+              <div >
+                <h3 className="font-semibold mb-2">Single Pixel</h3>
+                <div style={{ backgroundColor: `rgb(${parseRgb(song.single_pixel_color)?.join(',')})` }} className="h-10 w-10 rounded-full" />
+
+              </div>
             )}
+            {song.weighted_average_color && (
+              <div>
+                <h3 className="font-semibold mb-2">Weighted Average</h3>
+                <div style={{ backgroundColor: `rgb(${parseRgb(song.weighted_average_color)?.join(',')})` }} className="h-10 w-10 rounded-full" />
+
+              </div>
+            )}
+            {song.most_vibrant_color && (
+              <div>
+                <h3 className="font-semibold mb-2">Most Vibrant</h3>
+                <div style={{ backgroundColor: `rgb(${parseRgb(song.most_vibrant_color)?.join(',')})` }} className="h-10 w-10 rounded-full" />
+
+              </div>
+            )}
+          </div>
+          {song.color_temperature && (
+            <>
+              <h3 className="font-semibold mb-2">Color Temperature</h3>
+              <div>{song.color_temperature}</div>
+            </>
+          )}
+          {song.color_brightness && (
+            <>
+              <h3 className="font-semibold mb-2">Color Brightness</h3>
+              <div>{song.color_brightness}</div>
+            </>
+          )}
+          {song.overall_lightness && (
+            <>
+              <h3 className="font-semibold mb-2">Overall Lightness</h3>
+              <div>{song.overall_lightness}</div>
+            </>
+          )}
           <Separator />
           <div>
             <h3 className="font-semibold mb-2">Track Features</h3>
@@ -90,22 +140,16 @@ export function SongDetailsPanel({ song, isOpen, onClose }: SongDetailsPanelProp
               {renderProgressWithValue("Speechiness", song.speechiness)}
             </div>
           </div>
-          <Separator />
-          <h3 className="font-semibold mb-2">Dominant Colors</h3>
-          <div className="flex space-x-2">
-            {dominant_colors && dominant_colors.map((color, index) => (
-              <div key={index} style={{ backgroundColor: `rgb(${color[0]}, ${color[1]}, ${color[2]})` }} className="h-10 w-10 rounded-full" />
-            ))}
-          </div>
-          <h3 className="font-semibold mb-2">Single Pixel Colour</h3>
-          <div style={{ backgroundColor: `rgb(${parseRgb(song.single_pixel_color!)?.join(',')})` }} className="h-10 w-10 rounded-full" />
+
           <Separator />
           <div>
             <h3 className="font-semibold mb-2">Additional Information</h3>
             <div className="space-y-2">
               <p><span className="font-medium">Key:</span> {song.key !== null ? keyMap[song.key] || 'Unknown' : 'Unknown'}</p>
               <p><span className="font-medium">Loudness:</span> {song.loudness.toFixed(1)} dB</p>
-              
+             
+              <p><span className="font-medium">Explicit:</span> {song.explicit === true ? 'Yes' : 'No'}</p>
+              <p><span className="font-medium">Spotify ID:</span> {song.spotify_id}</p>
             </div>
           </div>
           <Separator />

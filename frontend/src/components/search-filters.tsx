@@ -9,6 +9,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
+import { SearchFilterBadges } from "./search-filter-badges"
 
 export function SearchFilters() {
   const router = useRouter()
@@ -17,6 +18,7 @@ export function SearchFilters() {
   const updateSearchParam = (key: string, value: string) => {
     const params = new URLSearchParams(searchParams.toString())
     params.set(key, value)
+    params.delete("page")
     router.push(`?${params.toString()}`)
   }
 
@@ -54,6 +56,31 @@ export function SearchFilters() {
           </SelectContent>
         </Select>
       </div>
+      <SearchFilterBadges 
+        label={"Color Temperature"} 
+        paramName={"color_temperature"} 
+        options={[
+          { value: "warm", label: "Warm" },
+          { value: "cool", label: "Cool" }
+        ]}
+      />
+      <SearchFilterBadges 
+        label={"Colour Brightness"} 
+        paramName={"color_brightness"} 
+        options={[
+          { value: "bright", label: "Bright" },
+          { value: "soft", label: "Soft" }
+        ]}
+      />
+      <SearchFilterBadges 
+        label={"Overall Lightness"} 
+        paramName={"overall_lightness"} 
+        options={[
+          { value: "light", label: "Light" },
+          { value: "medium", label: "Medium" },
+          { value: "dark", label: "Dark" }
+        ]}
+      />
     </div>
   )
 }

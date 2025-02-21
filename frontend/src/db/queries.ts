@@ -1,5 +1,5 @@
 "server-only";
-import { sql, and, gte, eq, lte, desc, asc, inArray} from 'drizzle-orm';
+import { sql, and, gte, eq, lte, desc, asc, inArray, or} from 'drizzle-orm';
 import { db } from './index';
 import { songs, surveys } from './schema';
 import { SearchParams } from '@/lib/url-state';
@@ -16,6 +16,38 @@ const danceabilityFilter = (params: SearchParams) => {
   }
   return undefined;
 };
+
+const colorTemperatureFilter = (params: SearchParams) => {
+  if (params.color_temperature) {
+    const colorTemperature = params.color_temperature.charAt(0).toUpperCase() + params.color_temperature.slice(1);
+    console.log("params.color_temperature", colorTemperature);
+    return and(
+      colorTemperature ? eq(songs.color_temperature, colorTemperature) : undefined
+    );
+  }
+  return undefined;
+};
+
+
+const colorBrightnessFilter = (params: SearchParams) => {
+  if (params.color_brightness) {
+    const colorBrightness = params.color_brightness.charAt(0).toUpperCase() + params.color_brightness.slice(1);
+    return and(
+      colorBrightness ? eq(songs.color_brightness, colorBrightness) : undefined
+    );
+  }
+  return undefined;
+}
+
+const overallLightnessFilter = (params: SearchParams) => {
+  if (params.overall_lightness) {
+    const overallLightness = params.overall_lightness.charAt(0).toUpperCase() + params.overall_lightness.slice(1);
+    return and(
+      overallLightness ? eq(songs.overall_lightness, overallLightness) : undefined
+    );
+  }
+  return undefined;
+}
 
 const energyFilter = (params: SearchParams) => {
   if (params.minEnergy || params.maxEnergy) {
@@ -39,8 +71,12 @@ const loudnessFilter = (params: SearchParams) => {
 
 const searchFilter = (q?: string) => {
   if (q) {
+   
+    // Escape special characters for tsquery
     const tsQuery = q.trim().split(/\s+/).join(' & ');
-    return sql`(${songs.name} @@ to_tsquery(${tsQuery}) OR ${songs.artist} @@ to_tsquery(${tsQuery}))`;
+    const nameFilter =  sql`${songs.name} @@ to_tsquery('english', ${tsQuery})` ;
+    const artistFilter =  sql`${songs.artist} @@ to_tsquery('english', ${tsQuery})` ;
+    return or(nameFilter, artistFilter);
   }
   return undefined;
 };
@@ -81,7 +117,6 @@ export async function fetchSongs(songIds: string[]) {
 export async function fetchSongsWithPagination(searchParams: SearchParams) {
   const page = Math.max(1, searchParams.page || 1);
   const limit = searchParams.limit || ITEMS_PER_PAGE;
-
   const filters = [
     danceabilityFilter(searchParams),
     energyFilter(searchParams),
@@ -90,6 +125,9 @@ export async function fetchSongsWithPagination(searchParams: SearchParams) {
     artistFilter(searchParams.artist),
     previewUrlFilter(searchParams.preview_url),
     imageUrlFilter(searchParams.image_url),
+    colorTemperatureFilter(searchParams),
+    colorBrightnessFilter(searchParams),
+    overallLightnessFilter(searchParams),
   ].filter(Boolean);
 
   const whereClause = filters.length > 0 ? and(...filters) : undefined;
@@ -115,6 +153,11 @@ export async function estimateTotalSongs(searchParams: SearchParams) {
     loudnessFilter(searchParams),
     searchFilter(searchParams.search),
     artistFilter(searchParams.artist),
+    previewUrlFilter(searchParams.preview_url),
+    imageUrlFilter(searchParams.image_url),
+    colorTemperatureFilter(searchParams),
+    colorBrightnessFilter(searchParams),
+    overallLightnessFilter(searchParams),
   ].filter(Boolean);
 
   const whereClause = filters.length > 0 ? and(...filters) : undefined;

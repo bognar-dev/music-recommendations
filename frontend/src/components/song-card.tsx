@@ -15,15 +15,14 @@ export function SongCard({ song, priority }: SongCardProps) {
     <Card className="overflow-hidden group cursor-pointer duration-300">
       <CardContent className="p-0">
         <div className="relative aspect-square">
-        {song.image_url !== 'no' && (
           <Image
-            src={song.image_url!}
+            src={song.image_url && song.image_url !== "no" ? song.image_url : '/placeholder.svg'}
             alt={`${song.name} by ${song.artist}`}
             className="object-cover transition-transform group-hover:scale-105"
             fill
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             priority={priority}
-          />)}
+          />
             {song.preview_url ? (
             <PlayButton
             className="absolute inset-0"
