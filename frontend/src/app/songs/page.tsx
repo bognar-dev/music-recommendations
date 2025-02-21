@@ -60,7 +60,7 @@ export default async function Page(
             <SongsPagination
               currentPage={currentPage}
               totalPages={totalPages}
-              totalResults={totalPages}
+              totalResults={estimatedTotal}
               searchParams={searchParams}
             />
           </Suspense>
