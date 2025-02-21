@@ -73,7 +73,7 @@ const searchFilter = (q?: string) => {
   if (q) {
    
     // Escape special characters for tsquery
-    const tsQuery = q.trim().split(/\s+/).join(' & ');
+    const tsQuery = q.trim().split(/\s+/).join(' & ') + ':*';
     const nameFilter =  sql`${songs.name} @@ to_tsquery('english', ${tsQuery})` ;
     const artistFilter =  sql`${songs.artist} @@ to_tsquery('english', ${tsQuery})` ;
     return or(nameFilter, artistFilter);
