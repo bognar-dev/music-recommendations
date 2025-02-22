@@ -1,0 +1,18 @@
+[project]
+name = "nb302289-comp302"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "nltk>=3.9.1",
+    "numpy>=2.2.3",
+    "pandas>=2.2.3",
+    "pinecone>=6.0.1",
+    "pip>=25.0.1",
+    "scikit-learn>=1.6.1",
+    "scipy>=1.15.2",
+    "setuptools>=75.8.0",
+    "tqdm>=4.67.1",
+    "wheel>=0.45.1",
+]
