@@ -22,12 +22,14 @@ import { countries } from "country-data-list"
 const initialState: FormErrors = {}
 
 export default function StepFourForm() {
-  
+
   const { updateSurveyDetails, surveyData } = useSurveyContext()
   const [serverErrors, formAction] = useActionState(stepFourFormAction.bind(null, surveyData), initialState)
   const t = useTranslations('Review')
   const submit = () => {
-   posthog.capture('submitted_survey', { property: surveyData })
+    localStorage.removeItem('surveyData')
+    localStorage.removeItem('tutorialComplete')
+    posthog.capture('submitted_survey', { property: surveyData })
   }
 
 
@@ -100,9 +102,9 @@ export default function StepFourForm() {
           </CardHeader>
           <CardContent>
             <div className="space-y-6">
-                <Label htmlFor="preference">{t('preference')}</Label>
-                <div className="space-y-2 mt-2">
-                  <VinylRating name="preference" value={surveyData.stepFour.preference} onChange={handleInputChange} range={3} ratingMode="single" />
+              <Label htmlFor="preference">{t('preference')}</Label>
+              <div className="space-y-2 mt-2">
+                <VinylRating name="preference" value={surveyData.stepFour.preference} onChange={handleInputChange} range={3} ratingMode="single" />
               </div>
             </div>
 

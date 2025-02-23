@@ -10,7 +10,7 @@ export default function SubmitButton({ text,onClick }: SubmitButtonProps) {
   return (
     <button
       onClick={onClick}
-      className="mt-2 rounded-lg bg-accent py-4 text-lg text-black disabled:bg-accent/30 lg:py-7 lg:text-2xl"
+      className="mt-2 rounded-lg bg-accent py-4 text-lg disabled:bg-accent/30 lg:py-7 lg:text-2xl"
       type="submit"
     >
       {pending ? <Loader /> : text}
