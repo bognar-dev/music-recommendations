@@ -32,23 +32,29 @@ const StepOneTutorial: React.FC<StepOneTutorialProps> = ({ playlist, recommendat
     };
 
     if (!showTutorial) {
-        return <StepOneForm recommendations={recommendationsList} tutorialState={tutorialState} nextTutorialState={nextTutorialState} />;
+        return (
+            <>
+                <Playlist playlist={playlist} />
+                <StepOneForm recommendations={recommendationsList} tutorialState={tutorialState} nextTutorialState={nextTutorialState} />;
+            </>
+        )
     }
 
     return (
         <>
             <Popover open={tutorialState === 0}>
-            <Playlist playlist={playlist} />
+                <Playlist playlist={playlist} />
                 <PopoverContent className="w-80 border-foreground flex flex-col gap-4">
                     1. Listen to the playlist above and get the overall vibe of the songs
-                    <Button onClick={() => { nextTutorialState();
+                    <Button onClick={() => {
+                        nextTutorialState();
                         scrollToStepTwo();
                     }} className="mt-4">Next</Button>
                 </PopoverContent>
                 <PopoverTrigger className="sr-only"></PopoverTrigger>
             </Popover>
             <div id="stepOneTutorial">
-            <StepOneForm recommendations={recommendationsList} tutorialState={tutorialState} nextTutorialState={nextTutorialState} />
+                <StepOneForm recommendations={recommendationsList} tutorialState={tutorialState} nextTutorialState={nextTutorialState} />
             </div>
         </>
     );
