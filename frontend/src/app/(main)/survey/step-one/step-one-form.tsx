@@ -85,8 +85,8 @@ export default function StepOneForm({ recommendations, tutorialState, nextTutori
         localStorage.setItem('tutorialComplete', 'true')
     }
     return (
-        <Form action={formAction} className="flex flex-1 flex-col items-center">
-            <div className="flex w-full flex-col gap-8 lg:max-w-[700px]">
+        <Form action={formAction} className="flex flex-1 flex-col items-center justify-items-center">
+            <div className="flex w-full flex-col justify-center justify-items-center gap-8 lg:max-w-[700px]">
                 {/* Song Ratings */}
                 <Popover open={tutorialState === 1}>
 

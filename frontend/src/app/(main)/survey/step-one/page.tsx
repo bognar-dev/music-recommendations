@@ -10,7 +10,7 @@ export default async function StepOne() {
         return <div>Error fetching data</div>;
     }
     return (
-        <div className="grid grid-cols-1 lg:grid-cols-2">
+        <div className="grid grid-cols-1 lg:grid-cols-2 justify-center justify-items-center">
             <Suspense fallback={<div>Loading...</div>}>
                 <StepOneTutorial playlist={playlist} recommendationsList={recommendationsList} />
             </Suspense>

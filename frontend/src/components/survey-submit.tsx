@@ -11,7 +11,7 @@ export default function SubmitButton({ text,onClick }: SubmitButtonProps) {
   return (
     <StarBorder
       onClick={onClick}
-      className="w-48"
+      className="w-48 self-center"
       type="submit"
     >
       {pending ? <Loader /> : text}
