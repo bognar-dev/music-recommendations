@@ -1,5 +1,5 @@
 import CircularImages from '@/components/circling-images';
-import { ButtonShootingStarBorder } from '@/components/shootingstar-border.tsx';
+import StarBorder from '@/components/star-border';
 import VerticalCutReveal from '@/components/vertical-cut-reveal';
 import { fetchSongsWithPagination } from '@/db/queries';
 import { getTranslations } from 'next-intl/server';
@@ -29,12 +29,13 @@ const Page: React.FC = async () => {
                             {t('hero')}
 
                         </VerticalCutReveal>
-                        <ButtonShootingStarBorder
+                        <StarBorder
+                            as="a"
                             href="terms"
                             className="font-azeretMono font-light text-foreground text-base mt-20"
                         >
                             {t('button')}
-                        </ButtonShootingStarBorder>
+                        </StarBorder>
                     </div>
 
                 </div>

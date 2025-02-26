@@ -80,10 +80,20 @@ export default {
 			"accordion-down": "accordion-down 0.2s ease-out",
 			"accordion-up": "accordion-up 0.2s ease-out",
 			circling: "circling calc(var(--circling-duration)*1s) linear infinite",
+			'star-movement-bottom': 'star-movement-bottom linear infinite alternate',
+        	'star-movement-top': 'star-movement-top linear infinite alternate',
 			"background-gradient":
 			  "background-gradient var(--background-gradient-speed, 15s) cubic-bezier(0.445, 0.05, 0.55, 0.95) infinite",
 		  },
 		  keyframes: {
+			'star-movement-bottom': {
+          '0%': { transform: 'translate(0%, 0%)', opacity: '1' },
+          '100%': { transform: 'translate(-100%, 0%)', opacity: '0' },
+        },
+        'star-movement-top': {
+          '0%': { transform: 'translate(0%, 0%)', opacity: '1' },
+          '100%': { transform: 'translate(100%, 0%)', opacity: '0' },
+        },
 			flip: {
 				to: {
 				  transform: "rotate(360deg)",

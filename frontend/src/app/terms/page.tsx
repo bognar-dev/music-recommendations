@@ -1,6 +1,6 @@
 "use client";
 import acceptTerms from '@/app/actions/acceptTerms';
-import GooeyButton from '@/components/shootingstar-border.tsx';
+import GooeyButton from '@/components/star-border';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { ChevronDown } from 'lucide-react';
