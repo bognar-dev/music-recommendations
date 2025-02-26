@@ -23,7 +23,7 @@ export function SearchFilters() {
   }
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 grid grid-cols-2 grid-rows-3 sm:grid-cols-1 gap-3 justify-start items-end">
       <div>
         <label className="text-sm font-medium">Minimum Danceability</label>
         <Slider

@@ -15,7 +15,7 @@ const Page: React.FC = async () => {
         <div className='min-h-screen flex items-center justify-start select-none'>
             <CircularImages images={images}>
                 <div className="flex flex-col items-start md:items-center justify-start md:justify-center gap-5 md:w-1/4">
-                    <div className=" flex justify-center items-center flex-col gap-8 text-center text-lg pb-80 md:p-0 md:text-5xl mb-5 font-azeretMono">
+                    <div className=" flex justify-start items-center flex-col gap-8 text-center text-lg pb-80 md:p-0 md:text-5xl mb-5 font-azeretMono">
                         <VerticalCutReveal
                             containerClassName='justify-center items-center'
                             splitBy="words"
@@ -38,7 +38,7 @@ const Page: React.FC = async () => {
                                 const cookieStore = await cookies()
                                 cookieStore.delete('accepted-terms')
                             }}
-                            className="font-azeretMono font-light text-foreground text-base mt-20"
+                            className="align-top font-azeretMono font-light text-foreground text-base md:mt-20"
                         >
                             {t('button')}
                         </StarBorder>

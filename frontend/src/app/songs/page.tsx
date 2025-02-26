@@ -35,10 +35,11 @@ export default async function Page(
   const currentPage = Math.max(1, Number(parsedSearchParams.page) || 1);
 
   return (
-    <div className="flex h-full border-t border-foreground/20 dark:border-background">
-      <div className="w-64 p-4 border-r hidden md:block border-foreground/20 dark:border-background">
+    <div className="flex flex-col sm:flex-row h-full border-t border-foreground/20 dark:border-background">
+      <div className="md:w-64 p-4 border-r border-foreground/20 dark:border-background">
         <SearchFilters />
       </div>
+     
 
       <div className="flex-1 flex flex-col">
         <header className="p-4">

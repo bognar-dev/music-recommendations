@@ -36,12 +36,12 @@ export default function Player() {
             <Image
               src={currentTrack.image_url!}
               alt={`${currentTrack.name} by ${currentTrack.artist}`}
-              className="object-cover transition-transform group-hover:scale-105"
+              className="hidden sm:block object-cover transition-transform group-hover:scale-105"
               width={48}
               height={48}
             />)}
           <div>
-            <h3 className="text-sm font-medium">{currentTrack.name}</h3>
+            <h3 className="text-xs sm:text-sm font-medium text-ellipsis">{currentTrack.name}</h3>
             <p className="text-xs text-muted-foreground">{currentTrack.artist}</p>
           </div>
         </div>

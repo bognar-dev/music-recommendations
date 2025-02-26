@@ -13,7 +13,7 @@ export default async function RootLayout({
 }) {
   return (
     <>
-      <div className="flex flex-col justify-center justify-items-center pl-5">
+      <div className="flex flex-col justify-center justify-items-center">
         <StepNavigation />
         {children}
       </div>
