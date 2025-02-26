@@ -1,9 +1,9 @@
-import React from 'react';
 import CircularImages from '@/components/circling-images';
-import { fetchSongsWithPagination } from '@/db/queries';
-import GooeyButton from '@/components/gooey-button';
-import { getTranslations } from 'next-intl/server';
+import { ButtonShootingStarBorder } from '@/components/shootingstar-border.tsx';
 import VerticalCutReveal from '@/components/vertical-cut-reveal';
+import { fetchSongsWithPagination } from '@/db/queries';
+import { getTranslations } from 'next-intl/server';
+import React from 'react';
 
 const Page: React.FC = async () => {
     const t = await getTranslations('HomePage');
@@ -14,7 +14,7 @@ const Page: React.FC = async () => {
         <div className='min-h-screen flex items-center justify-start select-none'>
             <CircularImages images={images}>
                 <div className="flex flex-col items-start md:items-center justify-start md:justify-center gap-5 md:w-1/4">
-                    <div className="text-center text-lg pb-80 md:p-0 md:text-5xl mb-5 font-azeretMono">
+                    <div className=" flex justify-center items-center flex-col gap-8 text-center text-lg pb-80 md:p-0 md:text-5xl mb-5 font-azeretMono">
                         <VerticalCutReveal
                             containerClassName='justify-center items-center'
                             splitBy="words"
@@ -27,14 +27,14 @@ const Page: React.FC = async () => {
                             }}
                         >
                             {t('hero')}
-                            
+
                         </VerticalCutReveal>
-                        <GooeyButton
+                        <ButtonShootingStarBorder
                             href="terms"
                             className="font-azeretMono font-light text-foreground text-base mt-20"
                         >
                             {t('button')}
-                        </GooeyButton>
+                        </ButtonShootingStarBorder>
                     </div>
 
                 </div>

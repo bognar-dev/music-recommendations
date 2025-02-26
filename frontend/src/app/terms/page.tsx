@@ -1,13 +1,13 @@
 "use client";
-import { useEffect } from 'react';
-import { useRouter } from 'next/navigation';
-import GooeyButton from '@/components/gooey-button';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import Form from 'next/form';
 import acceptTerms from '@/app/actions/acceptTerms';
+import GooeyButton from '@/components/shootingstar-border.tsx';
+import { Button } from '@/components/ui/button';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { ChevronDown } from 'lucide-react';
 import { useTranslations } from 'next-intl';
-import { Button } from '@/components/ui/button';
+import Form from 'next/form';
+import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 
 const TermsPage = () => {
     const router = useRouter();
@@ -37,7 +37,7 @@ const TermsPage = () => {
     return (
         <div className="flex flex-col items-center justify-start min-h-screen p-4 md:p-6 bg-background text-foreground">
             <div className="fixed bottom-4 right-4 md:hidden z-50">
-                <Button 
+                <Button
                     className="rounded-full shadow-lg"
                     onClick={scrollToBottom}
                 >
@@ -89,7 +89,7 @@ const TermsPage = () => {
                 </div>
             </div>
         </div>
-    );  
+    );
 };
 
 export default TermsPage;

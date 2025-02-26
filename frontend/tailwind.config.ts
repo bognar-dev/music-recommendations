@@ -75,6 +75,8 @@ export default {
   			sm: 'calc(var(--radius) - 4px)'
   		},
 		  animation: {
+			flip: "flip 6s infinite steps(2, end)",
+			rotate: "rotate 3s linear infinite both",
 			"accordion-down": "accordion-down 0.2s ease-out",
 			"accordion-up": "accordion-up 0.2s ease-out",
 			circling: "circling calc(var(--circling-duration)*1s) linear infinite",
@@ -82,6 +84,16 @@ export default {
 			  "background-gradient var(--background-gradient-speed, 15s) cubic-bezier(0.445, 0.05, 0.55, 0.95) infinite",
 		  },
 		  keyframes: {
+			flip: {
+				to: {
+				  transform: "rotate(360deg)",
+				},
+			  },
+			  rotate: {
+				to: {
+				  transform: "rotate(90deg)",
+				},
+			  },
 			"accordion-down": {
 			  from: { height: "0" },
 			  to: { height: "var(--radix-accordion-content-height)" },
