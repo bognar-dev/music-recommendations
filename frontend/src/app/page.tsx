@@ -3,6 +3,7 @@ import StarBorder from '@/components/star-border';
 import VerticalCutReveal from '@/components/vertical-cut-reveal';
 import { fetchSongsWithPagination } from '@/db/queries';
 import { getTranslations } from 'next-intl/server';
+import { cookies } from 'next/headers';
 import React from 'react';
 
 const Page: React.FC = async () => {
@@ -32,6 +33,11 @@ const Page: React.FC = async () => {
                         <StarBorder
                             as="a"
                             href="terms"
+                            onClick={async () => {
+                                "use server";
+                                const cookieStore = await cookies()
+                                cookieStore.delete('accepted-terms')
+                            }}
                             className="font-azeretMono font-light text-foreground text-base mt-20"
                         >
                             {t('button')}

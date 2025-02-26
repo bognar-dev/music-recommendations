@@ -1,5 +1,6 @@
 'use client';
 import { useFormStatus } from 'react-dom';
+import StarBorder from './star-border';
 
 interface SubmitButtonProps {
   text: string;
@@ -8,13 +9,13 @@ interface SubmitButtonProps {
 export default function SubmitButton({ text,onClick }: SubmitButtonProps) {
   const { pending } = useFormStatus();
   return (
-    <button
+    <StarBorder
       onClick={onClick}
-      className="mt-2 rounded-lg bg-accent py-4 text-lg disabled:bg-accent/30 lg:py-7 lg:text-2xl"
+      className="w-48"
       type="submit"
     >
       {pending ? <Loader /> : text}
-    </button>
+    </StarBorder>
   );
 }
 

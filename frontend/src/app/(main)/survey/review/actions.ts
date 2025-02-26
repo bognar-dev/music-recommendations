@@ -11,6 +11,7 @@ import {
 } from "@/lib/survey-schema";
 import { AddDealRoutes } from "@/types/survey";
 import type { FormErrors } from "@/types/survey"; // Import FormErrors
+import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
 interface SubmitSurveyActionReturnType {
@@ -96,7 +97,7 @@ export const stepFourFormAction = async (
     }, {});
     console.log(errors);
     return errors;
-  }
+  } 
 
   
   console.log(surveyData)

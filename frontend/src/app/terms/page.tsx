@@ -1,6 +1,6 @@
 "use client";
 import acceptTerms from '@/app/actions/acceptTerms';
-import GooeyButton from '@/components/star-border';
+import StarButton from '@/components/star-border';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { ChevronDown } from 'lucide-react';
@@ -82,9 +82,9 @@ const TermsPage = () => {
                 </Tabs>
                 <div className="flex justify-center mt-8" id="bottom">
                     <Form action={acceptTerms}>
-                        <GooeyButton className="font-azeretMono font-light text-foreground text-base">
+                        <StarButton as='button' className="font-azeretMono font-light text-foreground text-base">
                             {t('agreeButton')}
-                        </GooeyButton>
+                        </StarButton>
                     </Form>
                 </div>
             </div>

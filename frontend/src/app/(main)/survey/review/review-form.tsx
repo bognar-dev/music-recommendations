@@ -29,6 +29,7 @@ export default function StepFourForm() {
   const submit = () => {
     localStorage.removeItem('surveyData')
     localStorage.removeItem('tutorialComplete')
+    
     posthog.capture('submitted_survey', { property: surveyData })
   }
 
