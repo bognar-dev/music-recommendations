@@ -21,12 +21,10 @@ import { Button } from "@/components/ui/button";
 
 interface StepOneFormProps {
     recommendations: Song[],
-    tutorialState: number,
-    nextTutorialState: () => void
 }
 
 const initialState: FormErrors = {};
-export default function StepOneForm({ recommendations, tutorialState, nextTutorialState }: StepOneFormProps) {
+export default function StepOneForm({ recommendations}: StepOneFormProps) {
     const [serverErrors, formAction] = useActionState(
         stepOneFormAction,
         initialState
@@ -88,7 +86,7 @@ export default function StepOneForm({ recommendations, tutorialState, nextTutori
         <Form action={formAction} className="flex flex-1 flex-col items-center justify-items-center">
             <div className="flex w-full flex-col justify-center justify-items-center gap-8 lg:max-w-[700px]">
                 {/* Song Ratings */}
-                <Popover open={tutorialState === 1}>
+               
 
                     <Card  id="stepTwoTutorial">
                         <CardHeader>
@@ -124,17 +122,8 @@ export default function StepOneForm({ recommendations, tutorialState, nextTutori
                             </ul>
                         </CardContent>
                     </Card>
-                    <PopoverTrigger ></PopoverTrigger>
-                    <PopoverContent side="top" className="w-80 border-foreground flex flex-col gap-4">
-                        2. Rate the recommendations on how well they fit the playlist
-                        <Button onClick={() => { nextTutorialState()
-                            scrollToStepThree()
-                         }} className="mt-4">Next</Button>
-                    </PopoverContent>
-                </Popover>
+                   
 
-                {/* Model Ratings */}
-                <Popover open={tutorialState === 2}>
                 <Card id="stepThreeTutorial">
                     <CardHeader>
                         <CardTitle>{t('modelEvaluation')}</CardTitle>
@@ -167,17 +156,7 @@ export default function StepOneForm({ recommendations, tutorialState, nextTutori
                         </div>
                     </CardContent>
                 </Card>
-                <PopoverTrigger></PopoverTrigger>
-                    <PopoverContent  className="w-80 border-foreground flex flex-col gap-4">
-                        <div>3. Rate how much you liked the model here!</div>
-                        <div>If you filled everything out go to the bottom and click submit.</div>
-                        <div>If you see required you haven&apos;t filled out all ratings.</div>
-                        <div>You got the instructions? Let&apos;s go!</div>
-                        <Button onClick={() => { nextTutorialState()
-                            setTutorialComplete()
-                         }} className="mt-4">Next</Button>
-                    </PopoverContent>
-                </Popover>
+               
 
                 <SubmitButton text={t('submit')} />
                 {serverErrors && (
