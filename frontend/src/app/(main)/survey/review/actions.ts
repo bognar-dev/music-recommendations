@@ -5,7 +5,7 @@
 import { insertSurvey } from "@/db/queries";
 import { postHogServer } from "@/lib/postHog-server";
 import {
-  stepFourSchema,
+  stepTenSchema,
   surveySchema,
   type SurveyType,
 } from "@/lib/survey-schema";
@@ -86,8 +86,8 @@ export const stepFourFormAction = async (
 ): Promise<FormErrors | undefined> => {
   
 
-
-  const validated = stepFourSchema.safeParse(surveyData.stepFour);
+  
+  const validated = stepTenSchema.safeParse(surveyData.stepTen);
 
   if (!validated.success) {
     const errors = validated.error.issues.reduce((acc: FormErrors, issue) => {

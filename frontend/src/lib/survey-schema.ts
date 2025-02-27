@@ -8,14 +8,15 @@ const songRatingSchema = z.object({
 });
 
 const modelRatingSchema = z.object({
-  relevance: z.number().min(1).max(5).int(),
-  novelty: z.number().min(1).max(5).int(),
-  satisfaction: z.number().min(1).max(5).int()
+  relevance: z.number().min(1).max(5).int().default(0),
+  novelty: z.number().min(1).max(5).int().default(0),
+  satisfaction: z.number().min(1).max(5).int().default(0)
 });
 
 // Define each step schema separately
 export const stepOneSchema = z.object({
   step: z.literal(1),
+  playlistId: z.literal(1),
   modelId: z.string(),
   songRatings: z.array(songRatingSchema).default([]),
   modelRating: modelRatingSchema
@@ -23,6 +24,7 @@ export const stepOneSchema = z.object({
 
 export const stepTwoSchema = z.object({
   step: z.literal(2),
+  playlistId: z.literal(2),
   modelId: z.string(),
   songRatings: z.array(songRatingSchema).default([]),
   modelRating: modelRatingSchema
@@ -30,13 +32,63 @@ export const stepTwoSchema = z.object({
 
 export const stepThreeSchema = z.object({
   step: z.literal(3),
+  playlistId: z.literal(3),
   modelId: z.string(),
   songRatings: z.array(songRatingSchema).default([]),
   modelRating: modelRatingSchema
 });
 
+
 export const stepFourSchema = z.object({
   step: z.literal(4),
+  playlistId: z.literal(1),
+  modelId: z.string(),
+  songRatings: z.array(songRatingSchema).default([]),
+  modelRating: modelRatingSchema
+});
+export const stepFiveSchema = z.object({
+  step: z.literal(5),
+  playlistId: z.literal(2),
+  modelId: z.string(),
+  songRatings: z.array(songRatingSchema).default([]),
+  modelRating: modelRatingSchema
+});
+
+
+export const stepSixSchema = z.object({
+  step: z.literal(6),
+  playlistId: z.literal(3),
+  modelId: z.string(),
+  songRatings: z.array(songRatingSchema).default([]),
+  modelRating: modelRatingSchema
+});
+
+export const stepSevenSchema = z.object({
+  step: z.literal(7),
+  playlistId: z.literal(1),
+  modelId: z.string(),
+  songRatings: z.array(songRatingSchema).default([]),
+  modelRating: modelRatingSchema
+});
+
+export const stepEightSchema = z.object({
+  step: z.literal(8),
+  playlistId: z.literal(2),
+  modelId: z.string(),
+  songRatings: z.array(songRatingSchema).default([]),
+  modelRating: modelRatingSchema
+});
+  
+export const stepNineSchema = z.object({
+  step: z.literal(9),
+  playlistId: z.literal(3),
+  modelId: z.string(),
+  songRatings: z.array(songRatingSchema).default([]),
+  modelRating: modelRatingSchema
+});
+
+export const stepTenSchema = z.object({
+  step: z.literal(10),
   age: z.number().int().min(13, "You must be at least 13 years old").max(120, "Please enter a valid age"),
   country: z.string().min(1, "Country is required"),
   preference: z.enum(["model1", "model2", "model3"], {
@@ -50,31 +102,82 @@ export const surveySchema = z.object({
   stepOne: stepOneSchema,
   stepTwo: stepTwoSchema,
   stepThree: stepThreeSchema,
-  stepFour: stepFourSchema
+  stepFour: stepFourSchema,
+  stepFive: stepFiveSchema,
+  stepSix: stepSixSchema,
+  stepSeven: stepSevenSchema,
+  stepEight: stepEightSchema,
+  stepNine: stepNineSchema,
+  stepTen: stepTenSchema
 });
 
 // Initial values for each step
 export const initialValues = {
   stepOne: {
     step: 1,
+    playlistId: 1,
     modelId: '',
     songRatings: [],
     modelRating: { relevance: 1, novelty: 1, satisfaction: 1 }
   },
   stepTwo: {
     step: 2,
+    playlistId: 2,
     modelId: '',
     songRatings: [],
     modelRating: { relevance: 1, novelty: 1, satisfaction: 1 }
   },
   stepThree: {
     step: 3,
+    playlistId: 3,
     modelId: '',
     songRatings: [],
     modelRating: { relevance: 1, novelty: 1, satisfaction: 1 }
   },
   stepFour: {
     step: 4,
+    playlistId: 1,
+    modelId: '',
+    songRatings: [],
+    modelRating: { relevance: 1, novelty: 1, satisfaction: 1 }
+  },
+  stepFive: {
+    step: 5,
+    playlistId: 2,
+    modelId: '',
+    songRatings: [],
+    modelRating: { relevance: 1, novelty: 1, satisfaction: 1 }
+  },
+  stepSix: {
+    step: 6,
+    playlistId: 3,
+    modelId: '',
+    songRatings: [],
+    modelRating: { relevance: 1, novelty: 1, satisfaction: 1 }
+  },
+  stepSeven: {
+    step: 7,
+    playlistId: 1,
+    modelId: '',
+    songRatings: [],
+    modelRating: { relevance: 1, novelty: 1, satisfaction: 1 }
+  },
+  stepEight: {
+    step: 8,
+    playlistId: 2,
+    modelId: '',
+    songRatings: [],
+    modelRating: { relevance: 1, novelty: 1, satisfaction: 1 }
+  },
+  stepNine: {
+    step: 9,
+    playlistId: 3,
+    modelId: '',
+    songRatings: [],
+    modelRating: { relevance: 1, novelty: 1, satisfaction: 1 }
+  },
+  stepTen: {
+    step: 10,
     usability: 1,
     clarity: 1,
     preference: 1,
@@ -87,4 +190,10 @@ export type StepOneType = z.infer<typeof stepOneSchema>;
 export type StepTwoType = z.infer<typeof stepTwoSchema>;
 export type StepThreeType = z.infer<typeof stepThreeSchema>;
 export type StepFourType = z.infer<typeof stepFourSchema>;
+export type StepFiveType = z.infer<typeof stepFiveSchema>;
+export type StepSixType = z.infer<typeof stepSixSchema>;
+export type StepSevenType = z.infer<typeof stepSevenSchema>;
+export type StepEightType = z.infer<typeof stepEightSchema>;
+export type StepNineType = z.infer<typeof stepNineSchema>;
+export type StepTenType = z.infer<typeof stepTenSchema>;
 export type SurveyType = z.infer<typeof surveySchema>;

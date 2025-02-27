@@ -92,6 +92,12 @@ export const surveys = pgTable('surveys', {
     step_two: json('step_two').notNull(),
     step_three: json('step_three').notNull(),
     step_four: json('step_four').notNull(),
+    step_five: json('step_five').notNull(),
+    step_six: json('step_six').notNull(),
+    step_seven: json('step_seven').notNull(),
+    step_eight: json('step_eight').notNull(),
+    step_nine: json('step_nine').notNull(),
+    step_ten: json('step_ten').notNull(),
     created_at: timestamp('created_at').defaultNow(),
     updated_at: timestamp('updated_at').defaultNow(),
 });

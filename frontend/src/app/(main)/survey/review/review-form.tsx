@@ -44,13 +44,13 @@ export default function StepFourForm() {
 
     // Handle other fields
     if (["age", "usability", "clarity"].includes(name)) {
-      updateSurveyDetails("stepFour", {
+      updateSurveyDetails("stepTen", {
         [name]: Number(value),
       })
     }
 
     if (name === "country" || name === "feedback") {
-      updateSurveyDetails("stepFour", {
+      updateSurveyDetails("stepTen", {
         [name]: value,
       })
     }
@@ -58,17 +58,17 @@ export default function StepFourForm() {
     if (name === "preference") {
       switch (value) {
         case "1":
-          updateSurveyDetails("stepFour", {
+          updateSurveyDetails("stepTen", {
             preference: "model1",
           })
           break
         case "2":
-          updateSurveyDetails("stepFour", {
+          updateSurveyDetails("stepTen", {
             preference: "model2",
           })
           break
         case "3":
-          updateSurveyDetails("stepFour", {
+          updateSurveyDetails("stepTen", {
             preference: "model3",
           })
           break
@@ -85,12 +85,12 @@ export default function StepFourForm() {
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
-              <AgeInputSlider initialAge={surveyData.stepFour.age} onChange={(value) => updateSurveyDetails("stepFour", { age: Number(value) })} />
+              <AgeInputSlider initialAge={surveyData.stepTen.age} onChange={(value) => updateSurveyDetails("stepTen", { age: Number(value) })} />
               <div>
                 <Label htmlFor="country">{t('country')}</Label>
                 <CountryDropdown
-                  defaultValue={countries.all.find(country => country.name === surveyData.stepFour.country)?.alpha3}
-                  onChange={(country: Country) => updateSurveyDetails("stepFour", { country: country.name })}
+                  defaultValue={countries.all.find(country => country.name === surveyData.stepTen.country)?.alpha3}
+                  onChange={(country: Country) => updateSurveyDetails("stepTen", { country: country.name })}
                 />
               </div>
             </div>
@@ -105,7 +105,7 @@ export default function StepFourForm() {
             <div className="space-y-6">
               <Label htmlFor="preference">{t('preference')}</Label>
               <div className="space-y-2 mt-2">
-                <VinylRating name="preference" value={surveyData.stepFour.preference} onChange={handleInputChange} range={3} ratingMode="single" />
+                <VinylRating name="preference" value={surveyData.stepTen.preference} onChange={handleInputChange} range={3} ratingMode="single" />
               </div>
             </div>
 
@@ -121,7 +121,7 @@ export default function StepFourForm() {
             <Textarea
               name="feedback"
               rows={4}
-              value={surveyData.stepFour.feedback}
+              value={surveyData.stepTen.feedback}
               onChange={handleInputChange}
               placeholder={t('placeholderFeedback')}
               className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"

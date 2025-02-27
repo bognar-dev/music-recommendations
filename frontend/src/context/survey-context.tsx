@@ -18,24 +18,69 @@ const LOCAL_STORAGE_KEY = 'multi-page-survey-data';
 const initialValues: SurveyType = {
     stepOne: {
         step: 1,
+        playlistId: 1,
         modelId: '1',
         songRatings: [] as { modelId: string; songId: number; songName: string; rating: number; }[],
         modelRating: { relevance: 1, novelty: 1, satisfaction: 1 }
     },
     stepTwo: {
         step: 2,
+        playlistId: 2,
         modelId: '2',
         songRatings: [] as { modelId: string; songId: number; songName: string; rating: number; }[],
         modelRating: { relevance: 1, novelty: 1, satisfaction: 1 }
     },
     stepThree: {
         step: 3,
+        playlistId: 3,
         modelId: '3',
         songRatings: [] as { modelId: string; songId: number; songName: string; rating: number; }[],
         modelRating: { relevance: 1, novelty: 1, satisfaction: 1 }
     },
     stepFour: {
         step: 4,
+        playlistId: 1,
+        modelId: '4',
+        songRatings: [] as { modelId: string; songId: number; songName: string; rating: number; }[],
+        modelRating: { relevance: 1, novelty: 1, satisfaction: 1 }
+    },
+    stepFive: {
+        step: 5,
+        playlistId: 2,
+        modelId: '5',
+        songRatings: [] as { modelId: string; songId: number; songName: string; rating: number; }[],
+        modelRating: { relevance: 1, novelty: 1, satisfaction: 1 }
+    },
+    stepSix: {
+        step: 6,
+        playlistId: 3,
+        modelId: '6',
+        songRatings: [] as { modelId: string; songId: number; songName: string; rating: number; }[],
+        modelRating: { relevance: 1, novelty: 1, satisfaction: 1 }
+    },
+    stepSeven: {
+        step: 7,
+        playlistId: 1,
+        modelId: '7',
+        songRatings: [] as { modelId: string; songId: number; songName: string; rating: number; }[],
+        modelRating: { relevance: 1, novelty: 1, satisfaction: 1 }
+    },
+    stepEight: {
+        step: 8,
+        playlistId: 2,
+        modelId: '8',
+        songRatings: [] as { modelId: string; songId: number; songName: string; rating: number; }[],
+        modelRating: { relevance: 1, novelty: 1, satisfaction: 1 }
+    },
+    stepNine: {
+        step: 9,
+        playlistId: 3,
+        modelId: '8',
+        songRatings: [] as { modelId: string; songId: number; songName: string; rating: number; }[],
+        modelRating: { relevance: 1, novelty: 1, satisfaction: 1 }
+    },
+    stepTen: {
+        step: 10,
         age: 13,
         country: 'UK',
         preference: 'model1',

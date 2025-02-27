@@ -34,24 +34,24 @@ export default function StepThreeForm({ recommendations }: StepThreeFormProps) {
         // Handle song ratings
         if (name.startsWith('songRatings.')) {
             const [_, songId, field] = name.split('.');
-            const existingSongRating = surveyData.stepThree.songRatings.find(
+            const existingSongRating = surveyData.stepNine.songRatings.find(
                 sr => sr.songId === Number(songId)
             );
 
             const updatedRating = {
                 songId: Number(songId),
                 songName: recommendations.find(r => r.id === Number(songId))?.name || '',
-                modelId: surveyData.stepThree.modelId,
+                modelId: surveyData.stepNine.modelId,
                 rating: Number(value)
             };
 
             const updatedSongRatings = existingSongRating
-                ? surveyData.stepThree.songRatings.map(sr =>
+                ? surveyData.stepNine.songRatings.map(sr =>
                     sr.songId === Number(songId) ? updatedRating : sr
                 )
-                : [...surveyData.stepThree.songRatings, updatedRating];
+                : [...surveyData.stepNine.songRatings, updatedRating];
 
-            updateSurveyDetails('stepThree', {
+            updateSurveyDetails('stepNine', {
                 songRatings: updatedSongRatings
             });
         }
@@ -59,9 +59,9 @@ export default function StepThreeForm({ recommendations }: StepThreeFormProps) {
         // Handle model ratings
         if (name.startsWith('modelRating.')) {
             const [_, field] = name.split('.');
-            updateSurveyDetails('stepThree', {
+            updateSurveyDetails('stepNine', {
                 modelRating: {
-                    ...surveyData.stepThree.modelRating,
+                    ...surveyData.stepNine.modelRating,
                     [field]: Number(value)
                 }
             });
@@ -97,7 +97,7 @@ export default function StepThreeForm({ recommendations }: StepThreeFormProps) {
                                             <PlayButton song={track}/>
                                         </div>
                                         <ul className="flex space-x-2">
-                                            <VinylRating name={`songRatings.${track.id}.rating`} value={surveyData.stepEight.songRatings.find(sr => sr.songId === track.id)?.rating || 0} onChange={handleInputChange} />
+                                            <VinylRating name={`songRatings.${track.id}.rating`} value={surveyData.stepNine.songRatings.find(sr => sr.songId === track.id)?.rating || 0} onChange={handleInputChange} />
                                         </ul>
                                     </div>
                                 </li>
@@ -117,7 +117,7 @@ export default function StepThreeForm({ recommendations }: StepThreeFormProps) {
                             <div>
                                 <Label htmlFor="relevance">{t('relevance')}</Label>
                                 <ul className="flex space-x-2 mt-2">
-                                    <VinylRating name="modelRating.relevance" value={surveyData.stepEight.modelRating.relevance} onChange={handleInputChange} />
+                                    <VinylRating name="modelRating.relevance" value={surveyData.stepNine.modelRating.relevance} onChange={handleInputChange} />
                                 </ul>
                             </div>
 
@@ -125,7 +125,7 @@ export default function StepThreeForm({ recommendations }: StepThreeFormProps) {
                             <div>
                                 <Label htmlFor="novelty">{t('novelty')}</Label>
                                 <ul className="flex space-x-2 mt-2">
-                                    <VinylRating name="modelRating.novelty" value={surveyData.stepEight.modelRating.novelty} onChange={handleInputChange} />
+                                    <VinylRating name="modelRating.novelty" value={surveyData.stepNine.modelRating.novelty} onChange={handleInputChange} />
                                 </ul>
                             </div>
 
@@ -133,7 +133,7 @@ export default function StepThreeForm({ recommendations }: StepThreeFormProps) {
                             <div>
                                 <Label htmlFor="satisfaction">{t('satisfaction')}</Label>
                                 <ul className="flex space-x-2 mt-2">
-                                    <VinylRating name="modelRating.satisfaction" value={surveyData.stepEight.modelRating.satisfaction} onChange={handleInputChange} />
+                                    <VinylRating name="modelRating.satisfaction" value={surveyData.stepNine.modelRating.satisfaction} onChange={handleInputChange} />
                                 </ul>
                             </div>
                         </div>

@@ -41,7 +41,10 @@
       "model1": "Model 1",
       "model2": "Model 2",
       "model3": "Model 3",
-      "review": "Review"
+      "review": "Review",
+      "playlist1": "Playlist 1",
+      "playlist2": "Playlist 2",
+      "playlist3": "Playlist 3"
     }
   },
   "LocaleSwitcher": {
@@ -56,8 +59,8 @@
   "StepForm": {
     "recommendedTracks": "Recommended Tracks",
     "modelEvaluation": "Model Evaluation",
-    "relevance": "How relevant is this model to your music preferences?",
-    "novelty": "How novel/refreshing is this model?",
+    "relevance": "How well does this model match your music taste?",
+    "novelty": "How unfamiliar are you with the songs that this model suggests?",
     "satisfaction": "How satisfied are you with the models recommendations?",
     "submit": "Submit"
   },

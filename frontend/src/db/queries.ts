@@ -198,6 +198,12 @@ export async function insertSurvey(survey: SurveyType) {
     step_two: survey.stepTwo,
     step_three: survey.stepThree,
     step_four: survey.stepFour,
+    step_five: survey.stepFive,
+    step_six: survey.stepSix,
+    step_seven: survey.stepSeven,
+    step_eight: survey.stepEight,
+    step_nine: survey.stepNine,
+    step_ten: survey.stepTen,
   };
   const result = await db.insert(surveys).values(surveyToInsert).returning();
   return result;

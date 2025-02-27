@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 'use client';
 
 import Image from "next/image";
@@ -5,7 +6,7 @@ import SubmitButton from "@/components/survey-submit";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Song } from "@/db/schema";
 import { Label } from "@/components/ui/label";
-import { stepThreeFormAction } from "./actions";
+import { stepTwoFormAction } from "./actions";
 import { FormErrors } from "@/types/survey";
 import Form from "next/form";
 import { useActionState } from "react";
@@ -15,17 +16,20 @@ import { PlayButton } from "@/components/play-button";
 import { useTranslations } from "next-intl";
 
 
-interface StepThreeFormProps {
+interface StepTwoFormProps {
     recommendations: Song[]
 }
 
 const initialState: FormErrors = {};
-export default function StepThreeForm({ recommendations }: StepThreeFormProps) {
+
+
+export default function StepTwoForm({ recommendations }: StepTwoFormProps) {
+    const t = useTranslations('StepForm');
     const [serverErrors, formAction] = useActionState(
-        stepThreeFormAction,
+        stepTwoFormAction,
         initialState
     )
-    const t = useTranslations('StepForm');
+
     const { updateSurveyDetails, surveyData } = useSurveyContext();
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -34,24 +38,24 @@ export default function StepThreeForm({ recommendations }: StepThreeFormProps) {
         // Handle song ratings
         if (name.startsWith('songRatings.')) {
             const [_, songId, field] = name.split('.');
-            const existingSongRating = surveyData.stepThree.songRatings.find(
+            const existingSongRating = surveyData.stepSix.songRatings.find(
                 sr => sr.songId === Number(songId)
             );
 
             const updatedRating = {
                 songId: Number(songId),
                 songName: recommendations.find(r => r.id === Number(songId))?.name || '',
-                modelId: surveyData.stepThree.modelId,
+                modelId: surveyData.stepSix.modelId,
                 rating: Number(value)
             };
 
             const updatedSongRatings = existingSongRating
-                ? surveyData.stepThree.songRatings.map(sr =>
+                ? surveyData.stepSix.songRatings.map(sr =>
                     sr.songId === Number(songId) ? updatedRating : sr
                 )
-                : [...surveyData.stepThree.songRatings, updatedRating];
+                : [...surveyData.stepSix.songRatings, updatedRating];
 
-            updateSurveyDetails('stepThree', {
+            updateSurveyDetails('stepSix', {
                 songRatings: updatedSongRatings
             });
         }
@@ -59,9 +63,9 @@ export default function StepThreeForm({ recommendations }: StepThreeFormProps) {
         // Handle model ratings
         if (name.startsWith('modelRating.')) {
             const [_, field] = name.split('.');
-            updateSurveyDetails('stepThree', {
+            updateSurveyDetails('stepSix', {
                 modelRating: {
-                    ...surveyData.stepThree.modelRating,
+                    ...surveyData.stepSix.modelRating,
                     [field]: Number(value)
                 }
             });
@@ -97,7 +101,7 @@ export default function StepThreeForm({ recommendations }: StepThreeFormProps) {
                                             <PlayButton song={track}/>
                                         </div>
                                         <ul className="flex space-x-2">
-                                            <VinylRating name={`songRatings.${track.id}.rating`} value={surveyData.stepEight.songRatings.find(sr => sr.songId === track.id)?.rating || 0} onChange={handleInputChange} />
+                                            <VinylRating name={`songRatings.${track.id}.rating`} value={surveyData.stepSix.songRatings.find(sr => sr.songId === track.id)?.rating || 0} onChange={handleInputChange} />
                                         </ul>
                                     </div>
                                 </li>
@@ -117,7 +121,7 @@ export default function StepThreeForm({ recommendations }: StepThreeFormProps) {
                             <div>
                                 <Label htmlFor="relevance">{t('relevance')}</Label>
                                 <ul className="flex space-x-2 mt-2">
-                                    <VinylRating name="modelRating.relevance" value={surveyData.stepEight.modelRating.relevance} onChange={handleInputChange} />
+                                    <VinylRating name="modelRating.relevance" value={surveyData.stepSix.modelRating.relevance} onChange={handleInputChange} />
                                 </ul>
                             </div>
 
@@ -125,7 +129,7 @@ export default function StepThreeForm({ recommendations }: StepThreeFormProps) {
                             <div>
                                 <Label htmlFor="novelty">{t('novelty')}</Label>
                                 <ul className="flex space-x-2 mt-2">
-                                    <VinylRating name="modelRating.novelty" value={surveyData.stepEight.modelRating.novelty} onChange={handleInputChange} />
+                                    <VinylRating name="modelRating.novelty" value={surveyData.stepSix.modelRating.novelty} onChange={handleInputChange} />
                                 </ul>
                             </div>
 
@@ -133,14 +137,14 @@ export default function StepThreeForm({ recommendations }: StepThreeFormProps) {
                             <div>
                                 <Label htmlFor="satisfaction">{t('satisfaction')}</Label>
                                 <ul className="flex space-x-2 mt-2">
-                                    <VinylRating name="modelRating.satisfaction" value={surveyData.stepEight.modelRating.satisfaction} onChange={handleInputChange} />
+                                    <VinylRating name="modelRating.satisfaction" value={surveyData.stepSix.modelRating.satisfaction} onChange={handleInputChange} />
                                 </ul>
                             </div>
                         </div>
                     </CardContent>
                 </Card>
 
-                <SubmitButton text="Submit" />
+                <SubmitButton text={t('submit')} />
                 {serverErrors && (
                     <div className="text-red-500 text-sm">
                         {Object.entries(serverErrors).map(([key, value]) => (
