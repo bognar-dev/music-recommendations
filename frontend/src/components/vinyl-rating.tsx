@@ -1,9 +1,9 @@
-import { StepFourType } from "@/lib/survey-schema"
+import { StepTenType } from "@/lib/survey-schema"
 import { Disc3 } from "lucide-react"
 
 interface VinylRatingProps {
   name: string
-  value: number | StepFourType["preference"]
+  value: number | StepTenType["preference"]
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
   range?: number
   ratingMode?: "single" | "range"
@@ -16,7 +16,7 @@ export function VinylRating({
   range = 5,
   ratingMode = "range",
 }: VinylRatingProps) {
-  // Convert StepFourType["preference"] ("model1", "model2", "model3") to a number 1-3
+  // Convert StepTenType["preference"] ("model1", "model2", "model3") to a number 1-3
   const numericValue =
     typeof value === "number" ? value : Number(value.replace("model", ""))
 
