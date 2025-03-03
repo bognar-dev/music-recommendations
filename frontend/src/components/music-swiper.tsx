@@ -8,16 +8,18 @@ import SwipeControls from "@/components/swipe-controls"
 import SwipeProgress from "@/components/swipe-progress"
 import UndoButton from "@/components/undo-button"
 import type { Song } from "@/db/schema"
-import { Loader2 } from "lucide-react"
+import { ArrowBigDownIcon, Loader2 } from "lucide-react"
 import SeedSong from "./seeded-song"
+import Arrow10 from "./arrow-down"
+import { useSurveyContext } from "@/context/survey-context"
 
 
 interface SeedSongProps {
-    seedSong: Song
-    recommendations: Song[]
+  seedSong: Song
+  recommendations: Song[]
 }
 
-export default function MusicSwiper( { seedSong, recommendations }: SeedSongProps ) {
+export default function MusicSwiper({ seedSong, recommendations }: SeedSongProps) {
   const [songs, setSongs] = useState<Song[]>([])
   const [currentIndex, setCurrentIndex] = useState(0)
   const [likedSongs, setLikedSongs] = useState<Song[]>([])
@@ -27,6 +29,7 @@ export default function MusicSwiper( { seedSong, recommendations }: SeedSongProp
   const [error, setError] = useState<string | null>(null)
   const isMobile = useMediaQuery("(max-width: 640px)")
   const audioRef = useRef<HTMLAudioElement | null>(null)
+  const { surveyData } = useSurveyContext()
 
   // Load songs and preferences from localStorage
   useEffect(() => {
@@ -160,16 +163,26 @@ export default function MusicSwiper( { seedSong, recommendations }: SeedSongProp
   const isFinished = currentIndex >= songs.length
 
   return (
-    <div className="container flex flex-col items-center max-w-md px-4 py-8 mx-auto space-y-8">
+    <div className="container flex flex-col items-center max-w-md px-4 py-8 mx-auto space-y-8 overflow-x-hidden">
 
       {/* Seed song */}
-      <SeedSong song={seedSong}/>
+      <SeedSong song={seedSong} />
 
+      {/* Controls */}
+      {!isFinished && (
+        <div className="flex flex-col items-center justify-items-center space-y-4">
+
+          <p className="text-sm  flex flex-col gap-2 justify-items-center justify-center items-center">Would you add this song to your playlist?</p>
+          <p>Swipe right to save, left to skip.</p>
+          <p className="text-xs flex flex-col gap-2 justify-items-center justify-center items-center">You can undo your last swipe here <ArrowBigDownIcon /></p>
+          {swipeHistory.length > 0 && <UndoButton handleUndo={handleUndo} />}
+          <SwipeControls handleSwipe={handleSwipe} />
+        </div>
+      )}
       {/* Progress indicator */}
       <SwipeProgress current={currentIndex} total={songs.length} liked={likedSongs.length} />
-
       {/* Card stack */}
-      <div className="relative w-full h-[400px]">
+      <div className="relative w-full ">
         <AnimatePresence>
           {!isFinished ? (
             <>
@@ -201,20 +214,12 @@ export default function MusicSwiper( { seedSong, recommendations }: SeedSongProp
                   localStorage.removeItem("dislikedSongs")
                 }}
               >
-                Start Over
+                Next Round
               </button>
             </div>
           )}
         </AnimatePresence>
       </div>
-
-      {/* Controls */}
-      {!isFinished && (
-        <div className="">
-          <SwipeControls handleSwipe={handleSwipe} />
-          {swipeHistory.length > 0 && <UndoButton handleUndo={handleUndo} />}
-        </div>
-      )}
     </div>
   )
 }

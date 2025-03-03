@@ -11,7 +11,7 @@ export default async function StepOne() {
         return <div>Error fetching data</div>;
     }
     return (
-        <div className="grid grid-cols-1 justify-center justify-items-center">
+        <div className="grid grid-cols-1 justify-center justify-items-center min-h-screen">
             <MusicSwiper seedSong={playlist.at(0)!} recommendations={recommendationsList} />
         </div>
     );
