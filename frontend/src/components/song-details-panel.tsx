@@ -47,7 +47,7 @@ export function SongDetailsPanel({ song, isOpen, onClose }: SongDetailsPanelProp
   if (!song) return null
 
 
-  const dominant_colors = parseListOfRgb(song.dominant_colors!)
+  const dominant_colors = song.dominant_colors ? parseListOfRgb(song.dominant_colors) : null
 
 
   const renderProgressWithValue = (label: string, value: number) => (
@@ -70,7 +70,7 @@ export function SongDetailsPanel({ song, isOpen, onClose }: SongDetailsPanelProp
         <div className="mt-6 space-y-6">
           {song.image_url !== 'no' && (
             <Image
-              src={song.image_url!}
+              src={song.image_url && song.image_url !== "no" ? song.image_url : '/placeholder.svg'}
               alt={`${song.name} by ${song.artist}`}
               width={300}
               height={300}

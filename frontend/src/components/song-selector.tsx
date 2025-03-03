@@ -13,16 +13,13 @@ interface SongSelectorProps {
   priority: boolean
 }
 
-export function SongSelector({ song, searchParams, priority }: SongSelectorProps) {
+export function SongSelector({ song,priority }: SongSelectorProps) {
   const [isSelected, setIsSelected] = useState(false)
-  const noFilters = Object.values(searchParams).every((v) => v === undefined)
 
   return (
     <>
-      <Link
-        href={`/${song.id}?${stringifySearchParams(searchParams)}`}
+      <div
         className="block transition ease-in-out md:hover:scale-105"
-        prefetch={noFilters ? true : false}
         onClick={(e) => {
           e.preventDefault()
           setIsSelected(true)
@@ -32,7 +29,7 @@ export function SongSelector({ song, searchParams, priority }: SongSelectorProps
           song={song}
           priority={priority}
         />
-      </Link>
+      </div>
       <SongDetailsPanel 
         song={isSelected ? song : null}
         isOpen={isSelected}
