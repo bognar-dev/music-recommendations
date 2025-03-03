@@ -13,6 +13,7 @@ import { CookieBanner } from '@/components/cookie-banner'
 import { getLocale, getMessages } from 'next-intl/server'
 import { NextIntlClientProvider } from 'next-intl';
 import LocaleSwitcher from '@/components/locale-switcher'
+import Player from '@/components/Player'
 export const metadata: Metadata = {
   title: {
     default: siteConfig.name,
@@ -114,7 +115,7 @@ export default async function RootLayout({
 
                   <Sidebar hasAcceptedTerms={hasAcceptedTerms} />
 
-                  <main className="flex flex-col flex-grow gap-1">
+                  <main className="flex flex-col w-full">
 
                     <div className="sticky bg-transparent backdrop-blur-sm top-0 flex justify-between justify-items-stretch p-2 ">
                       <SidebarTrigger />
@@ -128,7 +129,7 @@ export default async function RootLayout({
                       <div className="flex flex-col justify-center justify-items-center">
                         {children}
                       </div>
-
+                    <Player />
 
                     </AudioProvider>
                   </main>

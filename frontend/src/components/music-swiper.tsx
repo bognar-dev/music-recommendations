@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState, useRef } from "react"
+import { useEffect, useState, useRef, ChangeEvent } from "react"
 import { AnimatePresence } from "framer-motion"
 import { useMediaQuery } from "@/hooks/use-media-query"
 import SongCard from "@/components/swipe-card"
@@ -10,106 +10,73 @@ import UndoButton from "@/components/undo-button"
 import type { Song } from "@/db/schema"
 import { ArrowBigDownIcon, Loader2 } from "lucide-react"
 import SeedSong from "./seeded-song"
-import Arrow10 from "./arrow-down"
 import { useSurveyContext } from "@/context/survey-context"
+import { Label } from "./ui/label"
+import { VinylRating } from "./vinyl-rating"
+import { useTranslations } from "next-intl"
+import SubmitButton from "./survey-submit"
 
 
-interface SeedSongProps {
+interface MusicSwiperProps {
   seedSong: Song
   recommendations: Song[]
+  handleInputChange: (e: ChangeEvent<HTMLInputElement>) => void
 }
 
-export default function MusicSwiper({ seedSong, recommendations }: SeedSongProps) {
-  const [songs, setSongs] = useState<Song[]>([])
-  const [currentIndex, setCurrentIndex] = useState(0)
-  const [likedSongs, setLikedSongs] = useState<Song[]>([])
-  const [dislikedSongs, setDislikedSongs] = useState<Song[]>([])
+export default function MusicSwiper({ seedSong, recommendations, handleInputChange}: MusicSwiperProps) {
+
   const [swipeHistory, setSwipeHistory] = useState<Array<{ song: Song; liked: boolean }>>([])
-  const [isLoading, setIsLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
   const isMobile = useMediaQuery("(max-width: 640px)")
   const audioRef = useRef<HTMLAudioElement | null>(null)
-  const { surveyData } = useSurveyContext()
+  const { updateSurveyDetails, surveyData } = useSurveyContext()
 
-  // Load songs and preferences from localStorage
-  useEffect(() => {
-    const loadData = async () => {
-      try {
-        setIsLoading(true)
-
-        // In a real app, you would fetch songs from an API
-        // For now, use sample data
-        setSongs(recommendations)
-
-        // Load preferences from localStorage
-        const storedLiked = localStorage.getItem("likedSongs")
-        const storedDisliked = localStorage.getItem("dislikedSongs")
-        const storedHistory = localStorage.getItem("swipeHistory")
-
-        if (storedLiked) setLikedSongs(JSON.parse(storedLiked))
-        if (storedDisliked) setDislikedSongs(JSON.parse(storedDisliked))
-        if (storedHistory) {
-          setSwipeHistory(JSON.parse(storedHistory))
-          // Adjust current index based on history
-          setCurrentIndex(JSON.parse(storedHistory).length)
-        }
-
-        setIsLoading(false)
-      } catch (err) {
-        console.error("Failed to load data:", err)
-        setError("Failed to load recommendations. Please try again.")
-        setIsLoading(false)
-      }
-    }
-
-    loadData()
-
-    // Initialize audio element
-    audioRef.current = new Audio()
-
-    return () => {
-      if (audioRef.current) {
-        audioRef.current.pause()
-        audioRef.current.src = ""
-      }
-    }
-  }, [])
-
-  // Save preferences to localStorage whenever they change
-  useEffect(() => {
-    if (likedSongs.length > 0) {
-      localStorage.setItem("likedSongs", JSON.stringify(likedSongs))
-    }
-    if (dislikedSongs.length > 0) {
-      localStorage.setItem("dislikedSongs", JSON.stringify(dislikedSongs))
-    }
-    if (swipeHistory.length > 0) {
-      localStorage.setItem("swipeHistory", JSON.stringify(swipeHistory))
-    }
-  }, [likedSongs, dislikedSongs, swipeHistory])
+  const t = useTranslations('StepForm');
+  const likedSongs = surveyData.stepOne.songRatings.filter(rating => rating.rating)
+  const dislikedSongs = surveyData.stepOne.songRatings.filter(rating => !rating.rating)
+  const currentIndex = surveyData.stepOne.songRatings.length
+  const isFinished = currentIndex >= recommendations.length
 
   const handleSwipe = (direction: "left" | "right") => {
-    if (currentIndex >= songs.length) return
+    if (currentIndex >= recommendations.length) return
 
-    const currentSong = songs[currentIndex]
+    const currentSong = recommendations[currentIndex]
     const liked = direction === "right"
-
+    updateSurveyDetails('stepOne', {
+      songRatings: [
+        ...surveyData.stepOne.songRatings,
+        {
+          songId: currentSong.id,
+          songName: currentSong.name,
+          rating: liked
+        }
+      ]
+    })
     // Add to appropriate list
     if (liked) {
-      setLikedSongs((prev) => [...prev, currentSong])
+      console.log("liked")
       // Provide haptic feedback on mobile devices
       if (navigator.vibrate && isMobile) {
         navigator.vibrate(50)
       }
     } else {
-      setDislikedSongs((prev) => [...prev, currentSong])
+      console.log("disliked")
     }
+
+
+    updateSurveyDetails('stepOne', {
+      songRatings: [
+        ...surveyData.stepOne.songRatings,
+        {
+          songId: currentSong.id,
+          songName: currentSong.name,
+          rating: liked
+        }
+      ]
+    })
 
     // Add to history
     setSwipeHistory((prev) => [...prev, { song: currentSong, liked }])
 
-    // Move to next song
-    setCurrentIndex((prev) => prev + 1)
 
     // Stop audio if playing
     if (audioRef.current) {
@@ -123,47 +90,29 @@ export default function MusicSwiper({ seedSong, recommendations }: SeedSongProps
     // Remove last action from history
     const lastAction = swipeHistory[swipeHistory.length - 1]
     setSwipeHistory((prev) => prev.slice(0, -1))
+    
+
+    updateSurveyDetails('stepOne', {
+      songRatings: surveyData.stepOne.songRatings.filter(rating => rating.songId !== lastAction.song.id)
+    });
 
     // Remove from appropriate list
     if (lastAction.liked) {
-      setLikedSongs((prev) => prev.filter((song) => song.id !== lastAction.song.id))
+
+      console.log("undo liked")
     } else {
-      setDislikedSongs((prev) => prev.filter((song) => song.id !== lastAction.song.id))
+      console.log("undo disliked")
     }
 
-    // Go back to previous song
-    setCurrentIndex((prev) => prev - 1)
   }
 
-  if (isLoading) {
-    return (
-      <div className="flex flex-col items-center justify-center min-h-screen p-4 space-y-4">
-        <Loader2 className="w-12 h-12 text-spotify-green animate-spin" />
-        <p className="text-lg font-medium text-spotify-green">Loading recommendations...</p>
-      </div>
-    )
-  }
 
-  if (error) {
-    return (
-      <div className="flex flex-col items-center justify-center min-h-screen p-4 space-y-4">
-        <div className="p-4 text-red-500 bg-red-100 rounded-lg dark:bg-red-900/20">
-          <p>{error}</p>
-          <button
-            className="px-4 py-2 mt-4 text-white bg-spotify-green rounded-full hover:bg-spotify-green/90"
-            onClick={() => window.location.reload()}
-          >
-            Try Again
-          </button>
-        </div>
-      </div>
-    )
-  }
 
-  const isFinished = currentIndex >= songs.length
+
+
 
   return (
-    <div className="container flex flex-col items-center max-w-md px-4 py-8 mx-auto space-y-8 overflow-x-hidden">
+    <div className="container flex flex-col items-center max-w-md px-4 py-8 mx-auto space-y-8 min-h-screen ">
 
       {/* Seed song */}
       <SeedSong song={seedSong} />
@@ -175,19 +124,20 @@ export default function MusicSwiper({ seedSong, recommendations }: SeedSongProps
           <p className="text-sm  flex flex-col gap-2 justify-items-center justify-center items-center">Would you add this song to your playlist?</p>
           <p>Swipe right to save, left to skip.</p>
           <p className="text-xs flex flex-col gap-2 justify-items-center justify-center items-center">You can undo your last swipe here <ArrowBigDownIcon /></p>
-          {swipeHistory.length > 0 && <UndoButton handleUndo={handleUndo} />}
+          <UndoButton handleUndo={handleUndo} />
           <SwipeControls handleSwipe={handleSwipe} />
         </div>
       )}
       {/* Progress indicator */}
-      <SwipeProgress current={currentIndex} total={songs.length} liked={likedSongs.length} />
+      <SwipeProgress current={currentIndex} total={recommendations.length} liked={likedSongs.length} />
       {/* Card stack */}
-      <div className="relative w-full ">
+      
         <AnimatePresence>
+        
           {!isFinished ? (
-            <>
+            <div className="relative w-full h-[400px] ">
               {/* Show next 3 cards for stack effect */}
-              {songs.slice(currentIndex, currentIndex + 3).map((song, index) => (
+              {recommendations.slice(currentIndex, currentIndex + 3).map((song, index) => (
                 <SongCard
                   key={song.id}
                   song={song}
@@ -196,31 +146,44 @@ export default function MusicSwiper({ seedSong, recommendations }: SeedSongProps
                   isActive={index === 0}
                 />
               ))}
-            </>
+            
+            </div>
           ) : (
-            <div className="flex flex-col items-center justify-center w-full h-full p-6 space-y-4 text-center bg-spotify-dark-gray rounded-xl">
+            <div className="flex flex-col items-center justify-start w-full h-full p-6 space-y-4 text-center rounded-xl">
               <h3 className="text-xl font-bold">All caught up!</h3>
-              <p className="text-gray-400">You&apos;ve reviewed all {songs.length} recommendations.</p>
+              <p className="text-gray-400">You&apos;ve reviewed all {recommendations.length} recommendations.</p>
               <p className="text-spotify-green font-medium">You liked {likedSongs.length} songs.</p>
-              <button
-                className="px-6 py-3 mt-4 font-medium text-white bg-spotify-green rounded-full hover:bg-spotify-green/90"
-                onClick={() => {
-                  setCurrentIndex(0)
-                  setSwipeHistory([])
-                  setLikedSongs([])
-                  setDislikedSongs([])
-                  localStorage.removeItem("swipeHistory")
-                  localStorage.removeItem("likedSongs")
-                  localStorage.removeItem("dislikedSongs")
-                }}
-              >
-                Next Round
-              </button>
+              <p className="text-red-500 font-medium">You disliked {dislikedSongs.length} songs.</p>
+              <div className="flex flex-col items-center justify-center justify-items-center space-y-4 ">
+                            {/* Relevance */}
+                            <div>
+                                <Label htmlFor="relevance">{t('relevance')}</Label>
+                                <ul className="flex space-x-2 mt-2">
+                                    <VinylRating name="modelRating.relevance" value={surveyData.stepOne.modelRating.relevance} onChange={handleInputChange} />
+                                </ul>
+                            </div>
+
+                            {/* Novelty */}
+                            <div>
+                                <Label htmlFor="novelty">{t('novelty')}</Label>
+                                <ul className="flex space-x-2 mt-2">
+                                    <VinylRating name="modelRating.novelty" value={surveyData.stepOne.modelRating.novelty} onChange={handleInputChange} />
+                                </ul>
+                            </div>
+
+                            {/* Satisfaction */}
+                            <div>
+                                <Label htmlFor="satisfaction">{t('satisfaction')}</Label>
+                                <ul className="flex space-x-2 mt-2">
+                                    <VinylRating name="modelRating.satisfaction" value={surveyData.stepOne.modelRating.satisfaction} onChange={handleInputChange} />
+                                </ul>
+                            </div>
+                        </div>
+                        <SubmitButton text={t('submit')} />
             </div>
           )}
         </AnimatePresence>
       </div>
-    </div>
   )
 }
 

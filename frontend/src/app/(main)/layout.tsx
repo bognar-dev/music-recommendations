@@ -1,5 +1,4 @@
 import '@/app/globals.css'
-import Player from '@/components/Player'
 import StepNavigation from '@/components/survey-step-navigation'
 export const metadata = {
   title: 'Music Recommendation Study',
@@ -13,11 +12,10 @@ export default async function RootLayout({
 }) {
   return (
     <>
-      <div className="flex flex-col justify-center justify-items-center">
+      <div className="flex flex-col justify-center justify-items-center min-h-screen">
         <StepNavigation />
         {children}
       </div>
-      <Player />
     </>
   )
 }

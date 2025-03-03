@@ -3,9 +3,11 @@
 import { useState, useRef, useEffect } from "react"
 import Image from "next/image"
 import { motion, useMotionValue, useTransform, type PanInfo, useAnimation } from "framer-motion"
-import { Play, Pause, Music } from "lucide-react"
+
 import type { Song } from "@/db/schema"
 import { useAudio } from "@/context/audio-context"
+import { PlayButton } from "./play-button"
+import { Music } from "lucide-react"
 
 interface SongCardProps {
   song: Song
@@ -19,15 +21,13 @@ export default function SongCard({ song, index, handleSwipe, isActive }: SongCar
   const [exitY, setExitY] = useState(0)
   const [exitRotation, setExitRotation] = useState(0)
 
-  // For audio visualization
-  const [audioData, setAudioData] = useState<number[]>([])
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const animationRef = useRef<number | undefined>(undefined)
   const audioContextRef = useRef<AudioContext | null>(null)
   const analyserRef = useRef<AnalyserNode | null>(null)
   
   // Use audio context instead of managing audio locally
-  const { playTrack, currentTrack, isPlaying, togglePlay } = useAudio()
+  const { currentTrack, isPlaying } = useAudio()
 
   // Motion values for the drag
   const x = useMotionValue(0)
@@ -82,93 +82,9 @@ export default function SongCard({ song, index, handleSwipe, isActive }: SongCar
     rotate.set(info.offset.x * rotationFactor)
   }
 
-  const handlePlayPause = () => {
-    if (!isActive) return
 
-    // Use the audio context methods
-    if (currentTrack?.id === song.id) {
-      togglePlay()
-    } else {
-      playTrack(song)
-    }
-  }
+ 
 
-  // Setup audio visualization when this song is playing
-  useEffect(() => {
-    if (!canvasRef.current) return
-    
-    const setupVisualization = () => {
-      // Only setup visualization if this song is currently playing
-      if (isThisSongPlaying && song.preview_url) {
-        // Get the audio element from the page (since we don't have direct access to it)
-        const audioElement = document.querySelector('audio');
-        
-        if (!audioElement) return;
-        
-        // Create audio context if it doesn't exist
-        if (!audioContextRef.current) {
-          audioContextRef.current = new (window.AudioContext || (window as any).webkitAudioContext)();
-          analyserRef.current = audioContextRef.current.createAnalyser();
-          
-          // Connect to the existing audio element
-          const source = audioContextRef.current.createMediaElementSource(audioElement);
-          source.connect(analyserRef.current);
-          analyserRef.current.connect(audioContextRef.current.destination);
-          
-          // Configure the analyser
-          analyserRef.current.fftSize = 64;
-        }
-        
-        // Start visualization
-        startVisualization();
-      } else {
-        // Stop visualization if song is not playing
-        stopVisualization();
-      }
-    };
-    
-    setupVisualization();
-    
-    return () => {
-      stopVisualization();
-    };
-  }, [isThisSongPlaying, song.preview_url]);
-
-  const startVisualization = () => {
-    if (!canvasRef.current || !analyserRef.current) return;
-    
-    const canvas = canvasRef.current;
-    const canvasCtx = canvas.getContext('2d');
-    if (!canvasCtx) return;
-    
-    const bufferLength = analyserRef.current.frequencyBinCount;
-    const dataArray = new Uint8Array(bufferLength);
-    
-    const draw = () => {
-      animationRef.current = requestAnimationFrame(draw);
-      
-      if (!analyserRef.current) return;
-      
-      analyserRef.current.getByteFrequencyData(dataArray);
-      setAudioData(Array.from(dataArray));
-      
-      canvasCtx.clearRect(0, 0, canvas.width, canvas.height);
-      
-      const barWidth = (canvas.width / bufferLength) * 2.5;
-      let x = 0;
-      
-      for (let i = 0; i < bufferLength; i++) {
-        const barHeight = ((dataArray[i] / 255) * canvas.height) / 2;
-        
-        canvasCtx.fillStyle = `rgb(${dataArray[i]}, 255, ${255 - dataArray[i]})`;
-        canvasCtx.fillRect(x, canvas.height - barHeight, barWidth, barHeight);
-        
-        x += barWidth + 1;
-      }
-    };
-    
-    draw();
-  };
   
   const stopVisualization = () => {
     if (animationRef.current) {
@@ -247,7 +163,7 @@ export default function SongCard({ song, index, handleSwipe, isActive }: SongCar
       </motion.div>
 
       {/* Album art */}
-      <div className="relative w-full aspect-square">
+      <div className="relative w-full aspect-square select-none">
         <Image
           src={song.image_url && song.image_url !== "no" ? song.image_url : '/placeholder.svg'}
           alt={song.name}
@@ -256,13 +172,7 @@ export default function SongCard({ song, index, handleSwipe, isActive }: SongCar
           className="object-cover w-full h-full"
           priority={index === 0}
         />
-        <button
-          onClick={handlePlayPause}
-          className="absolute inset-0 flex items-center justify-center transition-opacity bg-black/40 hover:bg-black/60"
-          disabled={!isActive}
-        >
-          {isThisSongPlaying ? <Pause className="w-16 h-16 text-white" /> : <Play className="w-16 h-16 text-white" />}
-        </button>
+        <PlayButton song={song}/>
       </div>
 
       {/* Song info */}

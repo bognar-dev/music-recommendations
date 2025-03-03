@@ -17,39 +17,41 @@ import posthog from "posthog-js";
 import { useTranslations } from 'next-intl';
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
+import MusicSwiper from "@/components/music-swiper";
 
 
 interface StepOneFormProps {
     recommendations: Song[],
-    tutorialState: number,
-    nextTutorialState: () => void
+    seededSong: Song,
 }
 
 const initialState: FormErrors = {};
-export default function StepOneForm({ recommendations, tutorialState, nextTutorialState }: StepOneFormProps) {
-    const [serverErrors, formAction] = useActionState(
-        stepOneFormAction,
-        initialState
-    )
+export default function StepOneForm({ recommendations,seededSong}: StepOneFormProps) {
+    
     const t = useTranslations('StepForm');
     const { updateSurveyDetails, surveyData } = useSurveyContext();
+    const updatedStepOneFormAction = stepOneFormAction.bind(null,JSON.stringify(surveyData))
+    const [serverErrors, formAction] = useActionState(
+        updatedStepOneFormAction,
+        initialState
+    )
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        posthog.capture('my event', { property: 'value' })
-        const { name, value } = e.target;
-
-        // Handle song ratings
+        const { name, value, checked } = e.target;
+        
+        // Handle song ratings (boolean: liked/disliked)
         if (name.startsWith('songRatings.')) {
             const [_, songId, field] = name.split('.');
             const existingSongRating = surveyData.stepOne.songRatings.find(
                 sr => sr.songId === Number(songId)
             );
-
+            
+            // Use checked property for boolean value
             const updatedRating = {
                 songId: Number(songId),
                 songName: recommendations.find(r => r.id === Number(songId))?.name || '',
                 modelId: surveyData.stepOne.modelId,
-                rating: Number(value)
+                rating: checked // Boolean value from checkbox
             };
 
             const updatedSongRatings = existingSongRating
@@ -74,120 +76,11 @@ export default function StepOneForm({ recommendations, tutorialState, nextTutori
             });
         }
     };
-    const scrollToStepThree = () => {
-        const element = document.getElementById('stepThreeTutorial');
-        if (element) {
-            element.scrollIntoView({ behavior: 'smooth' });
-        }
-    };
-
-    const setTutorialComplete = () => {
-        localStorage.setItem('tutorialComplete', 'true')
-    }
     return (
-        <Form action={formAction} className="flex flex-1 flex-col items-center justify-items-center">
-            <div className="flex w-full flex-col justify-center justify-items-center gap-8 lg:max-w-[700px]">
-                {/* Song Ratings */}
-                <Popover open={tutorialState === 1}>
+        <Form action={formAction} className="flex flex-col items-center justify-items-center">
+            <MusicSwiper seedSong={seededSong} recommendations={recommendations} handleInputChange={handleInputChange}  />
 
-                    <Card  id="stepTwoTutorial">
-                        <CardHeader>
-                            <CardTitle>{t('recommendedTracks')}</CardTitle>
-                        </CardHeader>
-                        <CardContent>
-                            <ul className="space-y-4">
-                                {recommendations.slice(0, 3).map((track) => (
-                                    <li key={track.id} className="flex items-center space-x-4 border-b pb-4 last:border-b-0">
-                                        <input type="hidden" name={`songRatings.${track.id}.songId`} value={track.id} />
-                                        <input type="hidden" name={`songRatings.${track.id}.songName`} value={track.name} />
-                                        <Image
-                                            src={track.image_url && track.image_url !== "no" ? track.image_url : '/placeholder.svg'}
-                                            width={64}
-                                            height={64}
-                                            alt={`${track.name} album cover`}
-                                            className="h-16 w-16 rounded"
-                                        />
-                                        <div className="flex-1">
-                                            <div className="flex items-center justify-between mb-2">
-                                                <div>
-                                                    <p className="font-medium">{track.name}</p>
-                                                    <p className="text-sm text-muted-foreground">{track.artist}</p>
-                                                </div>
-                                                <PlayButton song={track} />
-                                            </div>
-                                            <ul className="flex space-x-2">
-                                                <VinylRating name={`songRatings.${track.id}.rating`} value={surveyData.stepOne.songRatings.find(sr => sr.songId === track.id)?.rating || 0} onChange={handleInputChange} />
-                                            </ul>
-                                        </div>
-                                    </li>
-                                ))}
-                            </ul>
-                        </CardContent>
-                    </Card>
-                    <PopoverTrigger ></PopoverTrigger>
-                    <PopoverContent side="top" className="w-80 border-foreground flex flex-col gap-4">
-                        2. Rate the recommendations on how well they fit the playlist
-                        <Button onClick={() => { nextTutorialState()
-                            scrollToStepThree()
-                         }} className="mt-4">Next</Button>
-                    </PopoverContent>
-                </Popover>
-
-                {/* Model Ratings */}
-                <Popover open={tutorialState === 2}>
-                <Card id="stepThreeTutorial">
-                    <CardHeader>
-                        <CardTitle>{t('modelEvaluation')}</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                        <div className="space-y-6">
-                            {/* Relevance */}
-                            <div>
-                                <Label htmlFor="relevance">{t('relevance')}</Label>
-                                <ul className="flex space-x-2 mt-2">
-                                    <VinylRating name="modelRating.relevance" value={surveyData.stepOne.modelRating.relevance} onChange={handleInputChange} />
-                                </ul>
-                            </div>
-
-                            {/* Novelty */}
-                            <div>
-                                <Label htmlFor="novelty">{t('novelty')}</Label>
-                                <ul className="flex space-x-2 mt-2">
-                                    <VinylRating name="modelRating.novelty" value={surveyData.stepOne.modelRating.novelty} onChange={handleInputChange} />
-                                </ul>
-                            </div>
-
-                            {/* Satisfaction */}
-                            <div>
-                                <Label htmlFor="satisfaction">{t('satisfaction')}</Label>
-                                <ul className="flex space-x-2 mt-2">
-                                    <VinylRating name="modelRating.satisfaction" value={surveyData.stepOne.modelRating.satisfaction} onChange={handleInputChange} />
-                                </ul>
-                            </div>
-                        </div>
-                    </CardContent>
-                </Card>
-                <PopoverTrigger></PopoverTrigger>
-                    <PopoverContent  className="w-80 border-foreground flex flex-col gap-4">
-                        <div>3. Rate how much you liked the model here!</div>
-                        <div>If you filled everything out go to the bottom and click submit.</div>
-                        <div>If you see required you haven&apos;t filled out all ratings.</div>
-                        <div>You got the instructions? Let&apos;s go!</div>
-                        <Button onClick={() => { nextTutorialState()
-                            setTutorialComplete()
-                         }} className="mt-4">Next</Button>
-                    </PopoverContent>
-                </Popover>
-
-                <SubmitButton text={t('submit')} />
-                {serverErrors && (
-                    <div className="text-red-500 text-sm">
-                        {Object.entries(serverErrors).map(([key, value]) => (
-                            <p key={key}>{value}</p>
-                        ))}
-                    </div>
-                )}
-            </div>
+                
         </Form>
     );
 }
