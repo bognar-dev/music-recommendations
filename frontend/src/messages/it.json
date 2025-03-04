@@ -1,50 +1,114 @@
 {
-    "HomePage": {
-      "hero": "Scopri se le copertine degli album possono essere utilizzate per migliorare le raccomandazioni musicali per te!",
-      "button": "Inizia il sondaggio!"
-    },
-    "TermsPage": {
-      "title": "Scopri se le copertine degli album possono essere utilizzate per migliorare le raccomandazioni musicali per te!",
-      "description": "Si prega di rivedere e accettare i nostri termini per partecipare a questa entusiasmante ricerca!",
-      "keyTerms": "Termini Chiave",
-      "fullTerms": "Termini Completi",
-      "agreeButton": "Accetto, inizia il sondaggio!",
-      "terms": {
-        "purpose": {
-          "title": "Scopo",
-          "content": "Questo sito supporta la ricerca sui sistemi di raccomandazione musicale, con l'obiettivo di migliorare l'esperienza dell'utente e l'accuratezza algoritmica."
-        },
-        "userAgreement": {
-          "title": "Accordo dell'Utente",
-          "content": "Utilizzando questo sito, accetti di partecipare al nostro studio di ricerca e di rispettare questi termini e condizioni."
-        },
-        "privacyData": {
-          "title": "Privacy e Dati",
-          "content": "Raccogliamo dati limitati per scopi di ricerca. Le tue informazioni sono mantenute sicure e riservate e non saranno condivise con terzi."
-        },
-        "voluntary": {
-          "title": "Partecipazione Volontaria",
-          "content": "La tua partecipazione è completamente volontaria. Puoi ritirarti dallo studio in qualsiasi momento senza conseguenze negative."
-        },
-        "risksBenefits": {
-          "title": "Rischi e Benefici",
-          "content": "C'è un basso rischio associato a questo studio. I benefici includono il contributo all'avanzamento della tecnologia di raccomandazione musicale."
-        },
-        "contact": {
-          "title": "Informazioni di Contatto",
-          "content": "Per domande o preoccupazioni, contattami a nb302289@falmouth.ac.uk."
-        }
+  "HomePage": {
+    "hero": "Scopri se le copertine degli album possono essere utilizzate per migliorare le raccomandazioni musicali per te!",
+    "button": "Inizia il sondaggio!"
+  },
+  "TermsPage": {
+    "title": "Scopri se le copertine degli album possono essere utilizzate per migliorare le raccomandazioni musicali per te!",
+    "description": "Si prega di rivedere e accettare i nostri termini per partecipare a questa entusiasmante ricerca!",
+    "keyTerms": "Termini Chiave",
+    "fullTerms": "Termini Completi",
+    "guideTab": "Guida",
+    "agreeButton": "Accetto, inizia il sondaggio!",
+    "terms": {
+      "purpose": {
+        "title": "Scopo",
+        "content": "Questo sito supporta la ricerca sui sistemi di raccomandazione musicale, con l'obiettivo di migliorare l'esperienza dell'utente e l'accuratezza algoritmica."
+      },
+      "userAgreement": {
+        "title": "Accordo dell'Utente",
+        "content": "Utilizzando questo sito, accetti di partecipare al nostro studio di ricerca e di rispettare questi termini e condizioni."
+      },
+      "privacyData": {
+        "title": "Privacy e Dati",
+        "content": "Raccogliamo dati limitati per scopi di ricerca. Le tue informazioni sono mantenute sicure e riservate e non saranno condivise con terzi."
+      },
+      "voluntary": {
+        "title": "Partecipazione Volontaria",
+        "content": "La tua partecipazione è completamente volontaria. Puoi ritirarti dallo studio in qualsiasi momento senza conseguenze negative."
+      },
+      "risksBenefits": {
+        "title": "Rischi e Benefici",
+        "content": "C'è un basso rischio associato a questo studio. I benefici includono il contributo all'avanzamento della tecnologia di raccomandazione musicale."
+      },
+      "contact": {
+        "title": "Informazioni di Contatto",
+        "content": "Per domande o preoccupazioni, contattami a nb302289@falmouth.ac.uk."
       }
     },
-    "Survey": {
+    "guide": {
+      "title": "Guida all'Uso del Sondaggio sulle Raccomandazioni Musicali",
+      "intro": "Questa guida ti mostrerà come navigare e utilizzare efficacemente il sondaggio sulle raccomandazioni musicali.",
+      "gettingStarted": {
+        "title": "Per Iniziare",
+        "access": "Accesso al Sondaggio: Vai alla pagina iniziale del sondaggio dove ti verrà presentato lo scopo dello studio.",
+        "structure": "Struttura del Sondaggio: Il sondaggio consiste in più fasi che valutano diversi modelli di raccomandazione musicale:"
+      },
       "steps": {
-        "model1": "Modello 1",
-        "model2": "Modello 2",
-        "model3": "Modello 3",
-        "review": "Revisione"
-      }
-    },
-    "LocaleSwitcher": {
+        "step1": "Raccomandazioni del Modello 1 (3 playlist)",
+        "step2": "Raccomandazioni del Modello 2 (3 playlist)",
+        "step3": "Raccomandazioni del Modello 3 (3 playlist)",
+        "final": "Revisione Finale: Valutazione complessiva"
+      },
+      "musicSwiper": {
+        "title": "Utilizzo dello Swiper Musicale",
+        "subtitle": "Funzionalità Principali"
+      },
+      "features": {
+        "seedSong": "Brano di Partenza: Nella parte superiore della pagina, vedrai il brano di partenza su cui si basano le raccomandazioni.",
+        "swipingInterface": "Interfaccia di Scorrimento:",
+        "swipeRight": "Scorri a destra (o clicca sulla freccia destra) per salvare un brano nella tua playlist",
+        "swipeLeft": "Scorri a sinistra (o clicca sulla freccia sinistra) per saltare un brano",
+        "vibration": "Gli utenti mobile sentiranno una leggera vibrazione quando mettono 'mi piace' a un brano",
+        "undo": "Funzione Annulla: Hai fatto un errore? Usa il pulsante Annulla per ripristinare l'ultimo scorrimento.",
+        "progress": "Monitoraggio dei Progressi: La barra dei progressi mostra quanti brani hai valutato e quanti ne rimangono.",
+        "completion": "Completamento della Valutazione: Dopo aver valutato tutti i brani, ti verranno presentate le domande sulla valutazione del modello."
+      },
+      "stepByStep": {
+        "title": "Passo dopo Passo",
+        "reviewSeed": "Esamina il brano di partenza nella parte superiore dello schermo per capire su cosa si basano le raccomandazioni.",
+        "forEachSong": "Per ogni brano consigliato:",
+        "listenPreview": "Ascolta un'anteprima, se disponibile, cliccando sul pulsante di riproduzione",
+        "evaluate": "Valuta se aggiungeresti questo brano alla tua playlist",
+        "swipeAction": "Scorri a destra se ti piace, a sinistra se non ti piace",
+        "afterReview": "Dopo aver esaminato tutti i brani in una playlist:",
+        "rateModel": "Valuta il modello di raccomandazione in base a rilevanza, novità e soddisfazione",
+        "submit": "Invia le tue valutazioni per procedere alla playlist successiva",
+        "repeat": "Ripeti per tutte le 9 playlist attraverso i 3 diversi modelli di raccomandazione"
+      },
+      "completion": {
+        "title": "Completa il sondaggio finale con domande su:",
+        "preferred": "Quale modello hai preferito",
+        "demographics": "I tuoi dati demografici (età, paese)",
+        "feedback": "Feedback sull'usabilità e chiarezza del sondaggio"
+      },
+      "tips": {
+        "title": "Suggerimenti",
+        "listen": "Ascolta ogni brano prima di prendere la tua decisione",
+        "undo": "Usa il pulsante annulla se scorri accidentalmente nella direzione sbagliata",
+        "takeTime": "Prenditi il tuo tempo - non c'è fretta di completare le valutazioni",
+        "completeSteps": "Completa tutti i passaggi per assicurarti che il tuo feedback sia registrato correttamente",
+        "consistent": "Sii coerente con le tue preferenze per ottenere la valutazione più accurata del modello"
+      },
+      "technical": {
+        "title": "Note Tecniche",
+        "progress": "Il tuo progresso nel sondaggio viene salvato automaticamente nel tuo browser",
+        "pause": "Puoi mettere in pausa e riprendere il sondaggio in un secondo momento dallo stesso dispositivo",
+        "submitted": "Una volta inviate, le tue valutazioni aiutano a valutare diversi algoritmi di raccomandazione musicale",
+        "results": "I risultati saranno disponibili nella scheda Risultati dopo il 1° aprile"
+      },
+      "thanks": "Grazie per aver partecipato a questo studio sulle raccomandazioni musicali! Il tuo feedback aiuta a migliorare gli algoritmi di scoperta musicale."
+    }
+  },
+  "Survey": {
+    "steps": {
+      "model1": "Modello 1",
+      "model2": "Modello 2",
+      "model3": "Modello 3",
+      "review": "Revisione"
+    }
+  },
+  "LocaleSwitcher": {
     "de": "Deutsch",
     "en": "English",
     "es": "Español",
@@ -53,52 +117,51 @@
     "it": "Italiano",
     "label": "Lingua"
   },
-    "StepForm": {
-      "recommendedTracks": "Tracce Raccomandate",
-      "modelEvaluation": "Valutazione del Modello",
-      "relevance": "Quanto è rilevante questo modello per le tue preferenze musicali?",
-      "novelty": "Quanto è nuovo/rinfrescante questo modello?",
-      "satisfaction": "Quanto sei soddisfatto delle raccomandazioni dei modelli?",
-      "submit": "Invia"
-    },
-    "Review": {
-      "userInfo": "Informazioni Utente",
-      "country": "Paese",
-      "modelEval": "Valutazione del Modello",
-      "preference": "Modello di Raccomandazione Preferito",
-      "feedback": "Feedback Aggiuntivo",
-      "placeholderFeedback": "Si prega di fornire eventuali feedback aggiuntivi...",
-      "submit": "Invia"
-    },
-    "AgeInputSlider": {
-      "selectYourAge": "Seleziona la tua Età",
-      "minimumAge": "Età Minima",
-      "teen": "Adolescente",
-      "youngAdult": "Giovane Adulto",
-      "adult": "Adulto",
-      "middleAged": "Mezza Età",
-      "senior": "Anziano",
-      "youAreA": "Sei un {ageGroup}",
-      "minimumAgeReached": "Età minima raggiunta"
-    },
-    "ThankYouPage": {
-      "title": "Sei una Rock Star!",
-      "thankYouMessage": "Grazie per aver partecipato al nostro sondaggio. Il tuo feedback è musica per le mie orecchie!",
-      "resultsMessage": "Potrai vedere i risultati nella scheda dei risultati dopo il 1° aprile.",
-      "checkResults": "Controlla i Risultati",
-      "backToHome": "Torna alla Home",
-      "exploreDataset": "Esplora il Dataset che ho utilizzato"
-    },
-    "Playlist": {
-      "curatedPlaylist": "Playlist Curata"
-    },
-    "AppSidebar": {
-      "musicRecommendationStudy": "Studio di Raccomandazione Musicale",
-      "home": "Home",
-      "dataset": "Dataset",
-      "survey": "Sondaggio",
-      "results": "Risultati",
-      "releasedSoon": "in arrivo"
-    }
+  "StepForm": {
+    "recommendedTracks": "Tracce Raccomandate",
+    "modelEvaluation": "Valutazione del Modello",
+    "relevance": "Quanto è rilevante questo modello per le tue preferenze musicali?",
+    "novelty": "Quanto è nuovo/rinfrescante questo modello?",
+    "satisfaction": "Quanto sei soddisfatto delle raccomandazioni dei modelli?",
+    "submit": "Invia"
+  },
+  "Review": {
+    "userInfo": "Informazioni Utente",
+    "country": "Paese",
+    "modelEval": "Valutazione del Modello",
+    "preference": "Modello di Raccomandazione Preferito",
+    "feedback": "Feedback Aggiuntivo",
+    "placeholderFeedback": "Si prega di fornire eventuali feedback aggiuntivi...",
+    "submit": "Invia"
+  },
+  "AgeInputSlider": {
+    "selectYourAge": "Seleziona la tua Età",
+    "minimumAge": "Età Minima",
+    "teen": "Adolescente",
+    "youngAdult": "Giovane Adulto",
+    "adult": "Adulto",
+    "middleAged": "Mezza Età",
+    "senior": "Anziano",
+    "youAreA": "Sei un {ageGroup}",
+    "minimumAgeReached": "Età minima raggiunta"
+  },
+  "ThankYouPage": {
+    "title": "Sei una Rock Star!",
+    "thankYouMessage": "Grazie per aver partecipato al nostro sondaggio. Il tuo feedback è musica per le mie orecchie!",
+    "resultsMessage": "Potrai vedere i risultati nella scheda dei risultati dopo il 1° aprile.",
+    "checkResults": "Controlla i Risultati",
+    "backToHome": "Torna alla Home",
+    "exploreDataset": "Esplora il Dataset che ho utilizzato"
+  },
+  "Playlist": {
+    "curatedPlaylist": "Playlist Curata"
+  },
+  "AppSidebar": {
+    "musicRecommendationStudy": "Studio di Raccomandazione Musicale",
+    "home": "Home",
+    "dataset": "Dataset",
+    "survey": "Sondaggio",
+    "results": "Risultati",
+    "releasedSoon": "in arrivo"
   }
-  
+}

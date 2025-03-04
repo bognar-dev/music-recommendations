@@ -6,9 +6,10 @@ import { Music } from "lucide-react"
 interface SongCardProps {
   song: Song
   priority: boolean
+  onClick?: () => void
 }
 
-export function SongCard({ song, priority }: SongCardProps) {
+export function SongCard({ song, priority, onClick }: SongCardProps) {
 
   return (
     <div className="bg-background rounded-xl shadow-xl">
@@ -37,9 +38,11 @@ export function SongCard({ song, priority }: SongCardProps) {
       </div>
 
       {/* Song info */}
-      <div className="p-4">
-        <h2 className="text-xl font-bold truncate">{song.name}</h2>
-        <p className="text-gray-400 truncate">{song.artist}</p>
+      <div className="p-4 " onClick={onClick}>
+        <div className="cursor-pointer">
+        <h2 className="text-xl font-bold truncate hover:underline">{song.name}</h2>
+        <p className="text-gray-400 truncate hover:underline">{song.artist}</p>
+        </div>
 
         {/* Audio features visualization */}
         <div className="flex items-center mt-4 space-x-2">

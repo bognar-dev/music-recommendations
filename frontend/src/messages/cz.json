@@ -1,0 +1,171 @@
+{
+    "HomePage": {
+        "hero": "Zjistěte, zda lze obaly alb použít ke zlepšení hudebních doporučení pro vás!",
+        "button": "Zahájit průzkum!"
+    },
+    "TermsPage": {
+        "title": "Zjistěte, zda lze obaly alb použít ke zlepšení hudebních doporučení pro vás!",
+        "description": "Prosím přečtěte si a přijměte naše podmínky pro účast v tomto zajímavém výzkumu!",
+        "keyTerms": "Klíčové podmínky",
+        "fullTerms": "Úplné podmínky",
+        "guideTab": "Průvodce",
+        "agreeButton": "Souhlasím, zahájit průzkum!",
+        "terms": {
+            "purpose": {
+                "title": "Účel",
+                "content": "Tato webová stránka podporuje výzkum systémů hudebních doporučení s cílem zlepšit uživatelské zkušenosti a algoritmickou přesnost."
+            },
+            "userAgreement": {
+                "title": "Souhlas uživatele",
+                "content": "Používáním této webové stránky souhlasíte s účastí v našem výzkumném projektu a dodržováním těchto podmínek."
+            },
+            "privacyData": {
+                "title": "Soukromí a data",
+                "content": "Sbíráme omezené množství dat pro výzkumné účely. Vaše informace jsou udržovány v bezpečí a důvěrnosti a nebudou sdíleny s třetími stranami."
+            },
+            "voluntary": {
+                "title": "Dobrovolná účast",
+                "content": "Vaše účast je zcela dobrovolná. Můžete se z výzkumu kdykoliv stáhnout bez jakýchkoliv negativních následků."
+            },
+            "risksBenefits": {
+                "title": "Rizika a přínosy",
+                "content": "S tímto výzkumem je spojeno nízké riziko. Přínosy zahrnují přispění k pokroku technologie hudebních doporučení."
+            },
+            "contact": {
+                "title": "Kontaktní informace",
+                "content": "V případě dotazů nebo obav mě prosím kontaktujte na nb302289@falmouth.ac.uk."
+            }
+        },
+        "guide": {
+            "title": "Návod k použití průzkumu hudebních doporučení",
+            "intro": "Tento průvodce vás provede tím, jak efektivně procházet a používat průzkum hudebních doporučení.",
+            "gettingStarted": {
+                "title": "Začínáme",
+                "access": "Přístup k průzkumu: Přejděte na úvodní stránku průzkumu, kde se seznámíte s účelem studie.",
+                "structure": "Struktura průzkumu: Průzkum se skládá z několika kroků hodnotících různé modely hudebních doporučení:"
+            },
+            "steps": {
+                "step1": "Doporučení modelu 1 (3 playlisty)",
+                "step2": "Doporučení modelu 2 (3 playlisty)",
+                "step3": "Doporučení modelu 3 (3 playlisty)",
+                "final": "Závěrečné hodnocení: Celkové vyhodnocení"
+            },
+            "musicSwiper": {
+                "title": "Používání hudebního swiperu",
+                "subtitle": "Základní funkce"
+            },
+            "features": {
+                "seedSong": "Výchozí skladba: V horní části stránky uvidíte výchozí skladbu, na které jsou založena doporučení.",
+                "swipingInterface": "Rozhraní pro swipování:",
+                "swipeRight": "Přejeďte doprava (nebo klikněte na pravou šipku) pro uložení skladby do svého playlistu",
+                "swipeLeft": "Přejeďte doleva (nebo klikněte na levou šipku) pro přeskočení skladby",
+                "vibration": "Uživatelé mobilů pocítí mírné vibrace při označení skladby jako oblíbené",
+                "undo": "Funkce Zpět: Udělali jste chybu? Použijte tlačítko Zpět k vrácení posledního přejetí.",
+                "progress": "Sledování postupu: Ukazatel postupu zobrazuje, kolik skladeb jste ohodnotili a kolik jich zbývá.",
+                "completion": "Dokončení hodnocení: Po ohodnocení všech skladeb vám budou předloženy otázky k hodnocení modelu."
+            },
+            "stepByStep": {
+                "title": "Krok za krokem",
+                "reviewSeed": "Prohlédněte si výchozí skladbu v horní části obrazovky, abyste pochopili, na čem jsou doporučení založena.",
+                "forEachSong": "Pro každou doporučenou skladbu:",
+                "listenPreview": "Poslechněte si ukázku, pokud je k dispozici, kliknutím na tlačítko přehrávání",
+                "evaluate": "Zhodnoťte, zda byste tuto skladbu přidali do svého playlistu",
+                "swipeAction": "Přejeďte doprava, pokud se vám líbí, doleva, pokud ne",
+                "afterReview": "Po přezkoumání všech skladeb v playlistu:",
+                "rateModel": "Ohodnoťte model doporučení podle relevance, novosti a spokojenosti",
+                "submit": "Odešlete svá hodnocení pro postup k dalšímu playlistu",
+                "repeat": "Opakujte pro všech 9 playlistů napříč 3 různými modely doporučení"
+            },
+            "completion": {
+                "title": "Dokončete závěrečný průzkum s otázkami o:",
+                "preferred": "Který model jste preferovali",
+                "demographics": "Vaše demografické údaje (věk, země)",
+                "feedback": "Zpětná vazba k použitelnosti a srozumitelnosti průzkumu"
+            },
+            "tips": {
+                "title": "Tipy",
+                "listen": "Poslechněte si každou skladbu před rozhodnutím",
+                "undo": "Použijte tlačítko zpět, pokud omylem přejedete špatným směrem",
+                "takeTime": "Nespěchejte - není žádný spěch s dokončením hodnocení",
+                "completeSteps": "Dokončete všechny kroky, abyste zajistili správné zaznamenání vaší zpětné vazby",
+                "consistent": "Buďte konzistentní ve svých preferencích, abyste získali nejpřesnější vyhodnocení modelu"
+            },
+            "technical": {
+                "title": "Technické poznámky",
+                "progress": "Váš postup v průzkumu se automaticky ukládá ve vašem prohlížeči",
+                "pause": "Můžete průzkum přerušit a později v něm pokračovat ze stejného zařízení",
+                "submitted": "Po odeslání vaše hodnocení pomohou vyhodnotit různé algoritmy hudebních doporučení",
+                "results": "Výsledky budou k dispozici v záložce Výsledky po 1. dubnu"
+            },
+            "thanks": "Děkujeme za účast v této studii hudebních doporučení! Vaše zpětná vazba pomáhá zlepšovat algoritmy pro objevování hudby."
+        }
+    },
+    "Survey": {
+        "steps": {
+            "model1": "Model 1",
+            "model2": "Model 2",
+            "model3": "Model 3",
+            "review": "Hodnocení",
+            "playlist1": "Playlist 1",
+            "playlist2": "Playlist 2",
+            "playlist3": "Playlist 3"
+        }
+    },
+    "LocaleSwitcher": {
+        "de": "Deutsch",
+        "en": "English",
+        "es": "Español",
+        "fr": "Français",
+        "pt": "Português",
+        "it": "Italiano",
+        "cs": "Čeština",
+        "label": "Jazyk"
+    },
+    "StepForm": {
+        "recommendedTracks": "Doporučené skladby",
+        "modelEvaluation": "Hodnocení modelu",
+        "relevance": "Jak dobře tento model odpovídá vašemu hudebnímu vkusu?",
+        "novelty": "Jak neznámé jsou pro vás skladby, které tento model doporučuje?",
+        "satisfaction": "Jak jste spokojeni s doporučeními tohoto modelu?",
+        "submit": "Odeslat"
+    },
+    "Review": {
+        "userInfo": "Informace o uživateli",
+        "country": "Země",
+        "modelEval": "Hodnocení modelu",
+        "preference": "Preferovaný model doporučení",
+        "feedback": "Další zpětná vazba",
+        "placeholderFeedback": "Prosím poskytněte jakoukoliv další zpětnou vazbu...",
+        "submit": "Odeslat"
+    },
+    "AgeInputSlider": {
+        "selectYourAge": "Vyberte svůj věk",
+        "minimumAge": "Minimální věk",
+        "teen": "Teenager",
+        "youngAdult": "Mladý dospělý",
+        "adult": "Dospělý",
+        "middleAged": "Středního věku",
+        "senior": "Senior",
+        "youAreA": "Jste {ageGroup}",
+        "minimumAgeReached": "Dosažen minimální věk"
+    },
+    "ThankYouPage": {
+        "title": "Jste rocková hvězda!",
+        "thankYouMessage": "Děkujeme za účast v našem průzkumu. Vaše zpětná vazba je pro mě hudba pro uši!",
+        "resultsMessage": "Výsledky si budete moci prohlédnout v záložce výsledků po 1. dubnu.",
+        "checkResults": "Zkontrolovat výsledky",
+        "backToHome": "Zpět na hlavní stránku",
+        "exploreDataset": "Prozkoumejte dataset, který jsem použil"
+    },
+    "Playlist": {
+        "curatedPlaylist": "Kurátorovaný playlist"
+    },
+    "AppSidebar": {
+        "musicRecommendationStudy": "Studie hudebních doporučení",
+        "home": "Domů",
+        "dataset": "Dataset",
+        "survey": "Průzkum",
+        "results": "Výsledky",
+        "releasedSoon": "brzy k dispozici"
+    }
+}

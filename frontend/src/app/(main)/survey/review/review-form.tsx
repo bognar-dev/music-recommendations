@@ -17,10 +17,15 @@ import AgeInputSlider from "@/components/age-input-slider"
 import posthog from "posthog-js"
 import { useTranslations } from "next-intl"
 import { countries } from "country-data-list"
+import { StepTenType, SurveyType } from "@/lib/survey-schema"
 
 
 const initialState: FormErrors = {}
-
+const modelIdToPreferenceMap: { [key: number]: StepTenType["preference"]} = {
+  1: "model1",
+  2: "model2",
+  3: "model3",
+}
 export default function StepFourForm() {
 
   const { updateSurveyDetails, surveyData } = useSurveyContext()
@@ -29,7 +34,7 @@ export default function StepFourForm() {
   const submit = () => {
     localStorage.removeItem('surveyData')
     localStorage.removeItem('tutorialComplete')
-    
+
     posthog.capture('submitted_survey', { property: surveyData })
   }
 
@@ -44,32 +49,36 @@ export default function StepFourForm() {
 
     // Handle other fields
     if (["age", "usability", "clarity"].includes(name)) {
-      updateSurveyDetails("stepTen", {
+      updateSurveyDetails("review", {
         [name]: Number(value),
       })
     }
 
     if (name === "country" || name === "feedback") {
-      updateSurveyDetails("stepTen", {
+      updateSurveyDetails("review", {
         [name]: value,
       })
     }
 
     if (name === "preference") {
+
       switch (value) {
         case "1":
-          updateSurveyDetails("stepTen", {
-            preference: "model1",
+          const model1 = modelIdToPreferenceMap[Number(surveyData.stepOne.modelId)]
+          updateSurveyDetails("review", {
+            preference: model1,
           })
           break
         case "2":
-          updateSurveyDetails("stepTen", {
-            preference: "model2",
+          const model2 = modelIdToPreferenceMap[Number(surveyData.stepFour.modelId)]
+          updateSurveyDetails("review", {
+            preference: model2,
           })
           break
         case "3":
-          updateSurveyDetails("stepTen", {
-            preference: "model3",
+          const model3 = modelIdToPreferenceMap[Number(surveyData.stepThree.modelId)]
+          updateSurveyDetails("review", {
+            preference: model3,
           })
           break
       }
@@ -85,12 +94,12 @@ export default function StepFourForm() {
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
-              <AgeInputSlider initialAge={surveyData.stepTen.age} onChange={(value) => updateSurveyDetails("stepTen", { age: Number(value) })} />
+              <AgeInputSlider initialAge={surveyData.review.age} onChange={(value) => updateSurveyDetails("review", { age: Number(value) })} />
               <div>
                 <Label htmlFor="country">{t('country')}</Label>
                 <CountryDropdown
-                  defaultValue={countries.all.find(country => country.name === surveyData.stepTen.country)?.alpha3}
-                  onChange={(country: Country) => updateSurveyDetails("stepTen", { country: country.name })}
+                  defaultValue={countries.all.find(country => country.alpha3 === surveyData.review.country)?.alpha3}
+                  onChange={(country: Country) => updateSurveyDetails("review", { country: country.alpha3 })}
                 />
               </div>
             </div>
@@ -105,7 +114,7 @@ export default function StepFourForm() {
             <div className="space-y-6">
               <Label htmlFor="preference">{t('preference')}</Label>
               <div className="space-y-2 mt-2">
-                <VinylRating name="preference" value={surveyData.stepTen.preference} onChange={handleInputChange} range={3} ratingMode="single" />
+                <VinylRating name="preference" value={surveyData.review.preference} onChange={handleInputChange} range={3} ratingMode="single" />
               </div>
             </div>
 
@@ -121,7 +130,7 @@ export default function StepFourForm() {
             <Textarea
               name="feedback"
               rows={4}
-              value={surveyData.stepTen.feedback}
+              value={surveyData.review.feedback}
               onChange={handleInputChange}
               placeholder={t('placeholderFeedback')}
               className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"

@@ -8,6 +8,7 @@
     "description": "Please review and accept our terms to participate in this exciting research!",
     "keyTerms": "Key Terms",
     "fullTerms": "Full Terms",
+    "guideTab": "Guide",
     "agreeButton": "I Agree, Start the Survey!",
     "terms": {
       "purpose": {
@@ -34,6 +35,69 @@
         "title": "Contact Information",
         "content": "For questions or concerns, please contact me at nb302289@falmouth.ac.uk ."
       }
+    },
+    "guide": {
+      "title": "Guide to Using the Music Recommendation Survey",
+      "intro": "This guide will walk you through how to navigate and use the music recommendation survey effectively.",
+      "gettingStarted": {
+        "title": "Getting Started",
+        "access": "Accessing the Survey: Navigate to the survey landing page where you'll be introduced to the study purpose.",
+        "structure": "Survey Structure: The survey consists of multiple steps evaluating different music recommendation models:"
+      },
+      "steps": {
+        "step1": "Model 1 recommendations (3 playlists)",
+        "step2": "Model 2 recommendations (3 playlists)",
+        "step3": "Model 3 recommendations (3 playlists)",
+        "final": "Final Review: Overall evaluation"
+      },
+      "musicSwiper": {
+        "title": "Using the Music Swiper",
+        "subtitle": "Core Features"
+      },
+      "features": {
+        "seedSong": "Seed Song: At the top of the page, you'll see the seed song that recommendations are based on.",
+        "swipingInterface": "Swiping Interface:",
+        "swipeRight": "Swipe right (or click the right arrow) to save a song to your playlist",
+        "swipeLeft": "Swipe left (or click the left arrow) to skip a song",
+        "vibration": "Mobile users will feel a slight vibration when liking a song",
+        "undo": "Undo Function: Made a mistake? Use the Undo button to revert your last swipe.",
+        "progress": "Progress Tracking: The progress bar shows how many songs you've rated and how many remain.",
+        "completion": "Rating completion: After rating all songs, you'll be presented with model rating questions."
+      },
+      "stepByStep": {
+        "title": "Step by Step",
+        "reviewSeed": "Review the seed song at the top of the screen to understand what the recommendations are based on.",
+        "forEachSong": "For each recommended song:",
+        "listenPreview": "Listen to a preview if available by clicking the play button",
+        "evaluate": "Evaluate if you would add this song to your playlist",
+        "swipeAction": "Swipe right if you like it, left if you don't",
+        "afterReview": "After reviewing all songs in a playlist:",
+        "rateModel": "Rate the recommendation model on relevance, novelty, and satisfaction",
+        "submit": "Submit your ratings to proceed to the next playlist",
+        "repeat": "Repeat for all 9 playlists across the 3 different recommendation models"
+      },
+      "completion": {
+        "title": "Complete the final survey with questions about:",
+        "preferred": "Which model you preferred",
+        "demographics": "Your demographics (age, country)",
+        "feedback": "Feedback on the survey usability and clarity"
+      },
+      "tips": {
+        "title": "Tips",
+        "listen": "Listen to each song before making your decision",
+        "undo": "Use the undo button if you accidentally swipe the wrong way",
+        "takeTime": "Take your time - there's no rush to complete the ratings",
+        "completeSteps": "Complete all steps to ensure your feedback is properly recorded",
+        "consistent": "Be consistent with your preferences to get the most accurate model evaluation"
+      },
+      "technical": {
+        "title": "Technical Notes",
+        "progress": "Your survey progress is automatically saved in your browser",
+        "pause": "You can pause and resume the survey later from the same device",
+        "submitted": "Once submitted, your ratings help evaluate different music recommendation algorithms",
+        "results": "Results will be available in the Results tab after April 1st"
+      },
+      "thanks": "Thank you for participating in this music recommendation study! Your feedback helps improve music discovery algorithms."
     }
   },
   "Survey": {

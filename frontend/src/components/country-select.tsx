@@ -75,13 +75,16 @@ const CountryDropdownComponent = (
         (country) => country.alpha3 === defaultValue
       );
       if (initialCountry) {
+        console.log("🌍 CountryDropdown initialCountry: ", initialCountry);
         setSelectedCountry(initialCountry);
       } else {
         // Reset selected country if defaultValue is not found
+        console.log("🌍 CountryDropdown defaultValue not found: ", defaultValue);
         setSelectedCountry(undefined);
       }
     } else {
       // Reset selected country if defaultValue is undefined or null
+      console.log("🌍 CountryDropdown defaultValue is undefined: ", defaultValue);
       setSelectedCountry(undefined);
     }
   }, [defaultValue, options]);

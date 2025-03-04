@@ -15,21 +15,20 @@ export function PlayButton({ song, className }: PlayButtonProps) {
   const { currentTrack, isPlaying, playTrack } = useAudio()
   const isCurrentTrack = currentTrack?.id === song.id
   return (
-    <Button
-      className={cn("", className)}
-      size="icon"
-      variant="ghost"
+    <button
+      className={cn("absolute inset-0 flex items-center justify-center transition-opacity bg-black/40 hover:bg-black/60", className)}
       type="button"
-      onClick={() => playTrack(song)}
     >
       {isCurrentTrack && isPlaying ? (
-        <Pause className="h-4 w-4" />
+        <Pause className="w-8 h-8 text-white"
+      onClick={() => playTrack(song)} />
       ) : (
-        <Play className="h-4 w-4" />
+        <Play className="w-8 h-8 text-white"
+      onClick={() => playTrack(song)} />
       )}
       <span className="sr-only">
         {isCurrentTrack && isPlaying ? `Pause ${song.name}` : `Play ${song.name}`}
       </span>
-    </Button>
+    </button>
   )
 }

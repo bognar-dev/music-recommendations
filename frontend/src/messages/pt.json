@@ -8,6 +8,7 @@
         "description": "Por favor, revise e aceite nossos termos para participar desta pesquisa empolgante!",
         "keyTerms": "Termos Chave",
         "fullTerms": "Termos Completos",
+        "guideTab": "Guia",
         "agreeButton": "Eu Aceito, Comece a Pesquisa!",
         "terms": {
             "purpose": {
@@ -34,6 +35,69 @@
                 "title": "Informações de Contato",
                 "content": "Para perguntas ou preocupações, entre em contato comigo em nb302289@falmouth.ac.uk."
             }
+        },
+        "guide": {
+            "title": "Guia para Usar a Pesquisa de Recomendações Musicais",
+            "intro": "Este guia vai mostrar como navegar e usar efetivamente a pesquisa de recomendações musicais.",
+            "gettingStarted": {
+                "title": "Primeiros Passos",
+                "access": "Acessando a Pesquisa: Navegue até a página inicial da pesquisa onde você será apresentado ao propósito do estudo.",
+                "structure": "Estrutura da Pesquisa: A pesquisa consiste em múltiplas etapas avaliando diferentes modelos de recomendação musical:"
+            },
+            "steps": {
+                "step1": "Recomendações do Modelo 1 (3 playlists)",
+                "step2": "Recomendações do Modelo 2 (3 playlists)",
+                "step3": "Recomendações do Modelo 3 (3 playlists)",
+                "final": "Revisão Final: Avaliação geral"
+            },
+            "musicSwiper": {
+                "title": "Usando o Deslizador de Música",
+                "subtitle": "Funcionalidades Principais"
+            },
+            "features": {
+                "seedSong": "Música Semente: No topo da página, você verá a música semente na qual as recomendações são baseadas.",
+                "swipingInterface": "Interface de Deslize:",
+                "swipeRight": "Deslize para a direita (ou clique na seta direita) para salvar uma música na sua playlist",
+                "swipeLeft": "Deslize para a esquerda (ou clique na seta esquerda) para pular uma música",
+                "vibration": "Usuários móveis sentirão uma leve vibração ao curtir uma música",
+                "undo": "Função Desfazer: Cometeu um erro? Use o botão Desfazer para reverter seu último deslize.",
+                "progress": "Acompanhamento de Progresso: A barra de progresso mostra quantas músicas você avaliou e quantas restam.",
+                "completion": "Conclusão da Avaliação: Após avaliar todas as músicas, você receberá perguntas de avaliação do modelo."
+            },
+            "stepByStep": {
+                "title": "Passo a Passo",
+                "reviewSeed": "Revise a música semente no topo da tela para entender no que as recomendações são baseadas.",
+                "forEachSong": "Para cada música recomendada:",
+                "listenPreview": "Ouça uma prévia, se disponível, clicando no botão de reprodução",
+                "evaluate": "Avalie se você adicionaria essa música à sua playlist",
+                "swipeAction": "Deslize para a direita se você gostar, para a esquerda se não gostar",
+                "afterReview": "Após revisar todas as músicas em uma playlist:",
+                "rateModel": "Avalie o modelo de recomendação quanto à relevância, novidade e satisfação",
+                "submit": "Envie suas avaliações para prosseguir para a próxima playlist",
+                "repeat": "Repita para todas as 9 playlists nos 3 diferentes modelos de recomendação"
+            },
+            "completion": {
+                "title": "Complete a pesquisa final com perguntas sobre:",
+                "preferred": "Qual modelo você preferiu",
+                "demographics": "Seus dados demográficos (idade, país)",
+                "feedback": "Feedback sobre a usabilidade e clareza da pesquisa"
+            },
+            "tips": {
+                "title": "Dicas",
+                "listen": "Ouça cada música antes de tomar sua decisão",
+                "undo": "Use o botão desfazer se acidentalmente deslizar na direção errada",
+                "takeTime": "Tome seu tempo - não há pressa para completar as avaliações",
+                "completeSteps": "Complete todas as etapas para garantir que seu feedback seja registrado corretamente",
+                "consistent": "Seja consistente com suas preferências para obter a avaliação mais precisa do modelo"
+            },
+            "technical": {
+                "title": "Notas Técnicas",
+                "progress": "Seu progresso na pesquisa é automaticamente salvo em seu navegador",
+                "pause": "Você pode pausar e retomar a pesquisa mais tarde no mesmo dispositivo",
+                "submitted": "Uma vez enviadas, suas avaliações ajudam a avaliar diferentes algoritmos de recomendação musical",
+                "results": "Os resultados estarão disponíveis na aba Resultados após 1º de abril"
+            },
+            "thanks": "Obrigado por participar deste estudo de recomendação musical! Seu feedback ajuda a melhorar os algoritmos de descoberta musical."
         }
     },
     "Survey": {

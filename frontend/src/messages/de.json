@@ -8,6 +8,7 @@
         "description": "Bitte überprüfe und akzeptiere unsere Bedingungen, um an dieser spannenden Forschung teilzunehmen!",
         "keyTerms": "Wichtige Bedingungen",
         "fullTerms": "Vollständige Bedingungen",
+        "guideTab": "Anleitung",
         "agreeButton": "Ich stimme zu, starte die Umfrage!",
         "terms": {
             "purpose": {
@@ -34,6 +35,69 @@
                 "title": "Kontaktinformation",
                 "content": "Bei Fragen oder Bedenken kontaktiere mich bitte unter nb302289@falmouth.ac.uk."
             }
+        },
+        "guide": {
+            "title": "Anleitung zur Nutzung der Musikempfehlungsumfrage",
+            "intro": "Diese Anleitung führt dich durch die Navigation und effektive Nutzung der Musikempfehlungsumfrage.",
+            "gettingStarted": {
+                "title": "Erste Schritte",
+                "access": "Zugriff auf die Umfrage: Navigiere zur Startseite der Umfrage, wo dir der Zweck der Studie vorgestellt wird.",
+                "structure": "Umfragestruktur: Die Umfrage besteht aus mehreren Schritten zur Bewertung verschiedener Musikempfehlungsmodelle:"
+            },
+            "steps": {
+                "step1": "Modell 1 Empfehlungen (3 Playlists)",
+                "step2": "Modell 2 Empfehlungen (3 Playlists)",
+                "step3": "Modell 3 Empfehlungen (3 Playlists)",
+                "final": "Abschließende Überprüfung: Gesamtbewertung"
+            },
+            "musicSwiper": {
+                "title": "Verwendung des Musik-Swipers",
+                "subtitle": "Kernfunktionen"
+            },
+            "features": {
+                "seedSong": "Ausgangssong: Oben auf der Seite siehst du den Ausgangssong, auf dem die Empfehlungen basieren.",
+                "swipingInterface": "Wisch-Oberfläche:",
+                "swipeRight": "Nach rechts wischen (oder Pfeil rechts klicken), um einen Song zu deiner Playlist hinzuzufügen",
+                "swipeLeft": "Nach links wischen (oder Pfeil links klicken), um einen Song zu überspringen",
+                "vibration": "Auf Mobilgeräten spürst du eine leichte Vibration beim Liken eines Songs",
+                "undo": "Rückgängig-Funktion: Fehler gemacht? Nutze die Rückgängig-Schaltfläche, um deinen letzten Wisch rückgängig zu machen.",
+                "progress": "Fortschrittsverfolgung: Der Fortschrittsbalken zeigt, wie viele Songs du bewertet hast und wie viele noch verbleiben.",
+                "completion": "Bewertungsabschluss: Nach der Bewertung aller Songs werden dir Fragen zur Modellbewertung präsentiert."
+            },
+            "stepByStep": {
+                "title": "Schritt für Schritt",
+                "reviewSeed": "Sieh dir den Ausgangssong oben auf dem Bildschirm an, um zu verstehen, worauf die Empfehlungen basieren.",
+                "forEachSong": "Für jeden empfohlenen Song:",
+                "listenPreview": "Höre eine Vorschau, wenn verfügbar, indem du auf die Wiedergabetaste klickst",
+                "evaluate": "Bewerte, ob du diesen Song zu deiner Playlist hinzufügen würdest",
+                "swipeAction": "Wische nach rechts, wenn er dir gefällt, nach links, wenn nicht",
+                "afterReview": "Nach der Überprüfung aller Songs in einer Playlist:",
+                "rateModel": "Bewerte das Empfehlungsmodell nach Relevanz, Neuheit und Zufriedenheit",
+                "submit": "Reiche deine Bewertungen ein, um zur nächsten Playlist überzugehen",
+                "repeat": "Wiederhole dies für alle 9 Playlists über die 3 verschiedenen Empfehlungsmodelle"
+            },
+            "completion": {
+                "title": "Schließe die abschließende Umfrage mit Fragen zu:",
+                "preferred": "Welches Modell du bevorzugst",
+                "demographics": "Deine demografischen Daten (Alter, Land)",
+                "feedback": "Feedback zur Benutzerfreundlichkeit und Klarheit der Umfrage"
+            },
+            "tips": {
+                "title": "Tipps",
+                "listen": "Höre jeden Song an, bevor du eine Entscheidung triffst",
+                "undo": "Verwende die Rückgängig-Taste, wenn du versehentlich in die falsche Richtung wischst",
+                "takeTime": "Nimm dir Zeit – es gibt keine Eile, die Bewertungen abzuschließen",
+                "completeSteps": "Schließe alle Schritte ab, um sicherzustellen, dass dein Feedback ordnungsgemäß erfasst wird",
+                "consistent": "Sei konsequent mit deinen Präferenzen, um die genaueste Modellbewertung zu erhalten"
+            },
+            "technical": {
+                "title": "Technische Hinweise",
+                "progress": "Dein Umfragefortschritt wird automatisch in deinem Browser gespeichert",
+                "pause": "Du kannst die Umfrage pausieren und später vom selben Gerät aus fortsetzen",
+                "submitted": "Nach dem Absenden helfen deine Bewertungen bei der Evaluation verschiedener Musikempfehlungsalgorithmen",
+                "results": "Die Ergebnisse sind im Ergebnistab nach dem 1. April verfügbar"
+            },
+            "thanks": "Vielen Dank für deine Teilnahme an dieser Musikempfehlungsstudie! Dein Feedback hilft, Musikentdeckungsalgorithmen zu verbessern."
         }
     },
     "Survey": {

@@ -1,43 +1,29 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use server';
 import { postHogServer } from '@/lib/postHog-server';
-import { stepFourSchema } from '@/lib/survey-schema';
+import { stepFourSchema} from '@/lib/survey-schema';
 import { AddDealRoutes, FormErrors } from '@/types/survey';
 import { redirect } from 'next/navigation';
 
-export const stepTwoFormAction = async (
+export const stepFourFormAction = async (
+    surveyDataJSON: string,
     _prevState: FormErrors | undefined,
     formData: FormData
 ): Promise<FormErrors | undefined> => {
+
     const entries = Array.from(formData.entries());
     const songRatings: any[] = [];
     const modelRating: any = {};
     console.log("formData", formData);
-    
-    entries.forEach(([key, value]) => {
-        if (key.startsWith('songRatings.')) {
-            const [, index, field] = key.split('.');
-            if (!songRatings[parseInt(index)]) songRatings[parseInt(index)] = {};
-            songRatings[parseInt(index)][field] = (field === 'rating' || field === 'songId') ? parseInt(value as string) : value;
-        } else if (key.startsWith('modelRating.')) {
-            console.log("key", key);
-            const [, field] = key.split('.');
-            modelRating[field] = parseInt(value as string);
-        }
-    });
-    console.log("modelRating", modelRating);
-    console.log("songRatings", songRatings);
+    console.log("entries", entries);
 
-    const data = {
-        songRatings: songRatings.filter(x => x),
-        modelRating,
-        modelId: "2",
-        step: 4,
-        playlistId: 1,
-    };
+
+    const surveyDataObj = JSON.parse(surveyDataJSON);
+    console.log("surveyDataObj", surveyDataObj.stepFour);    
+    const validated = stepFourSchema.safeParse(surveyDataObj.stepFour);
+    console.log("surveyData", validated.error);
     
-    const validated = stepFourSchema.safeParse(data);
-    console.log("validated", validated.success);
+   
     if (!validated.success) {
         const errors = validated.error.issues.reduce((acc: FormErrors, issue) => {
             const path = issue.path[0] as string;
@@ -48,11 +34,13 @@ export const stepTwoFormAction = async (
         return errors;
     }
 
+
     postHogServer.capture({
         distinctId: "server",
-        event: "stepTwoFormSubmit",
+        event: "stepFourFormSubmit",
         properties: { modelRating, songRatings }
-      });
+    });
+    
 
     redirect(AddDealRoutes.M_2_P2);
 };

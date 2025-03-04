@@ -128,6 +128,8 @@ export async function fetchSongs(songIds: string[]) {
   return songsArray;
 }
 
+
+
 export async function fetchSongsWithPagination(searchParams: SearchParams) {
   const page = Math.max(1, searchParams.page || 1);
   const limit = searchParams.limit || ITEMS_PER_PAGE;
@@ -156,7 +158,7 @@ export async function fetchSongsWithPagination(searchParams: SearchParams) {
     .select()
     .from(songs)
     .where(whereClause)
-    .orderBy(sortOrder(sortColumn))
+    .orderBy(sortOrder(sortColumn), asc(songs.name))
     .limit(ITEMS_PER_PAGE)
     .offset(offset);
   return paginatedSongs;
@@ -192,6 +194,13 @@ export async function fetchSongById(id: number) {
   return result[0];
 }
 
+
+export async function fetchSongBySpotifyId(spotifyId: string) {
+  const result = await db.select().from(songs).where(eq(songs.spotify_id, spotifyId)).limit(1);
+
+  return result[0];
+}
+
 export async function insertSurvey(survey: SurveyType) {
   const surveyToInsert = {
     step_one: survey.stepOne,
@@ -203,7 +212,7 @@ export async function insertSurvey(survey: SurveyType) {
     step_seven: survey.stepSeven,
     step_eight: survey.stepEight,
     step_nine: survey.stepNine,
-    step_ten: survey.stepTen,
+    review: survey.review,
   };
   const result = await db.insert(surveys).values(surveyToInsert).returning();
   return result;

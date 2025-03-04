@@ -1,27 +1,20 @@
 "use client"
 
-import { useState } from "react"
 import Image from "next/image"
 import { motion } from "framer-motion"
-import { Play, Pause } from "lucide-react"
 import { Song } from "@/db/schema"
-import { useAudio } from "@/context/audio-context"
+import { PlayButton } from "./play-button"
+import { parseRgb } from "@/lib/numpy"
 
 interface SeedSongProps {
     song: Song
 }
 
 export default function SeedSong({ song }: SeedSongProps) {
-    const [isPlaying, setIsPlaying] = useState(false)
-    const { playTrack } = useAudio()
-    const handlePlayPause = () => {
-        playTrack(song)
-        setIsPlaying(!isPlaying)
-    }
 
     return (
         <motion.div
-            className="relative w-full overflow-hidden bg-spotify-dark-gray rounded-xl"
+            className="relative w-full  bg-spotify-dark-gray rounded-xl"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
@@ -29,7 +22,9 @@ export default function SeedSong({ song }: SeedSongProps) {
             <div
                 className="absolute inset-0 opacity-20"
                 style={{
-                    background: `linear-gradient(to bottom right, ${song.most_vibrant_color || "#1DB954"}, ${song.weighted_average_color || "#191414"})`,
+                    background: song.most_vibrant_color && song.weighted_average_color
+                        ? `linear-gradient(to bottom right, ${parseRgb(song.most_vibrant_color )}, ${parseRgb(song.weighted_average_color)})` 
+                        : `linear-gradient(to bottom right, #1DB954, "#191414")`
                 }}
             />
 
@@ -42,12 +37,7 @@ export default function SeedSong({ song }: SeedSongProps) {
                         height={64}
                         className="object-cover"
                     />
-                    <button
-                        onClick={handlePlayPause}
-                        className="absolute inset-0 flex items-center justify-center transition-opacity bg-black/40 hover:bg-black/60"
-                    >
-                        {isPlaying ? <Pause className="w-8 h-8 text-white" /> : <Play className="w-8 h-8 text-white" />}
-                    </button>
+                    <PlayButton song={song} />
                 </div>
 
                 <div className="flex-1">

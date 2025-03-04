@@ -138,8 +138,8 @@ export const initialValues: SurveyType = {
   },
   review: {
     step: 10,
-    age: 13,
-    country: 'UK',
+    age: 18,
+    country: 'GBR',
     preference: 'model1',
     feedback: ''
   }

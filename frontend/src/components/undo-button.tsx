@@ -13,6 +13,7 @@ export default function UndoButton({ handleUndo }: UndoButtonProps) {
       className="flex items-center justify-center px-4 py-2 space-x-2 text-sm font-medium text-white bg-gray-700 rounded-full hover:bg-gray-600"
       whileTap={{ scale: 0.95 }}
       onClick={handleUndo}
+      type="button"
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: 10 }}

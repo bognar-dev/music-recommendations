@@ -47,8 +47,8 @@ export default function SongCard({ song, index, handleSwipe, isActive }: SongCar
   // Handle drag end
   const handleDragEnd = (event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
     const threshold = 300
-    const velocity = 0.5
-
+    const velocity = 2500
+    console.log(info.velocity.x)
     // Calculate if the card should be dismissed based on drag distance or velocity
     const shouldDismiss = Math.abs(info.offset.x) > threshold || Math.abs(info.velocity.x) > velocity
 
@@ -114,7 +114,7 @@ export default function SongCard({ song, index, handleSwipe, isActive }: SongCar
 
   return (
     <motion.div
-      className="absolute w-full overflow-hidden bg-background rounded-xl shadow-xl"
+      className="absolute w-full overflow-hidden bg-background rounded-xl shadow-xl select-none"
       style={{
         zIndex,
         x,
@@ -163,13 +163,13 @@ export default function SongCard({ song, index, handleSwipe, isActive }: SongCar
       </motion.div>
 
       {/* Album art */}
-      <div className="relative w-full aspect-square select-none">
+      <div className="relative w-full aspect-square ">
         <Image
           src={song.image_url && song.image_url !== "no" ? song.image_url : '/placeholder.svg'}
           alt={song.name}
           width={400}
           height={400}
-          className="object-cover w-full h-full"
+          className="object-cover w-full h-full "
           priority={index === 0}
         />
         <PlayButton song={song}/>

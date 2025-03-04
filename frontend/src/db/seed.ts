@@ -55,13 +55,10 @@ interface CSVRecord {
     color_temperature: string;
     color_brightness: string;
     overall_lightness: string;
-    rgb_histogram_shapes: string;
-    hsv_histogram_shapes: string;
     single_pixel_color: string;
     weighted_average_color: string;
     most_vibrant_color: string;
-    edge_map_shape: string;
-    lbp_histogram_shape: string;
+    both_efficientnet_v2_extracted: string;
 }
 
 async function seed() {
@@ -69,7 +66,7 @@ async function seed() {
         console.log('Starting seed...');
 
         // Read CSV file
-        const csvFilePath = path.join(process.cwd(), "src", 'data', 'spotify_data_with_image_features.csv');
+        const csvFilePath = path.join(process.cwd(), "src", 'data', 'cleaned_data_both_efficientnet_v2_features.csv');
         const fileContent = fs.readFileSync(csvFilePath, 'utf-8');
         const records = parse(fileContent, {
             columns: true,
@@ -107,7 +104,7 @@ async function seed() {
             artist_ids: record.artist_ids || null,
             track_number: parseInt(record.track_number) || null,
             disc_number: parseInt(record.disc_number) || null,
-            explicit: record.explicit === 'TRUE' ? true : false,
+            explicit: record.explicit === 'True' || record.explicit === 'TRUE',
             key: parseInt(record.key) || null,
             mode: parseInt(record.mode) || null,
             tempo: parseFloat(record.tempo) || null,
@@ -129,13 +126,9 @@ async function seed() {
             color_temperature: record.color_temperature || null,
             color_brightness: record.color_brightness || null,
             overall_lightness: record.overall_lightness || null,
-            rgb_histogram_shapes: record.rgb_histogram_shapes || null,
-            hsv_histogram_shapes: record.hsv_histogram_shapes || null,
             single_pixel_color: record.single_pixel_color || null,
             weighted_average_color: record.weighted_average_color || null,
             most_vibrant_color: record.most_vibrant_color || null,
-            edge_map_shape: record.edge_map_shape || null,
-            lbp_histogram_shape: record.lbp_histogram_shape || null,
         }));
 
         // Insert in batches of 100

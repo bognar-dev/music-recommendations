@@ -20,12 +20,10 @@ export function SongSelector({ song,priority }: SongSelectorProps) {
     <>
       <div
         className="block transition ease-in-out md:hover:scale-105"
-        onClick={(e) => {
-          e.preventDefault()
-          setIsSelected(true)
-        }}
+        
       >
         <SongCard
+          onClick={() => setIsSelected(true)}
           song={song}
           priority={priority}
         />
