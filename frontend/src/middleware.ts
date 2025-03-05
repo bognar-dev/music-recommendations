@@ -7,9 +7,9 @@ const PROTECTED_ROUTES = ['/survey', '/songs'];
 
 export function middleware(request: NextRequest) {
     const acceptedTerms = request.cookies.get('accepted-terms');
-    console.log(acceptedTerms?.value)
+
     const { pathname } = request.nextUrl;
-    console.log(pathname)
+
     const isPublicRoute =
         PUBLIC_ROUTES.some(route => pathname.startsWith(route))
         && !PROTECTED_ROUTES.some(route => pathname.startsWith(route));

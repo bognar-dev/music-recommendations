@@ -20,9 +20,13 @@ export function VinylRating({
   likertLabels,
   showLabels = false,
 }: VinylRatingProps) {
+  console.log("value",value)
   // Convert StepTenType["preference"] ("model1", "model2", "model3") to a number 1-3
   const numericValue =
     typeof value === "number" ? value : Number(value.replace("model", ""))
+
+
+  console.log("numericValue",numericValue)
 
   // Default Likert labels if none are provided
   const defaultLikertLabels = [

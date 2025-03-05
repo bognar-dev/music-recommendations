@@ -1,17 +1,20 @@
-import { fetchSongBySpotifyId, fetchSongs } from '@/db/queries';
+import { getRecommendations, getSeededSong } from '@/db/queries';
 import { Suspense } from 'react';
 import StepOneForm from './step-one-form';
-import {recommendations} from '@/data/recommendations';
+import { cookies } from 'next/headers';
+import MusicSwiperSkeleton from '@/components/music-swiper-skeleton';
 export default async function StepOne() {
-    const seedSong = await fetchSongBySpotifyId(recommendations.model1playlist1.seededSong);
-    const recommendationsList = await fetchSongs(recommendations.model1playlist1.recommendations);
-    console.log(recommendationsList.length)
+    const seedSong = await getSeededSong(1);
+    const recommendationsList = await getRecommendations(1);
+    const cookie = await cookies();
+    const modelOrderCookie = cookie.get('model-order');
+    const modelOrder = JSON.parse(modelOrderCookie?.value || '[]');
     if (!seedSong || !recommendationsList) {
         return <div>Error fetching data</div>;
     }
     return (
-           <Suspense fallback={<div>Loading...</div>}>
-                <StepOneForm recommendations={recommendationsList} seededSong={seedSong} />
+           <Suspense fallback={<MusicSwiperSkeleton />}>
+                <StepOneForm modelOrder={modelOrder} recommendations={recommendationsList} seededSong={seedSong} />
             </Suspense>
     );
 }

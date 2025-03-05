@@ -1,10 +1,12 @@
 import { Disc3} from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import Link from 'next/link'
-import { useTranslations } from 'next-intl';
+import { getTranslations } from 'next-intl/server';
 
-export default function ThankYouPage() {
-    const t = useTranslations('ThankYouPage');
+export default async function ThankYouPage() {
+    const t = await getTranslations('ThankYouPage');
+
+
 
     return (
         <div className="min-h-screen flex flex-col items-center justify-center px-4 py-12 text-foreground">
@@ -33,7 +35,7 @@ export default function ThankYouPage() {
                 <div className="space-y-4">
                 <div className="space-x-4">
                     
-                    <Button asChild className="text-foreground">
+                    <Button asChild className="text-foreground" >
                         <Link href="/results">
                             {t('checkResults')}
                         </Link>

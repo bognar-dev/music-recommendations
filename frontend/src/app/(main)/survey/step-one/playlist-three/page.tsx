@@ -1,17 +1,17 @@
-import { fetchSongBySpotifyId, fetchSongs } from '@/db/queries';
+import { getRecommendations, getSeededSong } from '@/db/queries';
 import { Suspense } from 'react';
 import StepThreeForm from './step-three-form';
-const seedSongId = "7FwBtcecmlpc1sLySPXeGE"
-const recommendations = ["54bm2e3tk8cliUz3VSdCPZ", "5vmRQ3zELMLUQPo2FLQ76x", "2374M0fQpWi3dLnB54qaLX", "2iEGj7kAwH7HAa5epwYw","7FwBtcecmlpc1sLySPXeGE", "58mFu3oIpBa0HLNeJIxsw3", "1z3ugFmUKoCzGsI6jdY4Ci", "5vmRQ3zELMLUQPo2FLQ76x", "2374M0fQpWi3dLnB54qaLX", "2iEGj7kAwH7HAa5epwYwLB", "2WfaOiMkCvy7F5fcp2zZ8L"]
+import MusicSwiperSkeleton from '@/components/music-swiper-skeleton';
+
 export default async function StepThree() {
-    const seedSong = await fetchSongBySpotifyId(seedSongId);
-    const recommendationsList = await fetchSongs(recommendations);
+    const seedSong = await getSeededSong(3);
+    const recommendationsList = await getRecommendations(3);
     if (!seedSong || !recommendationsList) {
         return <div>Error fetching data</div>;
     }
     return (
-           <Suspense fallback={<div>Loading...</div>}>
-                <StepThreeForm recommendations={recommendationsList} seededSong={seedSong} />
-            </Suspense>
+        <Suspense fallback={<MusicSwiperSkeleton />}>
+            <StepThreeForm recommendations={recommendationsList} seededSong={seedSong} />
+        </Suspense>
     );
 }

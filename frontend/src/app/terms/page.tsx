@@ -34,6 +34,11 @@ const TermsPage = () => {
         }
     };
 
+    const removeSurveyData = () => {
+        localStorage.removeItem('surveyData');
+        localStorage.removeItem('tutorialComplete');
+    } 
+
     return (
         <div className="flex flex-col items-center justify-start min-h-screen p-4 md:p-6 bg-background text-foreground">
             <div className="fixed bottom-4 right-4 md:hidden z-50">
@@ -59,7 +64,7 @@ const TermsPage = () => {
                     </TabsList>
                     <div className="flex justify-center mt-8" id="top">
                         <Form action={acceptTerms}>
-                            <StarButton as='button' className="font-azeretMono font-light text-foreground text-base">
+                            <StarButton as='button' className="font-azeretMono font-light text-foreground text-base" onClick={removeSurveyData}>
                                 {t('agreeButton')}
                             </StarButton>
                         </Form>
@@ -237,7 +242,7 @@ const TermsPage = () => {
             </div>
             <div className="flex justify-center mt-8" id="bottom">
                 <Form action={acceptTerms}>
-                    <StarButton as='button' className="font-azeretMono font-light text-foreground text-base">
+                    <StarButton as='button' className="font-azeretMono font-light text-foreground text-base" onClick={removeSurveyData}>
                         {t('agreeButton')}
                     </StarButton>
                 </Form>

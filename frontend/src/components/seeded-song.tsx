@@ -40,9 +40,9 @@ export default function SeedSong({ song }: SeedSongProps) {
                     <PlayButton song={song} />
                 </div>
 
-                <div className="flex-1">
+                <div className="flex flex-col flex-grow space-y-1">
                     <h3 className="text-sm font-medium text-gray-400">Based on</h3>
-                    <h2 className="text-lg font-bold truncate">{song.name}</h2>
+                    <h2 className="text-lg font-bold break-words">{song.name}</h2>
                     <p className="text-sm text-gray-400 truncate">{song.artist}</p>
                 </div>
             </div>

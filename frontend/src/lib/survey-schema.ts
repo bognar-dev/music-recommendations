@@ -1,3 +1,4 @@
+import { recommendations } from '@/data/recommendations';
 import z from 'zod';
 
 // Define common types that are reused
@@ -16,7 +17,7 @@ const modelRatingSchema = z.object({
 // Define each step schema separately
 export const stepSchema = z.object({
   step: z.number().min(1).max(10), 
-  seedSongId: z.number().min(1).max(3),
+  seedSongId: z.string().min(1),
   modelId: z.string(),
   songRatings: z.array(songRatingSchema).default([]),
   modelRating: modelRatingSchema
@@ -68,6 +69,12 @@ function getRandomizedModelIds() {
   return modelIds;
 }
 
+
+function getSeededSongByModelId(modelId: string, playlistId: number) {
+  return recommendations[modelId + 'playlist' + playlistId].seededSong;
+}
+
+
 // Get randomized model IDs
 const [firstModel, secondModel, thirdModel] = getRandomizedModelIds();
 
@@ -75,63 +82,63 @@ const [firstModel, secondModel, thirdModel] = getRandomizedModelIds();
 export const initialValues: SurveyType = {
   stepOne: {
     step: 1,
-    seedSongId: 1,
+    seedSongId: getSeededSongByModelId(firstModel, 1),
     modelId: firstModel,
     songRatings: [],
     modelRating: { relevance: 1, novelty: 1, satisfaction: 1 }
   },
   stepTwo: {
     step: 2,
-    seedSongId: 2,
+    seedSongId: getSeededSongByModelId(firstModel, 2),
     modelId: firstModel,
     songRatings: [],
     modelRating: { relevance: 1, novelty: 1, satisfaction: 1 }
   },
   stepThree: {
     step: 3,
-    seedSongId: 3,
+    seedSongId: getSeededSongByModelId(firstModel, 3),
     modelId: firstModel,
     songRatings: [],
     modelRating: { relevance: 1, novelty: 1, satisfaction: 1 }
   },
   stepFour: {
     step: 4,
-    seedSongId: 1,
+    seedSongId: getSeededSongByModelId(secondModel, 1),
     modelId: secondModel,
     songRatings: [],
     modelRating: { relevance: 1, novelty: 1, satisfaction: 1 }
   },
   stepFive: {
     step: 5,
-    seedSongId: 2,
+    seedSongId: getSeededSongByModelId(secondModel, 2),
     modelId: secondModel,
     songRatings: [],
     modelRating: { relevance: 1, novelty: 1, satisfaction: 1 }
   },
   stepSix: {
     step: 6,
-    seedSongId: 3,
+    seedSongId: getSeededSongByModelId(secondModel, 3),
     modelId: secondModel,
     songRatings: [],
     modelRating: { relevance: 1, novelty: 1, satisfaction: 1 }
   },
   stepSeven: {
     step: 7,
-    seedSongId: 1,
+    seedSongId: getSeededSongByModelId(thirdModel, 1),
     modelId: thirdModel,
     songRatings: [],
     modelRating: { relevance: 1, novelty: 1, satisfaction: 1 }
   },
   stepEight: {
     step: 8,
-    seedSongId: 2,
+    seedSongId: getSeededSongByModelId(thirdModel, 2),
     modelId: thirdModel,
     songRatings: [],
     modelRating: { relevance: 1, novelty: 1, satisfaction: 1 }
   },
   stepNine: {
     step: 9,
-    seedSongId: 3,
+    seedSongId: getSeededSongByModelId(thirdModel, 3),
     modelId: thirdModel,
     songRatings: [],
     modelRating: { relevance: 1, novelty: 1, satisfaction: 1 }

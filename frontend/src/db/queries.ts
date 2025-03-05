@@ -5,6 +5,8 @@ import { songs, surveys } from "./schema";
 import { SearchParams } from "@/lib/url-state";
 import { SurveyType } from "@/lib/survey-schema";
 import { postHogServer } from "@/lib/postHog-server";
+import { cookies } from "next/headers";
+import { recommendations } from "@/data/recommendations";
 
 export const ITEMS_PER_PAGE = 20;
 
@@ -128,8 +130,6 @@ export async function fetchSongs(songIds: string[]) {
   return songsArray;
 }
 
-
-
 export async function fetchSongsWithPagination(searchParams: SearchParams) {
   const page = Math.max(1, searchParams.page || 1);
   const limit = searchParams.limit || ITEMS_PER_PAGE;
@@ -194,11 +194,58 @@ export async function fetchSongById(id: number) {
   return result[0];
 }
 
-
 export async function fetchSongBySpotifyId(spotifyId: string) {
-  const result = await db.select().from(songs).where(eq(songs.spotify_id, spotifyId)).limit(1);
+  const result = await db
+    .select()
+    .from(songs)
+    .where(eq(songs.spotify_id, spotifyId))
+    .limit(1);
 
   return result[0];
+}
+
+export async function getSeededSong(step: number) {
+  const c = await cookies();
+  const modelOrderCookie = c.get("model-order");
+  const modelOrder = JSON.parse(modelOrderCookie?.value || "[]");
+  const [firstModel, secondModel, thirdModel] = modelOrder;
+  console.log("modelOrder", modelOrder);
+  const modelName = step <= 3 ? firstModel : step <= 6 ? secondModel : thirdModel;
+
+  console.log("modelName", modelName);
+  const playlistId = step % 3 === 0 ? 3 : step % 3;
+
+  console.log("playlistId", playlistId);
+  const seededSong = recommendations[modelName + "playlist" + playlistId].seededSong;
+
+  console.log("seededSong", seededSong);
+
+  const result = await db.select().from(songs).where(eq(songs.spotify_id, seededSong)).limit(1);
+
+  return result[0];
+}
+
+export async function getRecommendations(step: number) {
+  const c = await cookies();
+  const modelOrderCookie = c.get("model-order");
+  const modelOrder = JSON.parse(modelOrderCookie?.value || "[]");
+  console.log("modelOrder", modelOrder);
+  const [firstModel, secondModel, thirdModel] = modelOrder;
+  const modelName =
+    step <= 3 ? firstModel : step <= 6 ? secondModel : thirdModel;
+    const playlistId = step % 3 === 0 ? 3 : step % 3;
+    console.log("modelName", modelName);
+    console.log("playlistId", playlistId);
+    console.log("Key",modelName + "playlist" + playlistId)
+  const recommendationsList =
+    recommendations[modelName + "playlist" + playlistId].recommendations;
+
+  console.log("recommendationsList", recommendationsList);
+  const songsArray = await db
+    .select()
+    .from(songs)
+    .where(inArray(songs.spotify_id, recommendationsList));
+  return songsArray;
 }
 
 export async function insertSurvey(survey: SurveyType) {

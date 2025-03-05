@@ -21,7 +21,7 @@ import { StepTenType, SurveyType } from "@/lib/survey-schema"
 
 
 const initialState: FormErrors = {}
-const modelIdToPreferenceMap: { [key: number]: StepTenType["preference"]} = {
+const modelIdToPreferenceMap: { [key: number]: StepTenType["preference"] } = {
   1: "model1",
   2: "model2",
   3: "model3",
@@ -61,27 +61,11 @@ export default function StepFourForm() {
     }
 
     if (name === "preference") {
+      const model = modelIdToPreferenceMap[Number(value)]
+      updateSurveyDetails("review", {
+        preference: model,
+      })
 
-      switch (value) {
-        case "1":
-          const model1 = modelIdToPreferenceMap[Number(surveyData.stepOne.modelId)]
-          updateSurveyDetails("review", {
-            preference: model1,
-          })
-          break
-        case "2":
-          const model2 = modelIdToPreferenceMap[Number(surveyData.stepFour.modelId)]
-          updateSurveyDetails("review", {
-            preference: model2,
-          })
-          break
-        case "3":
-          const model3 = modelIdToPreferenceMap[Number(surveyData.stepThree.modelId)]
-          updateSurveyDetails("review", {
-            preference: model3,
-          })
-          break
-      }
     }
   }
   return (

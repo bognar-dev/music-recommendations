@@ -23,8 +23,15 @@ interface SubmitSurveyActionReturnType {
 export const submitSurveyAction = async (
   survey: SurveyType
 ): Promise<SubmitSurveyActionReturnType> => {
+  const c = await cookies()
+  const modelOrderCookie = c.get("model-order")
+  const modelOrder = JSON.parse(modelOrderCookie?.value || "[]")
+  const [firstModel, secondModel, thirdModel] = modelOrder
+  const modelPreference = survey.review.preference
+  const modelName = modelPreference === "model1" ? firstModel : modelPreference === "model2" ? secondModel : thirdModel
+  survey.review.preference = modelName
   const validated = surveySchema.safeParse(survey);
-
+  
   if (!validated.success) {
     const errors = validated.error.issues;
 
@@ -60,6 +67,10 @@ export const submitSurveyAction = async (
       errorMsg: "Please validate all information.",
     };
   }
+
+ 
+  
+
 
   
   postHogServer.capture({

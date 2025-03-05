@@ -37,6 +37,7 @@ const Page: React.FC = async () => {
                                 "use server";
                                 const cookieStore = await cookies()
                                 cookieStore.delete('accepted-terms')
+                                cookieStore.delete('model-order')
                             }}
                             className="align-top font-azeretMono font-light text-foreground text-base md:mt-20"
                         >

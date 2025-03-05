@@ -21,6 +21,7 @@ type SurveyContextType = {
     surveyData: SurveyType;
     updateSurveyDetails: (step: keyof SurveyType, data: Partial<SurveyType[keyof SurveyType]>) => void;
     dataLoaded: boolean;
+    setModelOrder: (modelOrder: string[]) => void;
     resetLocalStorage: () => void;
 };
 
@@ -76,6 +77,53 @@ export const SurveyContextProvider = ({
         []
     );
 
+    const setModelOrder = useCallback(
+        (modelOrder: string[]) => {
+            
+            
+            setSurveyData(prev => ({
+                ...prev,
+                stepOne: {
+                    ...prev.stepOne,
+                    modelId: modelOrder[0],
+                },
+                stepTwo: {
+                    ...prev.stepTwo,
+                    modelId: modelOrder[0],
+                },
+                stepThree: {
+                    ...prev.stepThree,
+                    modelId: modelOrder[0],
+                },
+                stepFour: {
+                    ...prev.stepFour,
+                    modelId: modelOrder[1],
+                },
+                stepFive: {
+                    ...prev.stepFive,
+                    modelId: modelOrder[1],
+                },
+                stepSix: {
+                    ...prev.stepSix,
+                    modelId: modelOrder[1],
+                },
+                stepSeven: {
+                    ...prev.stepSeven,
+                    modelId: modelOrder[2],
+                },
+                stepEight: {
+                    ...prev.stepEight,
+                    modelId: modelOrder[2],
+                },
+                stepNine: {
+                    ...prev.stepNine,
+                    modelId: modelOrder[2],
+                },
+
+            }));
+        }
+    , []);
+
     const saveDataToLocalStorage = (currentSurveyData: SurveyType) => {
         localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(currentSurveyData));
     };
@@ -92,8 +140,10 @@ export const SurveyContextProvider = ({
             dataLoaded,
             updateSurveyDetails,
             resetLocalStorage,
+            setModelOrder,
+
         }),
-        [surveyData, dataLoaded, updateSurveyDetails]
+        [surveyData, dataLoaded, updateSurveyDetails, setModelOrder]
     );
 
     return (
