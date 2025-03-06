@@ -47,7 +47,7 @@ const Page: React.FC = async () => {
                                 damping: 21,
                             }}
                         >
-                            {t('hero')}
+                        CAN ALBUM COVERS BE USED TO MAKE MUSIC RECOMMENDATIONS
 
                         </VerticalCutReveal>
                         <p className='text-sm'>Bachelor Thesis Survey</p>
