@@ -83,6 +83,7 @@ const TermsPage = () => {
                     </TabsContent>
                     <TabsContent value="tab2">
                         <div className="bg-card/50 backdrop-blur-sm p-4 rounded-lg">
+                        <iframe src="https://scribehow.com/embed/How_To_Complete_the_Music_Recommendations_Survey__ZdLK9f-JTRiC7FSAr6t3MA?skipIntro=true" width="100%" height="640" allowFullScreen frameBorder="0"></iframe>
                             <section className="text-center">
                                 <h2 className="text-2xl font-semibold text-primary mb-4">{t('guide.title')}</h2>
                                 <p className="mb-6 text-md text-muted-foreground">{t('guide.intro')}</p>
