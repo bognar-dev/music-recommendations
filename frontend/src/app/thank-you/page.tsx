@@ -51,6 +51,11 @@ export default async function ThankYouPage() {
                             {t('exploreDataset')}
                         </Link>
                     </Button>
+                    <Button asChild variant="default" className="text-foreground">
+                        <Link href="https://surveyswap.io/sr/8Q9C-ID1A-JHTL">
+                            {'Get your Survey Swap Karma :) 8Q9C-ID1A-JHTL'}
+                        </Link>
+                    </Button>
                 </div>
             </div>
         </div>
