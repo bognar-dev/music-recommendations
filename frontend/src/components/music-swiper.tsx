@@ -163,7 +163,8 @@ export default function MusicSwiper({ seedSong, recommendations, step,  }: Music
     <div className="container flex flex-col items-center max-w-md px-4 py-8 mx-auto gap-8 min-h-screen ">
 
       {/* Seed song */}
-      <h3 className="text-lg font-bold">Recommendations based on</h3>
+      <p className="text-md text-center">After completing this there will be two more recommendation lists you have to review for this model and then you will get the same base songs with different recommendations from two more models</p>
+      <h3 className="text-lg font-bold">Recommendations based on this one song:</h3>
       <SeedSong song={seedSong} />
 
       {/* Controls */}
