@@ -163,6 +163,7 @@ export default function MusicSwiper({ seedSong, recommendations, step,  }: Music
     <div className="container flex flex-col items-center max-w-md px-4 py-8 mx-auto gap-8 min-h-screen ">
 
       {/* Seed song */}
+      <h3 className="text-lg font-bold">Recommendations based on</h3>
       <SeedSong song={seedSong} />
 
       {/* Controls */}
@@ -186,10 +187,12 @@ export default function MusicSwiper({ seedSong, recommendations, step,  }: Music
       <SwipeProgress current={currentIndex} total={recommendations.length} liked={likedSongs.length} />
       {/* Card stack */}
 
+      <h3 className="text-lg font-bold">Recommendations to rate</h3>
+
       <AnimatePresence>
 
         {!isFinished ? (
-          <div className="relative w-full h-[400px] ">
+          <div className="relative  h-[100px] w-3/4 md:w-full md:h-[400px] ">
             {/* Show next 3 cards for stack effect */}
             {recommendations.slice(currentIndex, currentIndex + 3).map((song, index) => (
               <SongCard

@@ -7,7 +7,7 @@ export default function MusicSwiperSkeleton() {
   return (
     <div className="container flex flex-col items-center max-w-md px-4 py-8 mx-auto gap-8 min-h-screen">
       {/* Seed song skeleton */}
-      <div className="relative w-full bg-spotify-dark-gray rounded-xl">
+      <div className="relative w-full bg-foreground rounded-xl">
         <div className="flex items-center p-4 space-x-4">
           <Skeleton className="relative flex-shrink-0 w-16 h-16 rounded-md" />
           <div className="flex-1">

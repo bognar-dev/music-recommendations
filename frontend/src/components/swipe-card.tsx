@@ -46,8 +46,8 @@ export default function SongCard({ song, index, handleSwipe, isActive }: SongCar
 
   // Handle drag end
   const handleDragEnd = (event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
-    const threshold = 300
-    const velocity = 2500
+    const threshold = window.innerWidth < 768 ? 200 : 300
+    const velocity = 1800
     console.log(info.velocity.x)
     // Calculate if the card should be dismissed based on drag distance or velocity
     const shouldDismiss = Math.abs(info.offset.x) > threshold || Math.abs(info.velocity.x) > velocity
