@@ -1,14 +1,14 @@
-import { recommendations } from '@/data/recommendations';
+import { recommendations } from '../data/recommendations';
 import z from 'zod';
 
 // Define common types that are reused
-const songRatingSchema = z.object({
+export const songRatingSchema = z.object({
   songId: z.number(),
   songName: z.string(),
   rating: z.boolean()
 });
 
-const modelRatingSchema = z.object({
+export const modelRatingSchema = z.object({
   relevance: z.number().min(1).max(5).int().default(1),
   novelty: z.number().min(1).max(5).int().default(1),
   satisfaction: z.number().min(1).max(5).int().default(1)

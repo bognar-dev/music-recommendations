@@ -1,4 +1,4 @@
-import { Song } from "@/db/schema";
+import { Song } from "../db/schema";
 import { beforeEach, describe, expect, it } from "vitest";
 import { shuffleModels } from "../utils/shuffle";
 
