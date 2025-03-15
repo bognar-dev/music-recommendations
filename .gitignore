@@ -9,3 +9,4 @@ cleaned_data.csv
 cleaned_data_both_efficientnet_v2_features.pkl
 result.csv
 cleaned_data_both_efficientnet_v2_features.csv
+.env
