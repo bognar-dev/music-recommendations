@@ -178,13 +178,13 @@ print("\n=== ANALYZING RESEARCH QUESTIONS AND HYPOTHESES ===")
 # Define model types
 ratings_df['model_type'] = ratings_df['model_id'].map({
     'model1': 'Unimodal (Audio Only)', 
-    'model2': 'Multimodal (Simple)', 
+    'model2': 'Unimodal (Album Covers Only)', 
     'model3': 'Multimodal (Advanced)'
 })
 
 song_ratings_df['model_type'] = song_ratings_df['model_id'].map({
     'model1': 'Unimodal (Audio Only)', 
-    'model2': 'Multimodal (Simple)', 
+    'model2': 'Unimodal (Album Covers Only)', 
     'model3': 'Multimodal (Advanced)'
 })
 
@@ -228,7 +228,7 @@ sns.stripplot(x='model_id', y='relevance', data=ratings_df, color='black', alpha
 plt.title('Relevance Ratings by Model Type', fontsize=16)
 plt.xlabel('Model Type', fontsize=14)
 plt.ylabel('Relevance Rating (1-5)', fontsize=14)
-plt.xticks([0, 1, 2], ['Unimodal (Audio Only)', 'Multimodal (Simple)', 'Multimodal (Advanced)'], fontsize=12)
+plt.xticks([0, 1, 2], ['Unimodal (Audio Only)', 'Unimodal (Album Covers)', 'Multimodal (Advanced)'], fontsize=12)
 plt.yticks(fontsize=12)
 
 plt.ylim(0.5, 5.5)
@@ -309,7 +309,7 @@ sns.boxplot(x='model_id', y='novelty', data=ratings_df, palette='viridis')
 plt.title('Novelty Ratings by Model Type')
 plt.xlabel('Model Type')
 plt.ylabel('Novelty Rating (1-5)')
-plt.xticks([0, 1, 2], ['Unimodal', 'Multimodal (S)', 'Multimodal (A)'])
+plt.xticks([0, 1, 2], ['Unimodal (Audio Only)', 'Unimodal (Album Covers)', 'Multimodal (Advanced)'])
 
 plt.subplot(1, 2, 2)
 positive_pct_df = song_ratings_df.groupby('model_id')['rating'].mean().reset_index()
@@ -318,7 +318,7 @@ sns.barplot(x='model_id', y='rating', data=positive_pct_df, palette='viridis')
 plt.title('Percentage of Positively Rated Songs')
 plt.xlabel('Model Type')
 plt.ylabel('Positive Ratings (%)')
-plt.xticks([0, 1, 2], ['Unimodal', 'Multimodal (S)', 'Multimodal (A)'])
+plt.xticks([0, 1, 2], ['Unimodal (Audio Only)', 'Unimodal (Album Covers)', 'Multimodal (Advanced)'])
 plt.tight_layout()
 plt.savefig('results/figures/h2_novelty_and_positive_ratings.png')
 
@@ -367,7 +367,7 @@ sns.boxplot(x='model_id', y='satisfaction', data=ratings_df, palette='viridis')
 plt.title('Satisfaction Ratings by Model Type')
 plt.xlabel('Model Type')
 plt.ylabel('Satisfaction Rating (1-5)')
-plt.xticks([0, 1, 2], ['Unimodal', 'Multimodal (S)', 'Multimodal (A)'])
+plt.xticks([0, 1, 2], ['Unimodal (Audio Only)', 'Unimodal (Album Covers)', 'Multimodal (Advanced)'])
 
 plt.subplot(1, 2, 2)
 model_preferences.plot(kind='bar', color=sns.color_palette('viridis', 3))
