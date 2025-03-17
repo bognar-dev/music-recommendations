@@ -64,8 +64,13 @@ df['age_group'] = pd.cut(df['age'], bins=bins, labels=labels, right=False)
 print("Extracting model ratings and song data...")
 
 # - model1: Audio only (unimodal)
-# - model2: Audio + Album Cover (multimodal - simple)
-# - model3: Audio + Album Cover with advanced features (multimodal - advanced)
+# - model2: Album Cover (unimodal)
+# - model3: Audio + Album Cover (multimodal)
+model_names = {
+    'model1': 'Audio only (unimodal)',
+    'model2': 'Album Cover (unimodal)',
+    'model3': 'Audio + Album Cover (multimodal)'
+}
 
 # Define seed song information
 seed_song_info = {
@@ -179,13 +184,13 @@ print("\n=== ANALYZING RESEARCH QUESTIONS AND HYPOTHESES ===")
 ratings_df['model_type'] = ratings_df['model_id'].map({
     'model1': 'Unimodal (Audio Only)', 
     'model2': 'Unimodal (Album Covers Only)', 
-    'model3': 'Multimodal (Advanced)'
+    'model3': 'Multimodal (Combined)'
 })
 
 song_ratings_df['model_type'] = song_ratings_df['model_id'].map({
     'model1': 'Unimodal (Audio Only)', 
     'model2': 'Unimodal (Album Covers Only)', 
-    'model3': 'Multimodal (Advanced)'
+    'model3': 'Multimodal (Combined)'
 })
 
 # ---- H1: RELEVANCE - MULTIMODAL ENHANCEMENT ----
@@ -199,20 +204,19 @@ print("\nRelevance Scores by Model:")
 print(relevance_by_model)
 
 # T-test for relevance between unimodal and multimodal
-unimodal_relevance = ratings_df[ratings_df['model_id'] == 'model1']['relevance']
-multimodal_simple = ratings_df[ratings_df['model_id'] == 'model2']['relevance']
-multimodal_advanced = ratings_df[ratings_df['model_id'] == 'model3']['relevance']
-multimodal_combined = pd.concat([multimodal_simple, multimodal_advanced])
+unimodal_audio_relevance = ratings_df[ratings_df['model_id'] == 'model1']['relevance']
+unimodal_covers_relevance = ratings_df[ratings_df['model_id'] == 'model2']['relevance']
+multimodal_relevance = ratings_df[ratings_df['model_id'] == 'model3']['relevance']
 
-# T-test: Unimodal vs. Multimodal (combined)
-t_stat, p_value = stats.ttest_ind(unimodal_relevance, multimodal_combined, equal_var=False)
-print(f"\nT-test for Relevance (Unimodal vs. Multimodal):")
+# T-test: Unimodal Audio vs. Multimodal (combined)
+t_stat, p_value = stats.ttest_ind(unimodal_audio_relevance, multimodal_relevance, equal_var=False)
+print(f"\nT-test for Relevance (Unimodal Audio vs. Multimodal):")
 print(f"t-statistic: {t_stat:.4f}, p-value: {p_value:.4f}")
 print(f"Result: {'Significant difference' if p_value < 0.05 else 'No significant difference'}")
 
 # Mann-Whitney U test (non-parametric alternative)
-u_stat, p_value_mw = stats.mannwhitneyu(unimodal_relevance, multimodal_combined)
-print(f"\nMann-Whitney U test for Relevance (Unimodal vs. Multimodal):")
+u_stat, p_value_mw = stats.mannwhitneyu(unimodal_audio_relevance, multimodal_relevance)
+print(f"\nMann-Whitney U test for Relevance (Unimodal Audio vs. Multimodal):")
 print(f"U-statistic: {u_stat:.4f}, p-value: {p_value_mw:.4f}")
 print(f"Result: {'Significant difference' if p_value_mw < 0.05 else 'No significant difference'}")
 
@@ -334,12 +338,9 @@ print(satisfaction_by_model)
 
 # T-test for satisfaction between unimodal and multimodal
 unimodal_satisfaction = ratings_df[ratings_df['model_id'] == 'model1']['satisfaction']
-multimodal_combined_satisfaction = pd.concat([
-    ratings_df[ratings_df['model_id'] == 'model2']['satisfaction'],
-    ratings_df[ratings_df['model_id'] == 'model3']['satisfaction']
-])
+multimodal_satisfaction = ratings_df[ratings_df['model_id'] == 'model3']['satisfaction']
 
-t_stat_sat, p_value_sat = stats.ttest_ind(unimodal_satisfaction, multimodal_combined_satisfaction, equal_var=False)
+t_stat_sat, p_value_sat = stats.ttest_ind(unimodal_satisfaction, multimodal_satisfaction, equal_var=False)
 print(f"\nT-test for Satisfaction (Unimodal vs. Multimodal):")
 print(f"t-statistic: {t_stat_sat:.4f}, p-value: {p_value_sat:.4f}")
 print(f"Result: {'Significant difference' if p_value_sat < 0.05 else 'No significant difference'}")
@@ -370,11 +371,11 @@ plt.ylabel('Satisfaction Rating (1-5)')
 plt.xticks([0, 1, 2], ['Unimodal (Audio Only)', 'Unimodal (Album Covers)', 'Multimodal (Advanced)'])
 
 plt.subplot(1, 2, 2)
-model_preferences.plot(kind='bar', color=sns.color_palette('viridis', 3))
+model_preferences.sort_values(ascending=True).plot(kind='bar', color=sns.color_palette('viridis', 3))
 plt.title('Overall Model Preferences')
 plt.xlabel('Model Type')
 plt.ylabel('Count')
-plt.xticks(rotation=0)
+plt.xticks([0, 1, 2], ['Unimodal (Audio Only)', 'Unimodal (Album Covers)', 'Multimodal (Advanced)'])
 plt.tight_layout()
 plt.savefig('results/figures/h3_satisfaction_and_preferences.png')
 
@@ -441,10 +442,7 @@ for genre in ratings_df['genre'].unique():
     
     # T-test for this specific genre
     genre_unimodal = genre_data[genre_data['model_id'] == 'model1']['satisfaction']
-    genre_multimodal = pd.concat([
-        genre_data[genre_data['model_id'] == 'model2']['satisfaction'],
-        genre_data[genre_data['model_id'] == 'model3']['satisfaction']
-    ])
+    genre_multimodal = genre_data[genre_data['model_id'] == 'model3']['satisfaction']
     
     if len(genre_unimodal) > 0 and len(genre_multimodal) > 0:
         try:
@@ -470,13 +468,13 @@ for genre in ratings_df['genre'].unique():
                     
                 values = [model_data[metric].mean() for metric in metrics]
                 values += values[:1]  # Close the loop
-                
-                ax.plot(angles, values, linewidth=2, label=f"{model_id}")
+
+                ax.plot(angles, values, linewidth=2, label=model_names[model_id])
                 ax.fill(angles, values, alpha=0.25)
             
             ax.set_xticks(angles[:-1])
             ax.set_xticklabels(metrics)
-            ax.set_yticks([1, 2, 3, 4, 5])
+            ax.set_yticks([1, 2, 3, 4])
             ax.set_title(f"Model Performance for Genre: {genre}")
             ax.legend(loc='upper right')
             
@@ -671,19 +669,19 @@ hypothesis_results = pd.DataFrame({
         'H4: Genre-Specific Impact'
     ],
     'Finding': [
-        f"Multimodal Models: Higher relevance ratings  (M={multimodal_combined.mean():.2f}) over Unimodal (M={unimodal_relevance.mean():.2f}).",
+        f"Multimodal Models: Higher relevance ratings  (M={multimodal_relevance.mean():.2f}) over Unimodal (M={unimodal_audio_relevance.mean():.2f}).",
         f"MM Models: Lower novelty ratings.",
-        f"Multimodal Models: Lower satisfaction ratings (M={multimodal_combined_satisfaction.mean():.2f}) compareed to Unimodal models (M={unimodal_satisfaction.mean():.2f}).",
+        f"Multimodal Models: Lower satisfaction ratings (M={multimodal_satisfaction.mean():.2f}) compareed to Unimodal models (M={unimodal_satisfaction.mean():.2f}).",
         "Evidence: Album covers impact various seed_song id models across different  genres, visual impacts can make the system great."
     ],
     "Result Summary": [
-        f"MM models achieved + {multimodal_combined.mean() - unimodal_relevance.mean()} relevance, over uniModal.",
+        f"MM models achieved + {multimodal_relevance.mean() - unimodal_audio_relevance.mean()} relevance, over uniModal audio.",
         f"",
         f"Less satisfied results but people had a preference, M={str(list(model_preferences.keys()))[1:-1]}" ,
         "Genre-specific patterns: Genre influences model results significantly.",
     ],
     'Conclusion Notes': [
-        f"Higher relevance ratings suggest visual enhancements have positive influence but it is small +{round(multimodal_combined.mean() - unimodal_relevance.mean(),3)}",
+        f"Higher relevance ratings suggest visual enhancements have positive influence but it is small +{round(multimodal_relevance.mean() - unimodal_audio_relevance.mean(),3)}",
         f"Model performance indicates that multimodal models may need other features.",
         "Model performance is different to people's overall satisfaction.",
         "Genre interaction needs model changes"
@@ -699,14 +697,17 @@ for genre in ratings_df['genre'].unique():
     genre_data = ratings_df[ratings_df['genre'] == genre]
     
     # Calculate differences between models for this genre
-    unimodal_mean = genre_data[genre_data['model_id'] == 'model1']['satisfaction'].mean()
-    multimodal_mean = genre_data[genre_data['model_id'].isin(['model2', 'model3'])]['satisfaction'].mean()
+    unimodal_audio_mean = genre_data[genre_data['model_id'] == 'model1']['satisfaction'].mean()
+    unimodal_covers_mean = genre_data[genre_data['model_id'] == 'model2']['satisfaction'].mean()
+    multimodal_mean = genre_data[genre_data['model_id'] == 'model3']['satisfaction'].mean()
     
-    difference = multimodal_mean - unimodal_mean
+    
+    difference = multimodal_mean - unimodal_audio_mean
     
     genre_findings.append({
         'Genre': genre,
-        'Unimodal Mean': unimodal_mean,
+        'Unimodal Audio Mean': unimodal_audio_mean,
+        'Unimodal Covers Mean': unimodal_covers_mean,
         'Multimodal Mean': multimodal_mean,
         'Difference': difference,
         'Impact': 'Strong positive' if difference > 1 else 
@@ -719,6 +720,178 @@ for genre in ratings_df['genre'].unique():
 genre_findings_df = pd.DataFrame(genre_findings)
 print("\nImpact of Album Covers by Genre:")
 print(genre_findings_df)
+
+
+# ---- ABSOLUTE SONG RATINGS ANALYSIS ----
+print("\n=== ABSOLUTE SONG RATINGS ANALYSIS ===")
+
+# Convert ratings to binary liked/not liked
+# Assuming ratings are 0 (dislike) or 1 (like)
+song_ratings_df['liked'] = song_ratings_df['rating'].astype(int)
+
+# Create output directory for absolute numbers results
+abs_dir = 'results/figures/absolute_numbers'
+os.makedirs(abs_dir, exist_ok=True)
+
+# 1. Overall liked/not liked by model
+model_absolute = song_ratings_df.groupby('model_id')['liked'].agg(['sum', 'count'])
+model_absolute['not_liked'] = model_absolute['count'] - model_absolute['sum']
+model_absolute.rename(columns={'sum': 'liked_count'}, inplace=True)
+
+print("\nAbsolute Numbers by Model Type:")
+print(model_absolute)
+
+# Visualization: Absolute liked/not liked by model
+plt.figure(figsize=(12, 6))
+model_likes = pd.DataFrame({
+    'Liked': model_absolute['liked_count'],
+    'Not Liked': model_absolute['not_liked']
+})
+model_likes.plot(kind='bar', stacked=True, color=['#2ecc71', '#e74c3c'])
+plt.title('Absolute Number of Liked vs. Not Liked Songs by Model', fontsize=16)
+plt.xlabel('Model Type', fontsize=14)
+plt.ylabel('Number of Songs', fontsize=14)
+plt.xticks(rotation=0)
+plt.legend(title='Rating', loc='upper right')
+plt.grid(axis='y', linestyle='--', alpha=0.7)
+for i, total in enumerate(model_absolute['count']):
+    plt.text(i, total + 5, f'Total: {total}', ha='center', fontweight='bold')
+plt.tight_layout()
+plt.savefig(f'{abs_dir}/liked_not_liked_by_model.png')
+
+# 2. Liked/not liked by playlist
+playlist_absolute = song_ratings_df.groupby('playlist_number')['liked'].agg(['sum', 'count'])
+playlist_absolute['not_liked'] = playlist_absolute['count'] - playlist_absolute['sum']
+playlist_absolute.rename(columns={'sum': 'liked_count'}, inplace=True)
+
+print("\nAbsolute Numbers by Playlist:")
+print(playlist_absolute)
+
+# Visualization: Absolute liked/not liked by playlist
+plt.figure(figsize=(12, 6))
+playlist_likes = pd.DataFrame({
+    'Liked': playlist_absolute['liked_count'],
+    'Not Liked': playlist_absolute['not_liked']
+})
+playlist_likes.plot(kind='bar', stacked=True, color=['#2ecc71', '#e74c3c'])
+plt.title('Absolute Number of Liked vs. Not Liked Songs by Playlist', fontsize=16)
+plt.xlabel('Playlist Number', fontsize=14)
+plt.ylabel('Number of Songs', fontsize=14)
+plt.xticks(rotation=0)
+plt.legend(title='Rating', loc='upper right')
+plt.grid(axis='y', linestyle='--', alpha=0.7)
+for i, total in enumerate(playlist_absolute['count']):
+    plt.text(i, total + 5, f'Total: {total}', ha='center', fontweight='bold')
+plt.tight_layout()
+plt.savefig(f'{abs_dir}/liked_not_liked_by_playlist.png')
+
+# 3. Liked/not liked by model and playlist
+model_playlist_absolute = song_ratings_df.groupby(['model_id', 'playlist_number'])['liked'].agg(['sum', 'count'])
+model_playlist_absolute['not_liked'] = model_playlist_absolute['count'] - model_playlist_absolute['sum']
+model_playlist_absolute.rename(columns={'sum': 'liked_count'}, inplace=True)
+model_playlist_absolute = model_playlist_absolute.reset_index()
+
+print("\nAbsolute Numbers by Model and Playlist:")
+print(model_playlist_absolute)
+
+# Visualization: Heatmap of liked songs by model and playlist
+liked_pivot = model_playlist_absolute.pivot_table(
+    index='model_id',
+    columns='playlist_number',
+    values='liked_count',
+    fill_value=0
+)
+
+# Convert to integers before plotting
+liked_pivot = liked_pivot.astype(int)
+
+plt.figure(figsize=(10, 6))
+sns.heatmap(liked_pivot, annot=True, fmt="d", cmap="YlGn", linewidths=.5)
+plt.title('Number of Liked Songs by Model and Playlist', fontsize=16)
+plt.ylabel('Model Type', fontsize=14)
+plt.xlabel('Playlist Number', fontsize=14)
+plt.tight_layout()
+plt.savefig(f'{abs_dir}/liked_heatmap_by_model_playlist.png')
+
+# Visualization: Heatmap of not liked songs by model and playlist
+not_liked_pivot = model_playlist_absolute.pivot_table(
+    index='model_id',
+    columns='playlist_number',
+    values='not_liked',
+    fill_value=0
+)
+
+# Convert to integers before plotting
+not_liked_pivot = not_liked_pivot.astype(int)
+
+plt.figure(figsize=(10, 6))
+sns.heatmap(not_liked_pivot, annot=True, fmt="d", cmap="YlOrRd", linewidths=.5)
+plt.title('Number of Not Liked Songs by Model and Playlist', fontsize=16)
+plt.ylabel('Model Type', fontsize=14)
+plt.xlabel('Playlist Number', fontsize=14)
+plt.tight_layout()
+plt.savefig(f'{abs_dir}/not_liked_heatmap_by_model_playlist.png')
+
+# 4. Stacked bar chart showing liked/not liked for each model-playlist combination
+plt.figure(figsize=(14, 8))
+
+# Prepare data for stacked bar chart
+model_playlist_df = model_playlist_absolute.copy()
+model_playlist_df['combination'] = model_playlist_df['model_id'] + ' - Playlist ' + model_playlist_df['playlist_number'].astype(str)
+
+# Sort by model and playlist
+model_playlist_df = model_playlist_df.sort_values(['model_id', 'playlist_number'])
+
+# Create stacked bar chart
+bar_width = 0.8
+bars = plt.bar(model_playlist_df['combination'], model_playlist_df['liked_count'], 
+               color='#2ecc71', label='Liked', width=bar_width)
+plt.bar(model_playlist_df['combination'], model_playlist_df['not_liked'], 
+        bottom=model_playlist_df['liked_count'], color='#e74c3c', label='Not Liked', width=bar_width)
+
+# Add total count labels on top of each bar
+for i, (_, row) in enumerate(model_playlist_df.iterrows()):
+    plt.text(i, row['count'] + 1, f'Total: {row["count"]}', ha='center', va='bottom', fontweight='bold')
+    
+    # Add count labels inside bars
+    if row['liked_count'] > 0:
+        plt.text(i, row['liked_count']/2, str(int(row['liked_count'])), ha='center', va='center', color='white', fontweight='bold')
+    
+    if row['not_liked'] > 0:
+        plt.text(i, row['liked_count'] + row['not_liked']/2, str(int(row['not_liked'])), 
+                ha='center', va='center', color='white', fontweight='bold')
+
+plt.title('Liked vs. Not Liked Songs by Model and Playlist', fontsize=16)
+plt.xlabel('Model - Playlist Combination', fontsize=14)
+plt.ylabel('Number of Songs', fontsize=14)
+plt.xticks(rotation=45, ha='right')
+plt.legend(title='Rating')
+plt.grid(axis='y', linestyle='--', alpha=0.3)
+plt.tight_layout()
+plt.savefig(f'{abs_dir}/liked_not_liked_by_model_playlist_stacked.png')
+
+# 5. Additional: Like percentage by model and playlist
+model_playlist_absolute['like_percentage'] = (model_playlist_absolute['liked_count'] / model_playlist_absolute['count'] * 100).round(1)
+
+print("\nLike Percentage by Model and Playlist:")
+print(model_playlist_absolute[['model_id', 'playlist_number', 'like_percentage', 'count']])
+
+# Visualization: Like percentage heatmap
+percentage_pivot = model_playlist_absolute.pivot_table(
+    index='model_id',
+    columns='playlist_number',
+    values='like_percentage',
+    fill_value=0
+)
+
+plt.figure(figsize=(10, 6))
+sns.heatmap(percentage_pivot, annot=True, fmt=".1f", cmap="RdYlGn", linewidths=.5, vmin=0, vmax=100)
+plt.title('Like Percentage (%) by Model and Playlist', fontsize=16)
+plt.ylabel('Model Type', fontsize=14)
+plt.xlabel('Playlist Number', fontsize=14)
+plt.tight_layout()
+plt.savefig(f'{abs_dir}/like_percentage_heatmap.png')
+    
 
 # Save summary tables
 hypothesis_results.to_csv('results/tables/hypothesis_results.csv', index=False)
@@ -749,7 +922,7 @@ with open('results/analysis_report.md', 'w') as f:
     f.write("### H1: Relevance - Multimodal Enhancement\n")
     f.write("Users will rate songs recommended by the multimodal system (audio + album cover) as significantly more relevant to the seed playlist compared to songs recommended by the unimodal system (audio only).\n\n")
     f.write(f"**Result**: {'Supported' if p_value < 0.05 else 'Not supported'} (p = {p_value:.4f})\n\n")
-    f.write(f"Multimodal models had {'higher' if unimodal_relevance.mean() < multimodal_combined.mean() else 'lower'} relevance ratings (M={multimodal_combined.mean():.2f}) compared to unimodal (M={unimodal_relevance.mean():.2f}).\n\n")
+    f.write(f"Multimodal models had {'higher' if unimodal_audio_relevance.mean() < multimodal_relevance.mean() else 'lower'} relevance ratings (M={multimodal_relevance.mean():.2f}) compared to unimodal audio (M={unimodal_audio_relevance.mean():.2f}).\n\n")
     
     # H2
     f.write("### H2: Novelty - Unfamiliar Tracks within Theme\n")
@@ -761,7 +934,7 @@ with open('results/analysis_report.md', 'w') as f:
     f.write("### H3: User Satisfaction - Overall Preference\n")
     f.write("Users will express greater overall satisfaction with the recommendations generated by the multimodal system compared to the unimodal system.\n\n")
     f.write(f"**Result**: {'Supported' if p_value_sat < 0.05 else 'Not supported'} (p = {p_value_sat:.4f})\n\n")
-    f.write(f"Multimodal models had {'higher' if unimodal_satisfaction.mean() < multimodal_combined_satisfaction.mean() else 'lower'} satisfaction ratings (M={multimodal_combined_satisfaction.mean():.2f}) compared to unimodal (M={unimodal_satisfaction.mean():.2f}).\n\n")
+    f.write(f"Multimodal models had {'higher' if unimodal_satisfaction.mean() < multimodal_satisfaction.mean() else 'lower'} satisfaction ratings (M={multimodal_satisfaction.mean():.2f}) compared to unimodal (M={unimodal_satisfaction.mean():.2f}).\n\n")
     
     # H4
     f.write("### H4: Genre-Specific Impact\n")
@@ -770,10 +943,10 @@ with open('results/analysis_report.md', 'w') as f:
     
     # Genre-specific findings
     f.write("#### Impact by Genre\n\n")
-    f.write("| Genre | Unimodal Mean | Multimodal Mean | Difference | Impact |\n")
+    f.write("| Genre | Unimodal Audio Mean | Multimodal Mean | Difference | Impact |\n")
     f.write("|-------|--------------|-----------------|------------|--------|\n")
     for _, row in genre_findings_df.iterrows():
-        f.write(f"| {row['Genre']} | {row['Unimodal Mean']:.2f} | {row['Multimodal Mean']:.2f} | {row['Difference']:.2f} | {row['Impact']} |\n")
+        f.write(f"| {row['Genre']} | {row['Unimodal Audio Mean']:.2f} | {row['Multimodal Mean']:.2f} | {row['Difference']:.2f} | {row['Impact']} |\n")
     f.write("\n")
     
     # Demographic analysis
@@ -805,6 +978,19 @@ with open('results/analysis_report.md', 'w') as f:
     
     f.write("\nThese findings suggest that incorporating visual information from album covers into music recommendation systems can enhance the user experience, particularly for certain genres and user demographics.\n")
 
+
+    f.write("\n\n## Absolute Song Rating Numbers\n\n")
+    
+    f.write("### Overall Liked/Not Liked by Model\n\n")
+    f.write(model_absolute.to_markdown() + "\n\n")
+    
+    f.write("### Liked/Not Liked by Playlist\n\n")
+    f.write(playlist_absolute.to_markdown() + "\n\n")
+    
+    f.write("### Liked/Not Liked by Model and Playlist\n\n")
+    f.write(model_playlist_absolute.to_markdown() + "\n\n")
+    
+    f.write("These absolute numbers provide direct insight into user preferences across different recommendation models and playlist types.\n\n")
 print("\nAnalysis complete. Results saved to the 'results' directory.")
 print("- Tables saved in 'results/tables/'")
 print("- Figures saved in 'results/figures/'")
