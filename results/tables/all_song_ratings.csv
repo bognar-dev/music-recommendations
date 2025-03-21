@@ -4,51 +4,6 @@ survey_id,step,step_idx,model_id,seed_song_id,genre,playlist_number,song_id,song
 4,1,0,model1,0dqGfCMAGyDgpUAgLNOjWd,Metal/Hard Rock,1,28629,Desperate Cry,True,52,GBR,>35,Unimodal (Audio Only),1
 4,1,0,model1,0dqGfCMAGyDgpUAgLNOjWd,Metal/Hard Rock,1,44722,In My Darkest Hour - Remastered,True,52,GBR,>35,Unimodal (Audio Only),1
 4,1,0,model1,0dqGfCMAGyDgpUAgLNOjWd,Metal/Hard Rock,1,52203,Mariana's Trench,True,52,GBR,>35,Unimodal (Audio Only),1
-5,1,0,model3,0dqGfCMAGyDgpUAgLNOjWd,Metal/Hard Rock,1,3487,Territory,False,18,GBR,<20,Multimodal (Combined),0
-5,1,0,model3,0dqGfCMAGyDgpUAgLNOjWd,Metal/Hard Rock,1,18564,Bitter,False,18,GBR,<20,Multimodal (Combined),0
-5,1,0,model3,0dqGfCMAGyDgpUAgLNOjWd,Metal/Hard Rock,1,24734,Siberian Breaks,False,18,GBR,<20,Multimodal (Combined),0
-5,1,0,model3,0dqGfCMAGyDgpUAgLNOjWd,Metal/Hard Rock,1,36917,Am I Evil? (Remastered),False,18,GBR,<20,Multimodal (Combined),0
-5,1,0,model3,0dqGfCMAGyDgpUAgLNOjWd,Metal/Hard Rock,1,59600,Breakdown,False,18,GBR,<20,Multimodal (Combined),0
-5,2,1,model3,2WfaOiMkCvy7F5fcp2zZ8L,Pop/Synthpop,2,2306,History,False,18,GBR,<20,Multimodal (Combined),0
-5,2,1,model3,2WfaOiMkCvy7F5fcp2zZ8L,Pop/Synthpop,2,7071,Take It From Here,False,18,GBR,<20,Multimodal (Combined),0
-5,2,1,model3,2WfaOiMkCvy7F5fcp2zZ8L,Pop/Synthpop,2,32740,Freedom! '90 - Remastered,False,18,GBR,<20,Multimodal (Combined),0
-5,2,1,model3,2WfaOiMkCvy7F5fcp2zZ8L,Pop/Synthpop,2,52126,Whatcha Know 'Bout That,False,18,GBR,<20,Multimodal (Combined),0
-5,2,1,model3,2WfaOiMkCvy7F5fcp2zZ8L,Pop/Synthpop,2,63394,Drive,False,18,GBR,<20,Multimodal (Combined),0
-5,3,2,model3,4vUmTMuQqjdnvlZmAH61Qk,Pop/R&B,3,18347,You Know My Steez,False,18,GBR,<20,Multimodal (Combined),0
-5,3,2,model3,4vUmTMuQqjdnvlZmAH61Qk,Pop/R&B,3,21768,Not Thinkin' Bout You,False,18,GBR,<20,Multimodal (Combined),0
-5,3,2,model3,4vUmTMuQqjdnvlZmAH61Qk,Pop/R&B,3,24950,Wrecking Ball,False,18,GBR,<20,Multimodal (Combined),0
-5,3,2,model3,4vUmTMuQqjdnvlZmAH61Qk,Pop/R&B,3,31139,The Recluse,False,18,GBR,<20,Multimodal (Combined),0
-5,3,2,model3,4vUmTMuQqjdnvlZmAH61Qk,Pop/R&B,3,31187,If You’re Too Shy (Let Me Know) - Edit,False,18,GBR,<20,Multimodal (Combined),0
-5,4,3,model2,0dqGfCMAGyDgpUAgLNOjWd,Metal/Hard Rock,1,10891,Bed of Lies,False,18,GBR,<20,Unimodal (Album Covers Only),0
-5,4,3,model2,0dqGfCMAGyDgpUAgLNOjWd,Metal/Hard Rock,1,23378,Last Beautiful Girl,False,18,GBR,<20,Unimodal (Album Covers Only),0
-5,4,3,model2,0dqGfCMAGyDgpUAgLNOjWd,Metal/Hard Rock,1,26095,Still Searching,False,18,GBR,<20,Unimodal (Album Covers Only),0
-5,4,3,model2,0dqGfCMAGyDgpUAgLNOjWd,Metal/Hard Rock,1,36917,Am I Evil? (Remastered),False,18,GBR,<20,Unimodal (Album Covers Only),0
-5,4,3,model2,0dqGfCMAGyDgpUAgLNOjWd,Metal/Hard Rock,1,39664,More Justice,False,18,GBR,<20,Unimodal (Album Covers Only),0
-5,5,4,model2,2WfaOiMkCvy7F5fcp2zZ8L,Pop/Synthpop,2,30224,Leave Your Lover,False,18,GBR,<20,Unimodal (Album Covers Only),0
-5,5,4,model2,2WfaOiMkCvy7F5fcp2zZ8L,Pop/Synthpop,2,34156,One Particular Harbour,False,18,GBR,<20,Unimodal (Album Covers Only),0
-5,5,4,model2,2WfaOiMkCvy7F5fcp2zZ8L,Pop/Synthpop,2,46389,Money On My Mind,False,18,GBR,<20,Unimodal (Album Covers Only),0
-5,5,4,model2,2WfaOiMkCvy7F5fcp2zZ8L,Pop/Synthpop,2,50791,Star Of The Show,False,18,GBR,<20,Unimodal (Album Covers Only),0
-5,5,4,model2,2WfaOiMkCvy7F5fcp2zZ8L,Pop/Synthpop,2,50955,Grace,False,18,GBR,<20,Unimodal (Album Covers Only),0
-5,6,5,model2,4vUmTMuQqjdnvlZmAH61Qk,Pop/R&B,3,1428,Remember The Name (feat. Eminem & 50 Cent),False,18,GBR,<20,Unimodal (Album Covers Only),0
-5,6,5,model2,4vUmTMuQqjdnvlZmAH61Qk,Pop/R&B,3,4174,Berenstein,False,18,GBR,<20,Unimodal (Album Covers Only),0
-5,6,5,model2,4vUmTMuQqjdnvlZmAH61Qk,Pop/R&B,3,30472,Nice To Meet Ya,False,18,GBR,<20,Unimodal (Album Covers Only),0
-5,6,5,model2,4vUmTMuQqjdnvlZmAH61Qk,Pop/R&B,3,32886,Gold Mine,False,18,GBR,<20,Unimodal (Album Covers Only),0
-5,6,5,model2,4vUmTMuQqjdnvlZmAH61Qk,Pop/R&B,3,36345,I Lied (Intro),False,18,GBR,<20,Unimodal (Album Covers Only),0
-5,7,6,model1,0dqGfCMAGyDgpUAgLNOjWd,Metal/Hard Rock,1,658,遥か彼方,True,18,GBR,<20,Unimodal (Audio Only),1
-5,7,6,model1,0dqGfCMAGyDgpUAgLNOjWd,Metal/Hard Rock,1,10176,Evisceration Plague,False,18,GBR,<20,Unimodal (Audio Only),0
-5,7,6,model1,0dqGfCMAGyDgpUAgLNOjWd,Metal/Hard Rock,1,28629,Desperate Cry,False,18,GBR,<20,Unimodal (Audio Only),0
-5,7,6,model1,0dqGfCMAGyDgpUAgLNOjWd,Metal/Hard Rock,1,44722,In My Darkest Hour - Remastered,False,18,GBR,<20,Unimodal (Audio Only),0
-5,7,6,model1,0dqGfCMAGyDgpUAgLNOjWd,Metal/Hard Rock,1,52203,Mariana's Trench,True,18,GBR,<20,Unimodal (Audio Only),1
-5,8,7,model1,2WfaOiMkCvy7F5fcp2zZ8L,Pop/Synthpop,2,8364,Born To Boogie,False,18,GBR,<20,Unimodal (Audio Only),0
-5,8,7,model1,2WfaOiMkCvy7F5fcp2zZ8L,Pop/Synthpop,2,16589,Last Train - Remastered Version,False,18,GBR,<20,Unimodal (Audio Only),0
-5,8,7,model1,2WfaOiMkCvy7F5fcp2zZ8L,Pop/Synthpop,2,21693,I Know I'm Not Wrong - 2015 Remaster,False,18,GBR,<20,Unimodal (Audio Only),0
-5,8,7,model1,2WfaOiMkCvy7F5fcp2zZ8L,Pop/Synthpop,2,31585,these are my friends,False,18,GBR,<20,Unimodal (Audio Only),0
-5,8,7,model1,2WfaOiMkCvy7F5fcp2zZ8L,Pop/Synthpop,2,50907,Heat of the Summer,False,18,GBR,<20,Unimodal (Audio Only),0
-5,9,8,model1,4vUmTMuQqjdnvlZmAH61Qk,Pop/R&B,3,6188,Ayo,False,18,GBR,<20,Unimodal (Audio Only),0
-5,9,8,model1,4vUmTMuQqjdnvlZmAH61Qk,Pop/R&B,3,11399,Me Gusta,False,18,GBR,<20,Unimodal (Audio Only),0
-5,9,8,model1,4vUmTMuQqjdnvlZmAH61Qk,Pop/R&B,3,43548,Lose Yourself to Dance (feat. Pharrell Williams),False,18,GBR,<20,Unimodal (Audio Only),0
-5,9,8,model1,4vUmTMuQqjdnvlZmAH61Qk,Pop/R&B,3,46484,Síguelo Bailando,False,18,GBR,<20,Unimodal (Audio Only),0
-5,9,8,model1,4vUmTMuQqjdnvlZmAH61Qk,Pop/R&B,3,56742,FML,False,18,GBR,<20,Unimodal (Audio Only),0
 6,1,0,model3,0dqGfCMAGyDgpUAgLNOjWd,Metal/Hard Rock,1,3487,Territory,False,32,FIN,20-35,Multimodal (Combined),0
 6,1,0,model3,0dqGfCMAGyDgpUAgLNOjWd,Metal/Hard Rock,1,18564,Bitter,True,32,FIN,20-35,Multimodal (Combined),1
 6,1,0,model3,0dqGfCMAGyDgpUAgLNOjWd,Metal/Hard Rock,1,24734,Siberian Breaks,False,32,FIN,20-35,Multimodal (Combined),0
@@ -7713,3 +7668,93 @@ survey_id,step,step_idx,model_id,seed_song_id,genre,playlist_number,song_id,song
 186,9,8,model2,4vUmTMuQqjdnvlZmAH61Qk,Pop/R&B,3,30472,Nice To Meet Ya,True,59,CHE,>35,Unimodal (Album Covers Only),1
 186,9,8,model2,4vUmTMuQqjdnvlZmAH61Qk,Pop/R&B,3,32886,Gold Mine,True,59,CHE,>35,Unimodal (Album Covers Only),1
 186,9,8,model2,4vUmTMuQqjdnvlZmAH61Qk,Pop/R&B,3,36345,I Lied (Intro),False,59,CHE,>35,Unimodal (Album Covers Only),0
+187,1,0,model1,0dqGfCMAGyDgpUAgLNOjWd,Metal/Hard Rock,1,658,遥か彼方,True,18,GBR,<20,Unimodal (Audio Only),1
+187,1,0,model1,0dqGfCMAGyDgpUAgLNOjWd,Metal/Hard Rock,1,10176,Evisceration Plague,True,18,GBR,<20,Unimodal (Audio Only),1
+187,1,0,model1,0dqGfCMAGyDgpUAgLNOjWd,Metal/Hard Rock,1,28629,Desperate Cry,False,18,GBR,<20,Unimodal (Audio Only),0
+187,1,0,model1,0dqGfCMAGyDgpUAgLNOjWd,Metal/Hard Rock,1,44722,In My Darkest Hour - Remastered,True,18,GBR,<20,Unimodal (Audio Only),1
+187,1,0,model1,0dqGfCMAGyDgpUAgLNOjWd,Metal/Hard Rock,1,52203,Mariana's Trench,True,18,GBR,<20,Unimodal (Audio Only),1
+187,2,1,model1,2WfaOiMkCvy7F5fcp2zZ8L,Pop/Synthpop,2,8364,Born To Boogie,False,18,GBR,<20,Unimodal (Audio Only),0
+187,2,1,model1,2WfaOiMkCvy7F5fcp2zZ8L,Pop/Synthpop,2,16589,Last Train - Remastered Version,False,18,GBR,<20,Unimodal (Audio Only),0
+187,2,1,model1,2WfaOiMkCvy7F5fcp2zZ8L,Pop/Synthpop,2,21693,I Know I'm Not Wrong - 2015 Remaster,True,18,GBR,<20,Unimodal (Audio Only),1
+187,2,1,model1,2WfaOiMkCvy7F5fcp2zZ8L,Pop/Synthpop,2,31585,these are my friends,True,18,GBR,<20,Unimodal (Audio Only),1
+187,2,1,model1,2WfaOiMkCvy7F5fcp2zZ8L,Pop/Synthpop,2,50907,Heat of the Summer,True,18,GBR,<20,Unimodal (Audio Only),1
+187,3,2,model1,4vUmTMuQqjdnvlZmAH61Qk,Pop/R&B,3,6188,Ayo,False,18,GBR,<20,Unimodal (Audio Only),0
+187,3,2,model1,4vUmTMuQqjdnvlZmAH61Qk,Pop/R&B,3,11399,Me Gusta,False,18,GBR,<20,Unimodal (Audio Only),0
+187,3,2,model1,4vUmTMuQqjdnvlZmAH61Qk,Pop/R&B,3,43548,Lose Yourself to Dance (feat. Pharrell Williams),False,18,GBR,<20,Unimodal (Audio Only),0
+187,3,2,model1,4vUmTMuQqjdnvlZmAH61Qk,Pop/R&B,3,46484,Síguelo Bailando,False,18,GBR,<20,Unimodal (Audio Only),0
+187,3,2,model1,4vUmTMuQqjdnvlZmAH61Qk,Pop/R&B,3,56742,FML,True,18,GBR,<20,Unimodal (Audio Only),1
+187,4,3,model3,0dqGfCMAGyDgpUAgLNOjWd,Metal/Hard Rock,1,3487,Territory,False,18,GBR,<20,Multimodal (Combined),0
+187,4,3,model3,0dqGfCMAGyDgpUAgLNOjWd,Metal/Hard Rock,1,18564,Bitter,True,18,GBR,<20,Multimodal (Combined),1
+187,4,3,model3,0dqGfCMAGyDgpUAgLNOjWd,Metal/Hard Rock,1,24734,Siberian Breaks,False,18,GBR,<20,Multimodal (Combined),0
+187,4,3,model3,0dqGfCMAGyDgpUAgLNOjWd,Metal/Hard Rock,1,36917,Am I Evil? (Remastered),True,18,GBR,<20,Multimodal (Combined),1
+187,4,3,model3,0dqGfCMAGyDgpUAgLNOjWd,Metal/Hard Rock,1,59600,Breakdown,True,18,GBR,<20,Multimodal (Combined),1
+187,5,4,model3,2WfaOiMkCvy7F5fcp2zZ8L,Pop/Synthpop,2,2306,History,False,18,GBR,<20,Multimodal (Combined),0
+187,5,4,model3,2WfaOiMkCvy7F5fcp2zZ8L,Pop/Synthpop,2,7071,Take It From Here,False,18,GBR,<20,Multimodal (Combined),0
+187,5,4,model3,2WfaOiMkCvy7F5fcp2zZ8L,Pop/Synthpop,2,32740,Freedom! '90 - Remastered,False,18,GBR,<20,Multimodal (Combined),0
+187,5,4,model3,2WfaOiMkCvy7F5fcp2zZ8L,Pop/Synthpop,2,52126,Whatcha Know 'Bout That,False,18,GBR,<20,Multimodal (Combined),0
+187,5,4,model3,2WfaOiMkCvy7F5fcp2zZ8L,Pop/Synthpop,2,63394,Drive,True,18,GBR,<20,Multimodal (Combined),1
+187,6,5,model3,4vUmTMuQqjdnvlZmAH61Qk,Pop/R&B,3,18347,You Know My Steez,False,18,GBR,<20,Multimodal (Combined),0
+187,6,5,model3,4vUmTMuQqjdnvlZmAH61Qk,Pop/R&B,3,21768,Not Thinkin' Bout You,False,18,GBR,<20,Multimodal (Combined),0
+187,6,5,model3,4vUmTMuQqjdnvlZmAH61Qk,Pop/R&B,3,24950,Wrecking Ball,True,18,GBR,<20,Multimodal (Combined),1
+187,6,5,model3,4vUmTMuQqjdnvlZmAH61Qk,Pop/R&B,3,31139,The Recluse,True,18,GBR,<20,Multimodal (Combined),1
+187,6,5,model3,4vUmTMuQqjdnvlZmAH61Qk,Pop/R&B,3,31187,If You’re Too Shy (Let Me Know) - Edit,True,18,GBR,<20,Multimodal (Combined),1
+187,7,6,model2,0dqGfCMAGyDgpUAgLNOjWd,Metal/Hard Rock,1,10891,Bed of Lies,True,18,GBR,<20,Unimodal (Album Covers Only),1
+187,7,6,model2,0dqGfCMAGyDgpUAgLNOjWd,Metal/Hard Rock,1,23378,Last Beautiful Girl,True,18,GBR,<20,Unimodal (Album Covers Only),1
+187,7,6,model2,0dqGfCMAGyDgpUAgLNOjWd,Metal/Hard Rock,1,26095,Still Searching,False,18,GBR,<20,Unimodal (Album Covers Only),0
+187,7,6,model2,0dqGfCMAGyDgpUAgLNOjWd,Metal/Hard Rock,1,36917,Am I Evil? (Remastered),True,18,GBR,<20,Unimodal (Album Covers Only),1
+187,7,6,model2,0dqGfCMAGyDgpUAgLNOjWd,Metal/Hard Rock,1,39664,More Justice,False,18,GBR,<20,Unimodal (Album Covers Only),0
+187,8,7,model2,2WfaOiMkCvy7F5fcp2zZ8L,Pop/Synthpop,2,30224,Leave Your Lover,False,18,GBR,<20,Unimodal (Album Covers Only),0
+187,8,7,model2,2WfaOiMkCvy7F5fcp2zZ8L,Pop/Synthpop,2,34156,One Particular Harbour,False,18,GBR,<20,Unimodal (Album Covers Only),0
+187,8,7,model2,2WfaOiMkCvy7F5fcp2zZ8L,Pop/Synthpop,2,46389,Money On My Mind,False,18,GBR,<20,Unimodal (Album Covers Only),0
+187,8,7,model2,2WfaOiMkCvy7F5fcp2zZ8L,Pop/Synthpop,2,50791,Star Of The Show,False,18,GBR,<20,Unimodal (Album Covers Only),0
+187,8,7,model2,2WfaOiMkCvy7F5fcp2zZ8L,Pop/Synthpop,2,50955,Grace,True,18,GBR,<20,Unimodal (Album Covers Only),1
+187,9,8,model2,4vUmTMuQqjdnvlZmAH61Qk,Pop/R&B,3,1428,Remember The Name (feat. Eminem & 50 Cent),False,18,GBR,<20,Unimodal (Album Covers Only),0
+187,9,8,model2,4vUmTMuQqjdnvlZmAH61Qk,Pop/R&B,3,4174,Berenstein,True,18,GBR,<20,Unimodal (Album Covers Only),1
+187,9,8,model2,4vUmTMuQqjdnvlZmAH61Qk,Pop/R&B,3,30472,Nice To Meet Ya,False,18,GBR,<20,Unimodal (Album Covers Only),0
+187,9,8,model2,4vUmTMuQqjdnvlZmAH61Qk,Pop/R&B,3,32886,Gold Mine,False,18,GBR,<20,Unimodal (Album Covers Only),0
+187,9,8,model2,4vUmTMuQqjdnvlZmAH61Qk,Pop/R&B,3,36345,I Lied (Intro),False,18,GBR,<20,Unimodal (Album Covers Only),0
+5,1,0,model3,0dqGfCMAGyDgpUAgLNOjWd,Metal/Hard Rock,1,3487,Territory,False,18,GBR,<20,Multimodal (Combined),0
+5,1,0,model3,0dqGfCMAGyDgpUAgLNOjWd,Metal/Hard Rock,1,18564,Bitter,False,18,GBR,<20,Multimodal (Combined),0
+5,1,0,model3,0dqGfCMAGyDgpUAgLNOjWd,Metal/Hard Rock,1,24734,Siberian Breaks,False,18,GBR,<20,Multimodal (Combined),0
+5,1,0,model3,0dqGfCMAGyDgpUAgLNOjWd,Metal/Hard Rock,1,36917,Am I Evil? (Remastered),False,18,GBR,<20,Multimodal (Combined),0
+5,1,0,model3,0dqGfCMAGyDgpUAgLNOjWd,Metal/Hard Rock,1,59600,Breakdown,False,18,GBR,<20,Multimodal (Combined),0
+5,2,1,model3,2WfaOiMkCvy7F5fcp2zZ8L,Pop/Synthpop,2,2306,History,False,18,GBR,<20,Multimodal (Combined),0
+5,2,1,model3,2WfaOiMkCvy7F5fcp2zZ8L,Pop/Synthpop,2,7071,Take It From Here,False,18,GBR,<20,Multimodal (Combined),0
+5,2,1,model3,2WfaOiMkCvy7F5fcp2zZ8L,Pop/Synthpop,2,32740,Freedom! '90 - Remastered,False,18,GBR,<20,Multimodal (Combined),0
+5,2,1,model3,2WfaOiMkCvy7F5fcp2zZ8L,Pop/Synthpop,2,52126,Whatcha Know 'Bout That,False,18,GBR,<20,Multimodal (Combined),0
+5,2,1,model3,2WfaOiMkCvy7F5fcp2zZ8L,Pop/Synthpop,2,63394,Drive,False,18,GBR,<20,Multimodal (Combined),0
+5,3,2,model3,4vUmTMuQqjdnvlZmAH61Qk,Pop/R&B,3,18347,You Know My Steez,False,18,GBR,<20,Multimodal (Combined),0
+5,3,2,model3,4vUmTMuQqjdnvlZmAH61Qk,Pop/R&B,3,21768,Not Thinkin' Bout You,False,18,GBR,<20,Multimodal (Combined),0
+5,3,2,model3,4vUmTMuQqjdnvlZmAH61Qk,Pop/R&B,3,24950,Wrecking Ball,False,18,GBR,<20,Multimodal (Combined),0
+5,3,2,model3,4vUmTMuQqjdnvlZmAH61Qk,Pop/R&B,3,31139,The Recluse,False,18,GBR,<20,Multimodal (Combined),0
+5,3,2,model3,4vUmTMuQqjdnvlZmAH61Qk,Pop/R&B,3,31187,If You’re Too Shy (Let Me Know) - Edit,False,18,GBR,<20,Multimodal (Combined),0
+5,4,3,model2,0dqGfCMAGyDgpUAgLNOjWd,Metal/Hard Rock,1,10891,Bed of Lies,False,18,GBR,<20,Unimodal (Album Covers Only),0
+5,4,3,model2,0dqGfCMAGyDgpUAgLNOjWd,Metal/Hard Rock,1,23378,Last Beautiful Girl,False,18,GBR,<20,Unimodal (Album Covers Only),0
+5,4,3,model2,0dqGfCMAGyDgpUAgLNOjWd,Metal/Hard Rock,1,26095,Still Searching,False,18,GBR,<20,Unimodal (Album Covers Only),0
+5,4,3,model2,0dqGfCMAGyDgpUAgLNOjWd,Metal/Hard Rock,1,36917,Am I Evil? (Remastered),False,18,GBR,<20,Unimodal (Album Covers Only),0
+5,4,3,model2,0dqGfCMAGyDgpUAgLNOjWd,Metal/Hard Rock,1,39664,More Justice,False,18,GBR,<20,Unimodal (Album Covers Only),0
+5,5,4,model2,2WfaOiMkCvy7F5fcp2zZ8L,Pop/Synthpop,2,30224,Leave Your Lover,False,18,GBR,<20,Unimodal (Album Covers Only),0
+5,5,4,model2,2WfaOiMkCvy7F5fcp2zZ8L,Pop/Synthpop,2,34156,One Particular Harbour,False,18,GBR,<20,Unimodal (Album Covers Only),0
+5,5,4,model2,2WfaOiMkCvy7F5fcp2zZ8L,Pop/Synthpop,2,46389,Money On My Mind,False,18,GBR,<20,Unimodal (Album Covers Only),0
+5,5,4,model2,2WfaOiMkCvy7F5fcp2zZ8L,Pop/Synthpop,2,50791,Star Of The Show,False,18,GBR,<20,Unimodal (Album Covers Only),0
+5,5,4,model2,2WfaOiMkCvy7F5fcp2zZ8L,Pop/Synthpop,2,50955,Grace,False,18,GBR,<20,Unimodal (Album Covers Only),0
+5,6,5,model2,4vUmTMuQqjdnvlZmAH61Qk,Pop/R&B,3,1428,Remember The Name (feat. Eminem & 50 Cent),False,18,GBR,<20,Unimodal (Album Covers Only),0
+5,6,5,model2,4vUmTMuQqjdnvlZmAH61Qk,Pop/R&B,3,4174,Berenstein,False,18,GBR,<20,Unimodal (Album Covers Only),0
+5,6,5,model2,4vUmTMuQqjdnvlZmAH61Qk,Pop/R&B,3,30472,Nice To Meet Ya,False,18,GBR,<20,Unimodal (Album Covers Only),0
+5,6,5,model2,4vUmTMuQqjdnvlZmAH61Qk,Pop/R&B,3,32886,Gold Mine,False,18,GBR,<20,Unimodal (Album Covers Only),0
+5,6,5,model2,4vUmTMuQqjdnvlZmAH61Qk,Pop/R&B,3,36345,I Lied (Intro),False,18,GBR,<20,Unimodal (Album Covers Only),0
+5,7,6,model1,0dqGfCMAGyDgpUAgLNOjWd,Metal/Hard Rock,1,658,遥か彼方,True,18,GBR,<20,Unimodal (Audio Only),1
+5,7,6,model1,0dqGfCMAGyDgpUAgLNOjWd,Metal/Hard Rock,1,10176,Evisceration Plague,False,18,GBR,<20,Unimodal (Audio Only),0
+5,7,6,model1,0dqGfCMAGyDgpUAgLNOjWd,Metal/Hard Rock,1,28629,Desperate Cry,False,18,GBR,<20,Unimodal (Audio Only),0
+5,7,6,model1,0dqGfCMAGyDgpUAgLNOjWd,Metal/Hard Rock,1,44722,In My Darkest Hour - Remastered,False,18,GBR,<20,Unimodal (Audio Only),0
+5,7,6,model1,0dqGfCMAGyDgpUAgLNOjWd,Metal/Hard Rock,1,52203,Mariana's Trench,True,18,GBR,<20,Unimodal (Audio Only),1
+5,8,7,model1,2WfaOiMkCvy7F5fcp2zZ8L,Pop/Synthpop,2,8364,Born To Boogie,False,18,GBR,<20,Unimodal (Audio Only),0
+5,8,7,model1,2WfaOiMkCvy7F5fcp2zZ8L,Pop/Synthpop,2,16589,Last Train - Remastered Version,False,18,GBR,<20,Unimodal (Audio Only),0
+5,8,7,model1,2WfaOiMkCvy7F5fcp2zZ8L,Pop/Synthpop,2,21693,I Know I'm Not Wrong - 2015 Remaster,False,18,GBR,<20,Unimodal (Audio Only),0
+5,8,7,model1,2WfaOiMkCvy7F5fcp2zZ8L,Pop/Synthpop,2,31585,these are my friends,False,18,GBR,<20,Unimodal (Audio Only),0
+5,8,7,model1,2WfaOiMkCvy7F5fcp2zZ8L,Pop/Synthpop,2,50907,Heat of the Summer,False,18,GBR,<20,Unimodal (Audio Only),0
+5,9,8,model1,4vUmTMuQqjdnvlZmAH61Qk,Pop/R&B,3,6188,Ayo,False,18,GBR,<20,Unimodal (Audio Only),0
+5,9,8,model1,4vUmTMuQqjdnvlZmAH61Qk,Pop/R&B,3,11399,Me Gusta,False,18,GBR,<20,Unimodal (Audio Only),0
+5,9,8,model1,4vUmTMuQqjdnvlZmAH61Qk,Pop/R&B,3,43548,Lose Yourself to Dance (feat. Pharrell Williams),False,18,GBR,<20,Unimodal (Audio Only),0
+5,9,8,model1,4vUmTMuQqjdnvlZmAH61Qk,Pop/R&B,3,46484,Síguelo Bailando,False,18,GBR,<20,Unimodal (Audio Only),0
+5,9,8,model1,4vUmTMuQqjdnvlZmAH61Qk,Pop/R&B,3,56742,FML,False,18,GBR,<20,Unimodal (Audio Only),0
