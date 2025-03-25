@@ -1,36 +1,82 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Music Recommendation Study
 
-## Getting Started
+This repository contains the code for a research study exploring the impact of album covers on music recommendation systems. The study evaluates how visual album cover features may enhance recommendations through user feedback and statistical analysis.
 
-First, run the development server:
+## Project Overview
 
+- **Purpose:**  
+  Investigate whether adding album cover information to music recommendation algorithms improves user satisfaction, novelty, and overall relevance.
+
+- **Components:**  
+  - **Frontend:** A Next.js and React-based survey interface where users interact with multiple recommendation models.  
+  - **Backend & Analysis:** Python scripts perform statistical analyses (t-tests, ANCOVA, ANOVA) and generate visualizations to assess the study hypotheses.  
+  - **Database Layer:** Drizzle ORM defines database schemas, and metadata snapshots are maintained to manage survey data.
+  - **Testing:** Playwright end-to-end tests ensure smooth user interactions across various devices and validate key survey flows.
+  - **Analytics:** PostHog integration tracks page views and user events, providing insights into survey behavior.
+
+## Frontend Structure
+
+- **Pages:**  
+  - Survey steps (e.g., model recommendations, playlist swipers, review screens)  
+  - Terms and conditions, thank-you page, and home page
+
+- **Components:**  
+  - UI primitives (Sheet, Popover, Chart, etc.)
+  - Multi-step form components utilizing React context for state management and Zod for schema validation.
+  - Music-specific components such as SongDetailsPanel and MusicSwiper for interactive user experiences.
+
+- **State Management:**  
+  Built-in survey context handles data collection and persistence across multiple steps. The local storage is used to retain incomplete surveys.
+
+- **Styling & Theming:**  
+  Tailwind CSS combined with custom theming (light/dark mode) support a sleek, responsive design.
+
+## Backend & Analysis
+
+- **Python Modules:**  
+  - `analysis.py` handles statistical tests and visualization plots, saving results to the `results` directory.
+  - `voyager.py` focuses on data visualization and interactions with external data sources like Google Drive.
+
+- **Database Queries & Schema:**  
+  Drizzle ORM and associated SQL snapshots lay out the database structure for storing survey responses and recommendations.
+
+## Testing and Deployment
+
+- **End-to-End Testing:**  
+  Playwright tests emulate user flows—from survey initiation and navigation to final submission—ensuring a reliable user experience.
+
+- **Getting Started:**  
+  To launch the development server, run:
+  ```bash
+  npm run dev
+  ```
+  or the equivalent command for your package manager.
+
+- **Deployment:**  
+  Detailed deployment instructions are available in the [Next.js documentation](https://nextjs.org/docs/app/building-your-application/deploying).
+
+## Additional Tools
+
+- **Internationalization:**  
+  Messages and locale-specific texts are managed via JSON files under the messages directory.
+  
+- **Analytics:**  
+  PostHog is integrated to monitor survey engagement and track page views dynamically.
+
+## Conclusion
+
+This repository encapsulates a robust framework to evaluate the role of visual information in music recommendation systems, combining modern frontend technologies with comprehensive data analysis and testing workflows.
+
+## How to Run
+
+### Frontend Development Server
+To start the development server, run:
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Running End-to-End Tests
+To execute the Playwright tests, run:
+```bash
+npx playwright test
+```
