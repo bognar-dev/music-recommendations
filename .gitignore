@@ -1,4 +1,5 @@
 /venv
+/.venv
 /album_covers
 yolov8n.pt
 last_processed.txt
