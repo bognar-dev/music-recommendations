@@ -7,7 +7,7 @@ Original file is located at
     https://colab.research.google.com/drive/1LcY-HcksJi79uoRlRfuDctAqdsDRfv_h
 """
 
-!pip install pandas numpy scikit-learn voyager kneed
+# pip install pandas numpy scikit-learn voyager kneed
 
 """Connect to Google Drive"""
 

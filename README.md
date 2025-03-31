@@ -1,105 +1,145 @@
-# Music Recommendation Study
+# The Impact of Album Cover Features on Music Recommendation: A Multimodal Approach (NB302289-Comp302)
 
-This repository contains the code for a research study exploring the impact of album covers on music recommendation systems. The study evaluates how visual album cover features may enhance recommendations through user feedback and statistical analysis.
+This repository contains the code, analysis, and frontend application for a dissertation research study exploring the impact of album covers on music recommendation systems. The study evaluates how visual album cover features, potentially combined with audio features, may enhance recommendations, assessed through user feedback and statistical analysis.
 
 ## Project Overview
 
-- **Purpose:**  
-  Investigate whether adding album cover information to music recommendation algorithms improves user satisfaction, novelty, and overall relevance.
+-   **Purpose:**
+    Investigate whether adding album cover visual information to music recommendation algorithms improves user satisfaction, novelty, and overall relevance compared to audio-only approaches.
 
-- **Components:**  
-  - **Frontend:** A Next.js and React-based survey interface where users interact with multiple recommendation models.  
-  - **Backend & Analysis:** Python scripts perform statistical analyses (t-tests, ANCOVA, ANOVA) and generate visualizations to assess the study hypotheses.  
-  - **Database Layer:** Drizzle ORM defines database schemas, and metadata snapshots are maintained to manage survey data.
-  - **Testing:** Playwright end-to-end tests ensure smooth user interactions across various devices and validate key survey flows.
-  - **Analytics:** PostHog integration tracks page views and user events, providing insights into survey behavior.
+-   **Components:**
+    1.  **Frontend Survey Application:** A Next.js and React-based web application providing an interactive survey interface where users rate recommendations from different models (audio-only, visual-only, multimodal).
+    2.  **Feature Extraction:** Python scripts to process album cover images:
+        *   `addBasicImagefeatures.py`: Extracts traditional features like color histograms, dominant colors, brightness, texture (LBP) using OpenCV and scikit-image. Also handles image downloading.
+        *   `extract-cnn.py`: Extracts deep learning features using CNN models (e.g., EfficientNetV2, ResNet, VGG mentioned across project files).
+    3.  **Recommendation Engine:** Implements Approximate Nearest Neighbors (ANN) search using libraries like `Voyager` (primary, mentioned in dissertation) or `Annoy` (used in testing/notebooks) to find similar songs based on selected feature vectors.
+    4.  **Backend Analysis:** Python scripts (`analysis.py`) performing statistical analysis (t-tests, ANOVA, Chi-square, etc.) on user study data fetched from a PostgreSQL database. Uses libraries like Pandas, NumPy, SciPy, Statsmodels.
+    5.  **Database Layer:** PostgreSQL database to store survey responses. Schema likely managed via Drizzle ORM (mentioned in original README).
+    6.  **Visualization:** Generates plots (using Matplotlib, Seaborn, Plotly) and reports (`analysis_report.md`) summarizing findings, saved in the `results/` directory.
+    7.  **Testing:** Includes backend unit tests (Pytest), frontend unit/integration tests (Vitest), and frontend end-to-end tests (Playwright).
+    8.  **Analytics:** PostHog integration for tracking user engagement within the survey application.
 
-## Frontend Structure
+## Key Technologies & Libraries
 
-- **Pages:**  
-  - Survey steps (e.g., model recommendations, playlist swipers, review screens)  
-  - Terms and conditions, thank-you page, and home page
+-   **Frontend:** Next.js, React, TypeScript, Tailwind CSS, Shadcn UI, Zustand/React Context, Zod
+-   **Backend/Analysis:** Python (>=3.12), Pandas, NumPy, SciPy, Statsmodels, Matplotlib, Seaborn, SQLAlchemy, psycopg2-binary, python-dotenv
+-   **Machine Learning / Image:** scikit-learn, OpenCV, scikit-image, TensorFlow/Keras, Pillow
+-   **ANN Search:** Voyager, Annoy
+-   **Database:** PostgreSQL, Drizzle ORM (for schema)
+-   **Testing:** Pytest (backend), Vitest (frontend unit/integration), Playwright (frontend E2E)
+-   **Environment/Deps:** uv (recommended), Node.js/npm
+-   **Analytics:** PostHog
 
-- **Components:**  
-  - UI primitives (Sheet, Popover, Chart, etc.)
-  - Multi-step form components utilizing React context for state management and Zod for schema validation.
-  - Music-specific components such as SongDetailsPanel and MusicSwiper for interactive user experiences.
+## Prerequisites
 
-- **State Management:**  
-  Built-in survey context handles data collection and persistence across multiple steps. The local storage is used to retain incomplete surveys.
+*   **Python:** Version 3.12 or higher.
+*   **`uv`:** The recommended Python package manager for this project (`pip install uv`). `pip` can also be used.
+*   **Node.js:** Required for the frontend application (check `package.json` for specific version if needed, otherwise use a recent LTS version).
+*   **npm / yarn / pnpm:** Node.js package manager.
+*   **Git:** For cloning the repository.
+*   **PostgreSQL Server:** A running instance is required for the `analysis.py` script.
+*   **Tesseract OCR (Optional):** Needed *only* if you intend to run the font feature extraction parts mentioned in `model2.ipynb`. Requires separate installation and configuration on your system.
 
-- **Styling & Theming:**  
-  Tailwind CSS combined with custom theming (light/dark mode) support a sleek, responsive design.
+## Setup and Installation
 
-## Backend & Analysis
+1.  **Clone the Repository:**
+    ```bash
+    git clone <your-repository-url>
+    cd NB302289-Comp302
+    ```
 
-- **Python Modules:**  
-  - `analysis.py` handles statistical tests and visualization plots, saving results to the `results` directory.
-  - `voyager.py` focuses on data visualization and interactions with external data sources like Google Drive.
+2.  **Set up Python Environment:**
+    *   Create and activate a virtual environment:
+    ```bash
+    # Using uv (recommended)
+    uv venv
+    source .venv/bin/activate # Linux/macOS
+    # or .venv\Scripts\activate # Windows
 
-- **Database Queries & Schema:**  
-  Drizzle ORM and associated SQL snapshots lay out the database structure for storing survey responses and recommendations.
+    # Using standard venv
+    # python -m venv venv
+    # source venv/bin/activate # Linux/macOS
+    # or venv\Scripts\activate # Windows
+    ```
 
-## Testing and Deployment
+3.  **Install Python Dependencies:**
+    ```bash
+    uv pip sync pyproject.toml
+    # Or using pip (less precise than uv sync):
+    # pip install .
+    ```
 
-- **End-to-End Testing:**  
-  Playwright tests emulate user flows—from survey initiation and navigation to final submission—ensuring a reliable user experience.
+4.  **Install Frontend Dependencies:**
+    ```bash
+    npm install
+    # or yarn install / pnpm install
+    ```
 
-- **Getting Started:**  
-  To launch the development server, run:
-  ```bash
-  npm run dev
-  ```
-  or the equivalent command for your package manager.
+5.  **Database Setup:**
+    *   Ensure your PostgreSQL server is running.
+    *   Create a database for the project.
+    *   Create a `.env` file in the project root directory.
+    *   Add your database connection string to the `.env` file:
+        ```dotenv
+        DATABASE_URL="postgresql://YOUR_USER:YOUR_PASSWORD@YOUR_HOST:YOUR_PORT/YOUR_DATABASE_NAME"
+        ```
+    *   *(Optional)* If database schema setup/migration scripts (e.g., using Drizzle) are present, run them according to their instructions.
 
-- **Deployment:**  
-  Detailed deployment instructions are available in the [Next.js documentation](https://nextjs.org/docs/app/building-your-application/deploying).
+6.  **Dataset:**
+    *   Place your initial Spotify dataset CSV (e.g., `spotify_data.csv` or `cleaned_data.csv`) in the project root or the directory expected by the scripts.
+    *   The feature extraction scripts will create an `album_covers/` directory (or use the one specified by `--image_dir`) to download images. Ensure you have internet access and write permissions.
 
-## Additional Tools
+## Running the Project Components
 
-- **Internationalization:**  
-  Messages and locale-specific texts are managed via JSON files under the messages directory.
-  
-- **Analytics:**  
-  PostHog is integrated to monitor survey engagement and track page views dynamically.
+*(Activate your Python virtual environment before running Python scripts)*
 
-## Conclusion
+### 1. Feature Extraction (Run if features are not pre-computed)
 
-This repository encapsulates a robust framework to evaluate the role of visual information in music recommendation systems, combining modern frontend technologies with comprehensive data analysis and testing workflows.
+*   **Extract CNN Features:** (Adapt input/output filenames as needed)
+    ```bash
+    uv run extract-cnn.py --csv cleaned_data.csv --output features_cnn.pkl
+    ```
+    *(This generates a pickle file with deep learning features)*
 
-## How to Run
+*   **Extract Basic Image Features & Download Images:** (Adapt input/output filenames as needed)
+    ```bash
+    uv run addBasicImagefeatures.py --spotify_data_path spotify_data.csv --output_csv_path spotify_data_with_image_features.csv --image_dir album_covers
+    ```
+    *(This downloads images to `album_covers/` and adds feature columns to the output CSV)*
 
-### Frontend Development Server
-To start the development server, run:
-```bash
-npm run dev
-```
+### 2. Data Analysis
 
-### Running End-to-End Tests
-To execute the Playwright tests, run:
-```bash
-npx playwright test
-```
+*   Ensure your PostgreSQL database is running and the `.env` file is correctly configured with the `DATABASE_URL`.
+*   Run the main analysis script:
+    ```bash
+    uv run analysis.py
+    # Or: python analysis.py
+    ```
+*   Check the `results/` directory for output tables, figures, and the `analysis_report.md`.
 
+### 3. Frontend Development Server
 
+*   Start the Next.js development server:
+    ```bash
+    npm run dev
+    ```
+*   Open your browser to `http://localhost:3000` (or the specified port).
 
+## Running Tests
 
+*   **Frontend End-to-End Tests (Playwright):**
+    ```bash
+    npx playwright test
+    ```
 
-# NB302289-Comp302 
-uv run extract-cnn.py --csv cleaned_data.csv --output result.csv
+*   **Frontend Unit/Integration Tests (Vitest):**
+    *(Check `package.json` for the exact script name)*
+    ```bash
+    npm run test:unit
+    # or similar command like 'npm test' or 'npm run test:vitest'
+    ```
 
-result.csv is the most current with cnn features
-
-## How to Run
-
-### Extract CNN Features
-Run the following command to extract CNN features:
-```bash
-uv run extract-cnn.py --csv cleaned_data.csv --output result.csv
-```
-
-### Run Analysis
-To perform data analysis and generate visualizations, execute:
-```bash
-python analysis.py
-```
+*   **Backend Unit Tests (Pytest):**
+    ```bash
+    pytest
+    ```
